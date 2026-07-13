@@ -18,12 +18,10 @@ permalink: /book-a-call/
         <p>{{ c.form_subhead }}</p>
         <!-- Formspree: set contact.formspree_contact_id in content/site.yaml -->
         <form class="form-fields" action="https://formspree.io/f/{{ site.contact.formspree_contact_id }}" method="POST">
-          <input type="text" name="restaurant" placeholder="Restaurant name" required>
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Email address" required>
-          <input type="tel" name="phone" placeholder="Phone number">
-          <input type="text" name="city" placeholder="City / neighborhood">
-          <input type="hidden" name="_subject" value="New free-audit request from {{ site.business.domain }}">
+          {% for f in c.form_fields %}
+          <input type="{{ f.type }}" name="{{ f.name }}" placeholder="{{ f.placeholder }}"{% if f.required %} required{% endif %}>
+          {% endfor %}
+          <input type="hidden" name="_subject" value="{{ c.form_subject }}">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="btn btn-primary btn-block" style="margin-top:6px;">{{ c.form_button }}</button>
         </form>
@@ -32,11 +30,19 @@ permalink: /book-a-call/
         <h3>{{ c.direct_heading }}</h3>
         <p>{{ c.direct_subhead }}</p>
         <ul class="contact-info">
-          <li><span>Email</span><span>{{ site.contact.email }}</span></li>
-          <li><span>Instagram</span><span>{{ site.contact.instagram }}</span></li>
-          <li><span>Response time</span><span>{{ site.contact.response_time }}</span></li>
-          <li><span>We work with</span><span>{{ site.contact.works_with }}</span></li>
+          <li><span>{{ site.ui.label_email }}</span><span>{{ site.contact.email }}</span></li>
+          <li><span>{{ site.ui.label_instagram }}</span><span>{% if site.contact.instagram_url %}<a href="{{ site.contact.instagram_url }}">{{ site.contact.instagram }}</a>{% else %}{{ site.contact.instagram }}{% endif %}</span></li>
+          <li><span>{{ site.ui.label_response }}</span><span>{{ site.contact.response_time }}</span></li>
+          <li><span>{{ site.ui.label_works_with }}</span><span>{{ site.contact.works_with }}</span></li>
         </ul>
+        {% if site.contact.hours and site.contact.hours.length %}
+        <h3 style="margin-top:28px;">{{ site.ui.label_hours }}</h3>
+        <ul class="contact-info">
+          {% for h in site.contact.hours %}
+          <li><span>{{ h.days }}</span><span>{{ h.hours }}</span></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
       </div>
     </div>
   </div>

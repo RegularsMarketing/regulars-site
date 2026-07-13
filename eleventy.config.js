@@ -25,7 +25,6 @@ export default function (eleventyConfig) {
   // Static assets copied through untouched.
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ admin: "admin" });
-  eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
   eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
 
   // Rebuild when the config or content changes.

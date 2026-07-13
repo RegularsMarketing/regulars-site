@@ -12,6 +12,13 @@
         {% endfor %}{% endfor %}
       </div>
     </div>
+    {% if site.contact.hours and site.contact.hours.length %}
+    <div class="fhours fhours--minimal">
+      {% for h in site.contact.hours %}
+      <div class="fh-row"><span>{{ h.days }}</span><span>{{ h.hours }}</span></div>
+      {% endfor %}
+    </div>
+    {% endif %}
     <div class="footer-bottom">
       <div class="fl">{{ site.footer.legal_left }}</div>
       <div class="fl">{{ site.footer.legal_right }}</div>

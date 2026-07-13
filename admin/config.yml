@@ -37,6 +37,7 @@ collections:
               - { label: Tagline, name: tagline, widget: string }
               - { label: Domain, name: domain, widget: string }
               - { label: Site URL, name: url, widget: string }
+              - { label: Language code (html lang), name: lang, widget: string }
 
           # ---------------- THEME ----------------
           - label: Theme
@@ -82,6 +83,20 @@ collections:
               - { label: Hero, name: hero, widget: select, options: [textforward, fullbleed, split] }
               - { label: Menu layout, name: menu, widget: select, options: [list, grid] }
               - { label: Footer, name: footer, widget: select, options: [columns, minimal] }
+
+          # ---------------- UI STRINGS (small interface labels) ----------------
+          - label: UI labels
+            name: ui
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Flagship pricing tag, name: flagship_tag, widget: string }
+              - { label: Pricing accordion toggle, name: accordion_toggle, widget: string }
+              - { label: Contact label — email, name: label_email, widget: string }
+              - { label: Contact label — Instagram, name: label_instagram, widget: string }
+              - { label: Contact label — response time, name: label_response, widget: string }
+              - { label: Contact label — works with, name: label_works_with, widget: string }
+              - { label: Hours heading, name: label_hours, widget: string }
 
           # ---------------- NAV ----------------
           - label: Navigation links
@@ -160,7 +175,7 @@ collections:
               - { label: Title, name: title, widget: string }
               - { label: Short line, name: short, widget: string }
               - { label: Full description, name: description, widget: text }
-              - { label: Tier, name: tier, widget: select, options: [Foundation, Growth, Full House] }
+              - { label: "Badge (optional — e.g. Foundation / New / Chef's Pick)", name: badge, widget: string, required: false }
               - { label: Category (for grid layout), name: category, widget: string }
 
           # ---------------- PAGES ----------------
@@ -184,6 +199,7 @@ collections:
                       - { label: Eyebrow, name: eyebrow, widget: string }
                       - { label: Headline, name: headline, widget: string }
                       - { label: Sub-headline, name: subhead, widget: text }
+                      - { label: "Background image (used by fullbleed/split hero styles)", name: bg_image, widget: image, required: false, allow_multiple: false }
                       - label: Primary button
                         name: primary_cta
                         widget: object
@@ -443,6 +459,9 @@ collections:
                   - { label: Signup heading, name: signup_heading, widget: string }
                   - { label: Signup sub-headline, name: signup_subhead, widget: string }
                   - { label: Signup micro-text, name: signup_micro, widget: string }
+                  - { label: Signup email placeholder, name: signup_placeholder, widget: string }
+                  - { label: Signup button label, name: signup_button, widget: string }
+                  - { label: Signup email subject line, name: signup_subject, widget: string }
                   - { label: Research heading, name: research_heading, widget: string }
                   - { label: Research sub-headline, name: research_subhead, widget: text }
                   - label: Stats
@@ -481,5 +500,37 @@ collections:
                   - { label: Form heading, name: form_heading, widget: string }
                   - { label: Form sub-headline, name: form_subhead, widget: text }
                   - { label: Form button, name: form_button, widget: string }
+                  - { label: Form email subject line, name: form_subject, widget: string }
+                  - label: Form fields
+                    name: form_fields
+                    widget: list
+                    fields:
+                      - { label: "Field name (for the email you receive)", name: name, widget: string }
+                      - { label: Placeholder text, name: placeholder, widget: string }
+                      - { label: Type, name: type, widget: select, options: [text, email, tel] }
+                      - { label: Required?, name: required, widget: boolean, default: false }
                   - { label: Direct heading, name: direct_heading, widget: string }
                   - { label: Direct sub-headline, name: direct_subhead, widget: text }
+              # ---- 404 ----
+              - label: Page not found (404)
+                name: not_found
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Sub-headline, name: subhead, widget: text }
+                  - label: Primary button
+                    name: primary_cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+                  - label: Secondary button
+                    name: secondary_cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }

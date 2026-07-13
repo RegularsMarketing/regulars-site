@@ -1,4 +1,4 @@
-// Regulars — shared site behaviour
+// Shared site behaviour (template)
 // Reveal-on-load animation + pricing accordion. Navigation is now real page loads.
 (function () {
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

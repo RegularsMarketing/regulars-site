@@ -8,6 +8,13 @@
           <div class="logo-word">{{ site.business.name }}</div>
         </div>
         <p class="fdesc">{{ site.footer.description }}</p>
+        {% if site.contact.hours and site.contact.hours.length %}
+        <div class="fhours">
+          {% for h in site.contact.hours %}
+          <div class="fh-row"><span>{{ h.days }}</span><span>{{ h.hours }}</span></div>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
       {% for col in site.footer.columns %}
       <div>

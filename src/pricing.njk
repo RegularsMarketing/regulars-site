@@ -47,12 +47,12 @@ permalink: /pricing/
         {% for tier in d3.tiers %}
         {% set tid = tier.name | lower | replace(" ", "") %}
         <div class="price-card{% if tier.flagship %} flagship{% endif %}">
-          {% if tier.flagship %}<div class="flagship-tag">Most Popular</div>{% endif %}
+          {% if tier.flagship %}<div class="flagship-tag">{{ site.ui.flagship_tag }}</div>{% endif %}
           <h3>{{ tier.name }}</h3><div class="amount">{{ tier.amount }}</div><div class="per">{{ tier.per }}</div>
           <ul>
             {% for li in tier.summary %}<li>{{ li }}</li>{% endfor %}
           </ul>
-          <button class="acc-toggle" id="btn-{{ tid }}" onclick="toggleAcc('{{ tid }}')"><span class="chev">+</span> See everything included</button>
+          <button class="acc-toggle" id="btn-{{ tid }}" onclick="toggleAcc('{{ tid }}')"><span class="chev">+</span> {{ site.ui.accordion_toggle }}</button>
           <div class="acc-content" id="content-{{ tid }}"><div class="acc-inner">
             {% for group in tier.details %}
             <h5>{{ group.heading }}</h5>

@@ -56,11 +56,21 @@ npm run build       # production build into _site/
 
 1. Copy this repo.
 2. Edit `content/site.yaml`: business name, colors, fonts, all copy, `menu_items`, and the
-   `components:` choices.
+   `components:` choices. Nothing lives outside this file — including the 404 page
+   (`pages.not_found`), interface micro-labels (`ui:`), the contact-form fields/subject
+   (`pages.contact.form_fields` / `form_subject`), newsletter strings (`pages.ledger.signup_*`),
+   robots/sitemap URLs (derived from `business.url`), and `business.lang`.
 3. Replace `src/assets/logo-mark.png` and `src/assets/hero-logo.png` with the client's images
-   (keep the filenames, or update the paths under `images:` in the config).
+   (keep the filenames, or update the paths under `images:` in the config). The `fullbleed`
+   and `split` heroes take an optional photo via `pages.home.hero.bg_image`.
 4. Set the client's own Formspree IDs under `contact:`.
-5. `npm run build`, deploy.
+5. Neutralize Regulars-flavored strings for the client: form placeholders (e.g.
+   "Restaurant name" → "Business name"), `form_subject` (e.g. "New inquiry from <domain>"),
+   newsletter placeholder/subject, and `menu_items[].badge` (optional freeform tag — leave
+   empty for no chip, or use e.g. "New" / "Chef's Pick").
+6. Hours (`contact.hours`) render automatically on the contact page and in both footers;
+   leave the list empty to hide them.
+7. `npm run build`, deploy.
 
 ## Deploy to Cloudflare Pages
 

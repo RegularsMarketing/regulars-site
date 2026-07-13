@@ -11,7 +11,7 @@
         <span class="service-num">{{ item.number }}</span>
         <h4>{{ item.title }}</h4>
         <p>{{ item.short }}</p>
-        <span class="tier-chip">{{ item.tier }}</span>
+        {% if item.badge %}<span class="tier-chip">{{ item.badge }}</span>{% endif %}
       </div>
       {% endfor %}
     </div>

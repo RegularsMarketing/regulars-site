@@ -4,7 +4,7 @@
   <div class="step">
     <div class="snum">{{ item.number }}</div>
     <div>
-      <h3>{{ item.title }} <span class="tier-chip">{{ item.tier }}</span></h3>
+      <h3>{{ item.title }}{% if item.badge %} <span class="tier-chip">{{ item.badge }}</span>{% endif %}</h3>
       <p>{{ item.description }}</p>
     </div>
   </div>

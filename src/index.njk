@@ -63,7 +63,7 @@ permalink: /
     </div>
     <div class="service-grid">
       {% for item in site.menu_items %}
-      <div class="service-card"><span class="service-num">{{ item.number }}</span><h3>{{ item.title }}</h3><p>{{ item.short }}</p><span class="tier-chip">{{ item.tier }}</span></div>
+      <div class="service-card"><span class="service-num">{{ item.number }}</span><h3>{{ item.title }}</h3><p>{{ item.short }}</p>{% if item.badge %}<span class="tier-chip">{{ item.badge }}</span>{% endif %}</div>
       {% endfor %}
     </div>
     <div style="text-align:center;margin-top:40px;">

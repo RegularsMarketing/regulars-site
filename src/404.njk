@@ -1,19 +1,19 @@
 ---
 layout: base.njk
+pageKey: not_found
 permalink: /404.html
-title: Page not found | Regulars
-description: Page not found.
 noindex: true
 eleventyExcludeFromCollections: true
 ---
+{% set nf = site.pages.not_found %}
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow center">404</div>
-    <h1>That table isn't set.</h1>
-    <p class="sub">The page you're looking for moved or never existed. Let's get you back to something useful.</p>
+    <div class="eyebrow center">{{ nf.eyebrow }}</div>
+    <h1>{{ nf.heading }}</h1>
+    <p class="sub">{{ nf.subhead }}</p>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="/">Back to Home</a>
-      <a class="btn btn-outline" href="/pricing/">See Pricing</a>
+      <a class="btn btn-primary" href="{{ nf.primary_cta.url }}">{{ nf.primary_cta.label }}</a>
+      <a class="btn btn-outline" href="{{ nf.secondary_cta.url }}">{{ nf.secondary_cta.label }}</a>
     </div>
   </div>
 </section>
