@@ -81,8 +81,8 @@ contact:
   email: hello@regularsmarketing.com
   instagram: "@regularsmarketing"
   instagram_url: https://instagram.com/regularsmarketing
-  response_time: Within 1 business day
-  works_with: Independent restaurants & cafés
+  response_time: Within 1 day
+  works_with: Independent restaurants & cafés and other small businesses ready to get regulars
   # Formspree endpoint IDs (see README). Replace after creating your forms.
   formspree_contact_id: YOUR_FORM_ID
   formspree_newsletter_id: YOUR_NEWSLETTER_ID
