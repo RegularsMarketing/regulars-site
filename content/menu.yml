@@ -1,0 +1,38 @@
+# The service "menu" — the five things Regulars does.
+# Editable in Decap CMS under "Services Menu".
+services:
+  - number: "01"
+    title: Google Business Profile & Local SEO
+    description: >-
+      Full onboarding optimization — verified name, correct categories, hours,
+      keyword-informed description, HTML menu link — plus 15–20 photos at setup,
+      3–5 added monthly, and one Google Post every week.
+    tier: Foundation
+  - number: "02"
+    title: Review Generation & Reputation Management
+    description: >-
+      Automated review requests by text and email, QR review cards, and every
+      Google review answered within 48 hours — positive or negative — using a
+      tone guide written for your restaurant.
+    tier: Foundation
+  - number: "03"
+    title: Social Media Content
+    description: >-
+      12–16 posts a month across Instagram and Facebook, including one on-site
+      content session monthly where we shoot your food and space — you never
+      have to send us anything.
+    tier: Growth
+  - number: "04"
+    title: Website Builds
+    description: >-
+      A fast, mobile-first site with reservation and ordering integration built
+      in from day one — live within 21 days of receiving your content, hosted
+      and maintained by us.
+    tier: Full House
+  - number: "05"
+    title: Email List Building & SMS/Email Campaigns
+    description: >-
+      List building syncs monthly with your POS (Toast, Square, OpenTable,
+      Resy). Full campaign sends — 2–4 a month with trackable redemption codes —
+      are a Full House feature.
+    tier: Growth

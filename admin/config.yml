@@ -1,0 +1,133 @@
+# Decap CMS configuration.
+# Docs: https://decapcms.org/docs/
+#
+# BACKEND — this is set up for a GitHub-hosted repo deployed on Cloudflare Pages.
+# 1. Set `repo` below to your GitHub "owner/name".
+# 2. Decap needs an OAuth handler to log in against GitHub. The simplest option on
+#    Cloudflare is the free "cloudflare-pages-decap-proxy" Worker (or Sveltia's
+#    OAuth Worker). Point `base_url`/`auth_endpoint` at it once deployed.
+# 3. To edit locally with no auth, keep `local_backend: true` and run:
+#       npx decap-server
+#    then open http://localhost:8080/admin/  (served by your local static server).
+backend:
+  name: github
+  repo: your-org/regulars-site      # TODO: change to your GitHub repo
+  branch: main
+  # base_url: https://your-oauth-worker.example.workers.dev   # TODO: your OAuth proxy
+
+local_backend: true
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  # -------- Site-wide settings: contact details + hours --------
+  - name: settings
+    label: Site Settings
+    files:
+      - name: contact
+        label: Contact & Hours
+        file: content/settings.yml
+        fields:
+          - { label: Email, name: email, widget: string }
+          - { label: Instagram handle, name: instagram, widget: string }
+          - { label: Instagram URL, name: instagram_url, widget: string }
+          - { label: Response time, name: response_time, widget: string }
+          - { label: Works with, name: works_with, widget: string }
+          - label: Hours
+            name: hours
+            widget: list
+            fields:
+              - { label: Day(s), name: days, widget: string }
+              - { label: Hours, name: hours, widget: string }
+
+  # -------- The service "menu" --------
+  - name: menu
+    label: Services Menu
+    files:
+      - name: services
+        label: Services
+        file: content/menu.yml
+        fields:
+          - label: Services
+            name: services
+            widget: list
+            fields:
+              - { label: Number, name: number, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - label: Tier
+                name: tier
+                widget: select
+                options: [Foundation, Growth, Full House]
+
+  # -------- Per-page key text + SEO --------
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Home
+        file: content/pages/home.yml
+        fields:
+          - { label: SEO title, name: seo_title, widget: string }
+          - { label: SEO description, name: seo_description, widget: text }
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Sub-headline, name: subhead, widget: text }
+          - { label: Primary button, name: primary_cta, widget: string }
+          - { label: Secondary button, name: secondary_cta, widget: string }
+      - name: our-story
+        label: Our Story
+        file: content/pages/our-story.yml
+        fields:
+          - { label: SEO title, name: seo_title, widget: string }
+          - { label: SEO description, name: seo_description, widget: text }
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: text }
+      - name: services
+        label: Services
+        file: content/pages/services.yml
+        fields:
+          - { label: SEO title, name: seo_title, widget: string }
+          - { label: SEO description, name: seo_description, widget: text }
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Sub-headline, name: subhead, widget: text }
+      - name: process
+        label: Process
+        file: content/pages/process.yml
+        fields:
+          - { label: SEO title, name: seo_title, widget: string }
+          - { label: SEO description, name: seo_description, widget: text }
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Sub-headline, name: subhead, widget: text }
+      - name: pricing
+        label: Pricing
+        file: content/pages/pricing.yml
+        fields:
+          - { label: SEO title, name: seo_title, widget: string }
+          - { label: SEO description, name: seo_description, widget: text }
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Sub-headline, name: subhead, widget: text }
+      - name: ledger
+        label: The Ledger
+        file: content/pages/ledger.yml
+        fields:
+          - { label: SEO title, name: seo_title, widget: string }
+          - { label: SEO description, name: seo_description, widget: text }
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Sub-headline, name: subhead, widget: text }
+          - { label: Signup heading, name: signup_heading, widget: string }
+          - { label: Signup subtext, name: signup_subtext, widget: string }
+      - name: book-a-call
+        label: Book a Call
+        file: content/pages/book-a-call.yml
+        fields:
+          - { label: SEO title, name: seo_title, widget: string }
+          - { label: SEO description, name: seo_description, widget: text }
+          - { label: Eyebrow, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Sub-headline, name: subhead, widget: text }
