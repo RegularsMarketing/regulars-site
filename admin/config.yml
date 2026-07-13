@@ -6,7 +6,7 @@
 # Netlify's git-gateway. Editors sign in with GitHub; grant write access to THIS repo only.
 backend:
   name: github
-  repo: RegularsMarketing/regulars-site
+  repo: RegularsMarketing/regulars-template
   branch: main
   base_url: https://sveltia-cms-auth.vickery-6a4.workers.dev
 
