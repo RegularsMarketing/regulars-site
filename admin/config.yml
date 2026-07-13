@@ -1,19 +1,21 @@
 # Decap CMS configuration.
 # Docs: https://decapcms.org/docs/
 #
-# BACKEND — this is set up for a GitHub-hosted repo deployed on Cloudflare Pages.
-# 1. Set `repo` below to your GitHub "owner/name".
-# 2. Decap needs an OAuth handler to log in against GitHub. The simplest option on
-#    Cloudflare is the free "cloudflare-pages-decap-proxy" Worker (or Sveltia's
-#    OAuth Worker). Point `base_url`/`auth_endpoint` at it once deployed.
-# 3. To edit locally with no auth, keep `local_backend: true` and run:
-#       npx decap-server
-#    then open http://localhost:8080/admin/  (served by your local static server).
+# BACKEND — GitHub backend, authenticated through a self-hosted OAuth proxy Worker
+# (sveltia-cms-auth) on Cloudflare. This replaces Netlify's git-gateway, which does
+# not work off Netlify. Editors sign in with their own GitHub account; grant them
+# write access to THIS repo only (as a collaborator) — not your whole org.
+#
+# `base_url` must point at your deployed Worker. Decap calls <base_url>/auth to start
+# the OAuth flow; GitHub then redirects to <base_url>/callback.
+#
+# To edit locally with no auth instead, keep `local_backend: true` and run:
+#   npx decap-server   (then open http://localhost:8080/admin/ via your local server)
 backend:
   name: github
-  repo: your-org/regulars-site      # TODO: change to your GitHub repo
+  repo: RegularsMarketing/regulars-site
   branch: main
-  # base_url: https://your-oauth-worker.example.workers.dev   # TODO: your OAuth proxy
+  base_url: https://sveltia-cms-auth.YOUR-SUBDOMAIN.workers.dev   # TODO: replace YOUR-SUBDOMAIN with your workers.dev subdomain shown after deploying the Worker
 
 local_backend: true
 
