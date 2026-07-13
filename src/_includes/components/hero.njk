@@ -1,0 +1,3 @@
+{# Dispatcher: renders the hero style named in content/site.yaml (components.hero).
+   Expects a `hero` object in scope (set by the page before including this). #}
+{% include "components/hero/" + site.components.hero + ".njk" %}

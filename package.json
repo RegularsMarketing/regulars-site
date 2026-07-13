@@ -1,0 +1,16 @@
+{
+  "name": "regulars-template",
+  "version": "1.0.0",
+  "description": "Reusable, config-driven static site template for restaurant/cafe client sites. Built with Eleventy, edited with Decap CMS, deployed on Cloudflare Pages.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "js-yaml": "^4.1.0"
+  }
+}

@@ -1,0 +1,15 @@
+{# NAV: simpler top-line style — plain inline links with an underline on the active page #}
+<nav class="nav nav--topline">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <img class="logo-mark" src="{{ site.images.logo_mark }}" alt="{{ site.business.name }}">
+      <div class="logo-word">{{ site.business.name }}</div>
+    </a>
+    <div class="topnav-links">
+      {% for link in site.nav.links %}
+      <a class="topnav-link{% if link.url == page.url %} active{% endif %}" href="{{ link.url }}">{{ link.label }}</a>
+      {% endfor %}
+      <a class="topnav-link topnav-cta" href="{{ site.nav.cta.url }}">{{ site.nav.cta.label }}</a>
+    </div>
+  </div>
+</nav>

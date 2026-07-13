@@ -1,0 +1,50 @@
+---
+layout: base.njk
+pageKey: ledger
+permalink: /ledger/
+---
+{% set l = site.pages.ledger %}
+<section style="padding-top:60px;">
+  <div class="wrap">
+    <div class="eyebrow reveal">{{ l.eyebrow }}</div>
+    <div class="section-head reveal">
+      <h2>{{ l.heading }}</h2>
+      <p>{{ l.subhead }}</p>
+    </div>
+
+    <div class="signup-panel reveal">
+      <h3>{{ l.signup_heading }}</h3>
+      <p>{{ l.signup_subhead }}</p>
+      <form class="signup-form" action="https://formspree.io/f/{{ site.contact.formspree_newsletter_id }}" method="POST">
+        <input type="email" name="email" placeholder="you@yourrestaurant.com" required>
+        <input type="hidden" name="_subject" value="New Ledger subscriber">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <div class="signup-micro">{{ l.signup_micro }}</div>
+    </div>
+
+    <div class="reveal" style="margin-top:60px;">
+      <div class="divider"><div class="ln"></div><div class="dot"></div><div class="ln"></div></div>
+      <div class="section-head center"><h2 style="font-size:26px;">{{ l.research_heading }}</h2>
+      <p>{{ l.research_subhead }}</p></div>
+      <div class="stat-grid">
+        {% for s in l.stats %}
+        <div class="stat-card"><div class="sval">{{ s.value }}</div><div class="sdesc">{{ s.desc }}</div><div class="ssrc">{{ s.source }}</div></div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="issue-card reveal">
+      <span class="issue-tag">{{ l.issue.tag }}</span>
+      <h3>{{ l.issue.title }}</h3>
+      {% for para in l.issue.paragraphs %}<p>{{ para }}</p>{% endfor %}
+      <div class="sig">{{ l.issue.signature }}</div>
+    </div>
+
+    <div style="text-align:center;margin-top:56px;">
+      <p style="font-size:14px;color:var(--charcoal-2);margin-bottom:18px;">{{ l.footer_prompt }}</p>
+      <a class="btn btn-outline" href="{{ l.footer_cta.url }}">{{ l.footer_cta.label }}</a>
+    </div>
+  </div>
+</section>

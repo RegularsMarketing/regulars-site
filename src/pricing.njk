@@ -1,0 +1,95 @@
+---
+layout: base.njk
+pageKey: pricing
+permalink: /pricing/
+---
+{% set pr = site.pages.pricing %}
+<section style="padding-top:60px;">
+  <div class="wrap">
+    <div class="eyebrow reveal">{{ pr.eyebrow }}</div>
+    <div class="section-head reveal">
+      <h2>{{ pr.heading }}</h2>
+      <p>{{ pr.subhead }}</p>
+    </div>
+
+    {# DOOR 1 #}
+    {% set d1 = pr.door_one %}
+    <div class="door-panel reveal">
+      <div class="door-label"><span class="door-num">{{ d1.label }}</span></div>
+      <h3>{{ d1.title }}</h3>
+      <p>{{ d1.body }}</p>
+      <a class="btn btn-primary btn-sm" href="{{ d1.button.url }}">{{ d1.button.label }}</a>
+    </div>
+
+    {# DOOR 2 #}
+    {% set d2 = pr.door_two %}
+    <div class="reveal" style="margin-top:56px;">
+      <div class="door-label"><span class="door-num">{{ d2.label }}</span></div>
+      <h3 style="font-size:21px;margin:0 0 6px;">{{ d2.title }}</h3>
+      <p style="font-size:14.5px;color:var(--charcoal-2);margin:0;">{{ d2.subhead }}</p>
+      <div class="project-grid">
+        {% for proj in d2.projects %}
+        <div class="project-card"><h4>{{ proj.title }}</h4><div class="price">{{ proj.price }}</div>
+          <ul>{% for it in proj.items %}<li>{{ it }}</li>{% endfor %}</ul></div>
+        {% endfor %}
+      </div>
+      <div class="note-panel">{{ d2.note | mdBold | safe }}</div>
+    </div>
+
+    {# DOOR 3 #}
+    {% set d3 = pr.door_three %}
+    <div class="reveal" style="margin-top:56px;">
+      <div class="door-label"><span class="door-num">{{ d3.label }}</span></div>
+      <h3 style="font-size:21px;margin:0 0 6px;">{{ d3.title }}</h3>
+      <p style="font-size:14.5px;color:var(--charcoal-2);margin:0;">{{ d3.subhead }}</p>
+
+      <div class="pricing-grid">
+        {% for tier in d3.tiers %}
+        {% set tid = tier.name | lower | replace(" ", "") %}
+        <div class="price-card{% if tier.flagship %} flagship{% endif %}">
+          {% if tier.flagship %}<div class="flagship-tag">Most Popular</div>{% endif %}
+          <h3>{{ tier.name }}</h3><div class="amount">{{ tier.amount }}</div><div class="per">{{ tier.per }}</div>
+          <ul>
+            {% for li in tier.summary %}<li>{{ li }}</li>{% endfor %}
+          </ul>
+          <button class="acc-toggle" id="btn-{{ tid }}" onclick="toggleAcc('{{ tid }}')"><span class="chev">+</span> See everything included</button>
+          <div class="acc-content" id="content-{{ tid }}"><div class="acc-inner">
+            {% for group in tier.details %}
+            <h5>{{ group.heading }}</h5>
+            <ul>{% for it in group.items %}<li>{{ it }}</li>{% endfor %}</ul>
+            {% endfor %}
+            <div class="not-inc">{{ tier.not_included }}</div>
+          </div></div>
+          <a class="btn {% if tier.flagship %}btn-primary{% else %}btn-outline{% endif %} btn-block" href="{{ tier.button.url }}" style="margin-top:16px;">{{ tier.button.label }}</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {# ADD-ONS #}
+    <div class="reveal" style="margin-top:56px;">
+      <h3 style="font-size:19px;margin:0 0 6px;">{{ pr.addons_heading }}</h3>
+      <p style="font-size:14px;color:var(--charcoal-2);margin:0;">{{ pr.addons_subhead }}</p>
+      <div class="addon-grid">
+        {% for a in pr.addons %}
+        <div class="addon-card"><span class="an">{{ a.name }}</span><span class="ap">{{ a.price }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {# GUARANTEES #}
+    <div class="reveal" style="margin-top:56px;">
+      <h3 style="font-size:19px;margin:0 0 18px;">{{ pr.guarantees_heading }}</h3>
+      <div class="ledger-panel dark">
+        {% for g in pr.guarantees %}
+        <div class="ledger-row"><span class="label">{{ g.label }}</span><span class="dots"></span><span class="value">{{ g.value }}</span></div>
+        {% endfor %}
+      </div>
+      <p class="pull-quote" style="margin-top:32px;">"{{ pr.guarantees_quote }}"</p>
+    </div>
+
+    <div style="text-align:center;margin-top:56px;">
+      <a class="btn btn-primary" href="{{ pr.final_cta.url }}">{{ pr.final_cta.label }}</a>
+    </div>
+  </div>
+</section>

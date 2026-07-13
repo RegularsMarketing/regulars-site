@@ -1,0 +1,15 @@
+{# HERO: text-forward with background texture (original) — centered logo + copy on the dotted cream ground #}
+<section class="hero">
+  <div class="wrap">
+    <img class="hero-logo" src="{{ site.images.hero_logo }}" alt="{{ site.business.name }} — {{ site.business.tagline }}">
+    <div class="reveal">
+      <div class="eyebrow center">{{ hero.eyebrow }}</div>
+      <h1>{{ hero.headline }}</h1>
+      <p class="sub">{{ hero.subhead }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ hero.primary_cta.url }}">{{ hero.primary_cta.label }}</a>
+        <a class="btn btn-outline" href="{{ hero.secondary_cta.url }}">{{ hero.secondary_cta.label }}</a>
+      </div>
+    </div>
+  </div>
+</section>

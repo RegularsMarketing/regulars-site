@@ -1,101 +1,92 @@
-# Regulars — Static Site
+# Regulars — Reusable Client Site Template
 
-Flat-rate marketing site for independent restaurants and cafés. Plain static HTML/CSS/JS —
-no build step required — ready to deploy to **Cloudflare Pages**.
+A config-driven static site template for independent restaurant/café client sites.
+Built with **Eleventy**, edited with **Decap CMS**, deployed on **Cloudflare Pages**.
 
-## Structure
+**A whole new client site = edit one file (`content/site.yaml`) + swap the images in
+`src/assets/`.** Nothing else changes.
+
+## How it works
 
 ```
-.
-├── index.html              # Home                → /
-├── our-story/index.html    # Our Story           → /our-story/
-├── services/index.html     # Services            → /services/
-├── process/index.html      # Process             → /process/
-├── pricing/index.html      # Pricing             → /pricing/
-├── ledger/index.html       # The Ledger          → /ledger/
-├── book-a-call/index.html  # Contact / Book a Call → /book-a-call/
-├── 404.html                # Not-found page
-├── assets/
-│   ├── styles.css          # All styles (shared)
-│   ├── site.js             # Reveal animation + pricing accordion
-│   ├── logo-mark.png       # Logo mark (nav/footer/favicon)
-│   └── hero-logo.png       # Hero wordmark
-├── admin/                  # Decap CMS
-│   ├── index.html
-│   └── config.yml
-├── content/                # CMS-editable content (see "Content / CMS" below)
-│   ├── settings.yml        # Contact details + hours
-│   ├── menu.yml            # The five services ("the menu")
-│   └── pages/*.yml         # Key text + SEO per page
-├── _headers                # Cloudflare cache headers for /assets/*
-├── robots.txt
-└── sitemap.xml
+content/site.yaml     ← THE single config: brand, colors, fonts, copy, menu, images,
+                         AND which component style each section uses. Edit this per client.
+src/
+  _data/site.js       ← loads content/site.yaml → available to every template as `site`
+  _includes/
+    base.njk          ← page shell (injects theme colors/fonts, SEO tags, nav + footer)
+    components/
+      nav.njk  hero.njk  menu.njk  footer.njk   ← dispatchers (pick the variant from config)
+      nav/     tabs.njk · topline.njk
+      hero/    textforward.njk · fullbleed.njk · split.njk
+      menu/    list.njk · grid.njk
+      footer/  columns.njk · minimal.njk
+  *.njk               ← the 7 pages (structure only; all text comes from the config)
+  assets/             ← styles.css, site.js, images (swap the images per client)
+admin/                ← Decap CMS (edits content/site.yaml)
+eleventy.config.js    ← build config
+_site/                ← build output (git-ignored; Cloudflare builds this)
 ```
 
-Each page has a unique `<title>`, meta description, canonical URL, and Open Graph tags,
-written for local restaurant-marketing SEO.
+The code structure and CMS wiring are **identical for every client and every component
+combination** — only `content/site.yaml` and the image files differ.
 
-## Local preview
+## Component library (swap via `content/site.yaml` → `components:`)
 
-Any static server works. From this folder:
+| Slot | Options | Set with |
+|---|---|---|
+| Navigation | `tabs` (pill), `topline` (underline) | `components.nav` |
+| Hero | `textforward` (logo + texture), `fullbleed` (dark band / photo), `split` (text + image) | `components.hero` |
+| Menu layout | `list` (numbered), `grid` (categorized cards) | `components.menu` |
+| Footer | `columns` (3-col), `minimal` (single row) | `components.footer` |
+
+`fullbleed` and `split` heroes accept an optional `hero.bg_image` in the config for a real photo.
+
+## Local development
+
+Requires Node 18+. From this folder:
 
 ```bash
-python3 -m http.server 8080
-# then open http://localhost:8080/
+npm install         # once
+npm run dev         # live preview at http://localhost:8080
+npm run build       # production build into _site/
 ```
 
-(Clean URLs like `/our-story/` resolve to the folder's `index.html`.)
+## Spin up a new client site
+
+1. Copy this repo.
+2. Edit `content/site.yaml`: business name, colors, fonts, all copy, `menu_items`, and the
+   `components:` choices.
+3. Replace `src/assets/logo-mark.png` and `src/assets/hero-logo.png` with the client's images
+   (keep the filenames, or update the paths under `images:` in the config).
+4. Set the client's own Formspree IDs under `contact:`.
+5. `npm run build`, deploy.
 
 ## Deploy to Cloudflare Pages
 
-1. Push this folder to a Git repo (GitHub/GitLab).
-2. Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**.
-3. Build settings:
-   - **Framework preset:** None
-   - **Build command:** *(leave empty)*
-   - **Build output directory:** `/` (the repo root)
-4. Deploy. Then add your custom domain `regularsmarketing.com` under **Custom domains**.
+This is now a **built** site, so the Pages project needs a build step:
 
-`_headers` gives hashed-forever caching to `/assets/*`. `robots.txt` + `sitemap.xml`
-reference `https://regularsmarketing.com` — update those if the domain changes.
+- **Framework preset:** None (or Eleventy)
+- **Build command:** `npm run build`
+- **Build output directory:** `_site`
 
-## Contact form (Formspree)
+`_headers` (long-cache for `/assets/*`), `robots.txt`, and `sitemap.xml` are generated into
+`_site/` automatically. Update `business.url` in the config if the domain changes.
 
-The audit form on **/book-a-call/** and the newsletter form on **/ledger/** post to
-[Formspree](https://formspree.io). They are wired and working except for the endpoint ID:
+## Contact forms (Formspree)
 
-1. Create a free Formspree account and a new form.
-2. Copy the form's endpoint, e.g. `https://formspree.io/f/abcdwxyz`.
-3. In `book-a-call/index.html`, replace `YOUR_FORM_ID` in the form's `action`.
-4. In `ledger/index.html`, replace `YOUR_NEWSLETTER_ID` (a separate Formspree form).
+The audit form (`/book-a-call/`) and newsletter form (`/ledger/`) post to Formspree. Set the
+IDs in `content/site.yaml`:
 
-The forms include a hidden `_gotcha` honeypot for spam and a `_subject` line. To show a
-custom "thanks" page instead of Formspree's, add `<input type="hidden" name="_next"
-value="https://regularsmarketing.com/">`.
-
-## Content / CMS (Decap)
-
-`content/` holds editable content as YAML, and `admin/` is a ready-to-use
-[Decap CMS](https://decapcms.org) instance so the menu, hours, and key text/SEO fields can
-be edited without touching code.
-
-- **Site Settings → Contact & Hours** → `content/settings.yml`
-- **Services Menu** → `content/menu.yml`
-- **Pages** → `content/pages/*.yml` (headline, sub-headline, SEO title/description)
-
-**Edit locally right now (no auth):** keep `local_backend: true` in `admin/config.yml`, then:
-
-```bash
-npx decap-server           # in one terminal
-python3 -m http.server 8080  # in another
-# open http://localhost:8080/admin/
+```yaml
+contact:
+  formspree_contact_id: xxxxxxxx      # from https://formspree.io
+  formspree_newsletter_id: yyyyyyyy
 ```
 
-**In production:** set `repo:` in `admin/config.yml` to your GitHub repo and add a GitHub
-OAuth handler (e.g. a Cloudflare Worker OAuth proxy) so editors can log in from
-`/admin/`. See the comments at the top of `admin/config.yml`.
+## Content editing (Decap CMS)
 
-> Note: the page HTML currently carries this same copy inline, so it renders with zero
-> JavaScript and no build step. The `content/` files are the CMS-managed source of truth;
-> wiring a small template/build step to render them into the HTML is a later step and does
-> not change how the site deploys today.
+`/admin/` opens Decap CMS, which edits `content/site.yaml` through the `sveltia-cms-auth`
+GitHub OAuth Worker (see `admin/config.yml`). Editors sign in with GitHub and need write
+access to this repo only. Every field in the config is exposed in the CMS, organized by
+section — including the **Components** dropdowns, so the site can be restyled without code.

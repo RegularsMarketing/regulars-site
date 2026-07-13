@@ -1,0 +1,99 @@
+---
+layout: base.njk
+pageKey: home
+permalink: /
+---
+{% set hero = site.pages.home.hero %}
+{% include "components/hero.njk" %}
+
+<div class="stamp-strip">
+  <div class="wrap stamp-row">
+    {% for s in site.stamps %}
+    <div class="stamp-item"><span class="ico"></span>{{ s }}</div>
+    {% endfor %}
+  </div>
+</div>
+
+{% set t = site.pages.home.thesis %}
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow center">{{ t.eyebrow }}</div>
+      <div class="section-head center"><h2>{{ t.heading }}</h2></div>
+    </div>
+    <div class="ledger-panel reveal" style="max-width:640px;margin:36px auto 0;">
+      {% for row in t.rows %}
+      <div class="ledger-row"><span class="label">{{ row.label }}</span><span class="dots"></span><span class="value">{{ row.value }}</span></div>
+      {% endfor %}
+      <a class="ledger-link" href="{{ t.link.url }}">{{ t.link.label }}</a>
+    </div>
+  </div>
+</section>
+
+{% set sp = site.pages.home.split %}
+<section class="tight">
+  <div class="wrap">
+    <div class="split reveal">
+      <div>
+        <div class="eyebrow">{{ sp.left.eyebrow }}</div>
+        <h2>{{ sp.left.heading }}</h2>
+        {% for para in sp.left.paragraphs %}<p>{{ para }}</p>{% endfor %}
+      </div>
+      <div>
+        <div class="eyebrow">{{ sp.right.eyebrow }}</div>
+        <h2>{{ sp.right.heading }}</h2>
+        {% for para in sp.right.paragraphs %}<p>{{ para }}</p>{% endfor %}
+        <div class="badge-pair">
+          {% for b in sp.right.badges %}
+          <div class="badge"><div class="k">{{ b.k }}</div><div class="v">{{ b.v }}</div></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% set st = site.pages.home.services_teaser %}
+<section class="tight">
+  <div class="wrap">
+    <div class="divider reveal"><div class="ln"></div><div class="dot"></div><div class="ln"></div></div>
+    <div class="section-head center reveal">
+      <h2 style="margin:0 0 12px;">{{ st.heading }}</h2>
+      <p style="margin:0 auto;">{{ st.subhead }}</p>
+    </div>
+    <div class="service-grid">
+      {% for item in site.menu_items %}
+      <div class="service-card"><span class="service-num">{{ item.number }}</span><h3>{{ item.title }}</h3><p>{{ item.short }}</p><span class="tier-chip">{{ item.tier }}</span></div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a class="btn btn-outline" href="{{ st.cta.url }}">{{ st.cta.label }}</a>
+    </div>
+  </div>
+</section>
+
+{% set ex = site.pages.home.exclusions %}
+<section class="tight">
+  <div class="wrap reveal">
+    <div class="eyebrow center">{{ ex.eyebrow }}</div>
+    <div class="section-head center"><h2>{{ ex.heading }}</h2>
+    <p>{{ ex.subhead }}</p></div>
+    <div class="exclusion-row" style="justify-content:center;">
+      {% for chip in ex.chips %}<span class="exclusion-chip">{{ chip }}</span>{% endfor %}
+    </div>
+    <p class="pull-quote" style="margin:0 auto;">"{{ ex.quote }}"</p>
+  </div>
+</section>
+
+{% set c = site.pages.home.cta %}
+<section class="tight">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <div>
+        <h3>{{ c.heading }}</h3>
+        <p>{{ c.subhead }}</p>
+      </div>
+      <a class="btn btn-primary" href="{{ c.button.url }}">{{ c.button.label }}</a>
+    </div>
+  </div>
+</section>

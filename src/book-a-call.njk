@@ -1,0 +1,43 @@
+---
+layout: base.njk
+pageKey: contact
+permalink: /book-a-call/
+---
+{% set c = site.pages.contact %}
+<section style="padding-top:60px;">
+  <div class="wrap">
+    <div class="contact-hero reveal">
+      <div class="eyebrow center">{{ c.eyebrow }}</div>
+      <h2>{{ c.heading }}</h2>
+      <p>{{ c.subhead }}</p>
+    </div>
+
+    <div class="contact-panel reveal">
+      <div>
+        <h3>{{ c.form_heading }}</h3>
+        <p>{{ c.form_subhead }}</p>
+        <!-- Formspree: set contact.formspree_contact_id in content/site.yaml -->
+        <form class="form-fields" action="https://formspree.io/f/{{ site.contact.formspree_contact_id }}" method="POST">
+          <input type="text" name="restaurant" placeholder="Restaurant name" required>
+          <input type="text" name="name" placeholder="Your name" required>
+          <input type="email" name="email" placeholder="Email address" required>
+          <input type="tel" name="phone" placeholder="Phone number">
+          <input type="text" name="city" placeholder="City / neighborhood">
+          <input type="hidden" name="_subject" value="New free-audit request from {{ site.business.domain }}">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top:6px;">{{ c.form_button }}</button>
+        </form>
+      </div>
+      <div>
+        <h3>{{ c.direct_heading }}</h3>
+        <p>{{ c.direct_subhead }}</p>
+        <ul class="contact-info">
+          <li><span>Email</span><span>{{ site.contact.email }}</span></li>
+          <li><span>Instagram</span><span>{{ site.contact.instagram }}</span></li>
+          <li><span>Response time</span><span>{{ site.contact.response_time }}</span></li>
+          <li><span>We work with</span><span>{{ site.contact.works_with }}</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

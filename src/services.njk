@@ -1,0 +1,21 @@
+---
+layout: base.njk
+pageKey: services
+permalink: /services/
+---
+{% set s = site.pages.services %}
+<section style="padding-top:60px;">
+  <div class="wrap">
+    <div class="eyebrow reveal">{{ s.eyebrow }}</div>
+    <div class="section-head reveal">
+      <h2>{{ s.heading }}</h2>
+      <p>{{ s.subhead }}</p>
+    </div>
+
+    {% include "components/menu.njk" %}
+
+    <div style="text-align:center;margin-top:48px;">
+      <a class="btn btn-primary" href="{{ s.cta.url }}">{{ s.cta.label }}</a>
+    </div>
+  </div>
+</section>

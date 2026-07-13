@@ -1,0 +1,17 @@
+{# HERO: split text / image — copy on the left, image panel on the right #}
+<section class="hero-split">
+  <div class="wrap hero-split-grid">
+    <div class="hero-split-text reveal">
+      <div class="eyebrow">{{ hero.eyebrow }}</div>
+      <h1>{{ hero.headline }}</h1>
+      <p class="sub">{{ hero.subhead }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ hero.primary_cta.url }}">{{ hero.primary_cta.label }}</a>
+        <a class="btn btn-outline" href="{{ hero.secondary_cta.url }}">{{ hero.secondary_cta.label }}</a>
+      </div>
+    </div>
+    <div class="hero-split-media reveal">
+      <img src="{{ hero.bg_image if hero.bg_image else site.images.hero_logo }}" alt="{{ site.business.name }}">
+    </div>
+  </div>
+</section>

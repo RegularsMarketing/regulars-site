@@ -14,3 +14,9 @@ npm-debug.log*
 
 # Decap local uploads staging (optional)
 # assets/uploads/
+
+# Eleventy build output
+_site/
+
+# Node
+node_modules/

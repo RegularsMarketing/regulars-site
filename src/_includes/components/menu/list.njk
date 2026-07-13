@@ -1,0 +1,12 @@
+{# MENU: single-column numbered list (original services layout) #}
+<div class="step-list reveal">
+  {% for item in site.menu_items %}
+  <div class="step">
+    <div class="snum">{{ item.number }}</div>
+    <div>
+      <h3>{{ item.title }} <span class="tier-chip">{{ item.tier }}</span></h3>
+      <p>{{ item.description }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>

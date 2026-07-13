@@ -1,0 +1,20 @@
+{# FOOTER: minimal — brand + a single inline link row #}
+<footer class="footer--minimal">
+  <div class="wrap">
+    <div class="footer-min-top">
+      <a class="footer-brand" href="/">
+        <img class="logo-mark" src="{{ site.images.logo_mark }}" alt="{{ site.business.name }}">
+        <div class="logo-word">{{ site.business.name }}</div>
+      </a>
+      <div class="footer-min-links">
+        {% for col in site.footer.columns %}{% for link in col.links %}
+        <a href="{{ link.url }}">{{ link.label }}</a>
+        {% endfor %}{% endfor %}
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="fl">{{ site.footer.legal_left }}</div>
+      <div class="fl">{{ site.footer.legal_right }}</div>
+    </div>
+  </div>
+</footer>

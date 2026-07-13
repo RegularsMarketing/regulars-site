@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% set p = site.pages[pageKey] if pageKey else null %}
+<title>{{ p.seo_title if p else title }}</title>
+<meta name="description" content="{{ p.seo_description if p else description }}">
+<link rel="canonical" href="{{ site.business.url }}{{ page.url }}">
+<meta name="robots" content="{{ 'noindex' if noindex else 'index, follow' }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.business.name }}">
+<meta property="og:title" content="{{ p.seo_title }}">
+<meta property="og:description" content="{{ p.seo_description }}">
+<meta property="og:url" content="{{ site.business.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.business.url }}{{ site.images.hero_logo }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="{{ site.images.logo_mark }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="{{ site.theme.fonts.google_href }}" rel="stylesheet">
+<style>
+:root{
+  --cream:{{ site.theme.colors.cream }};
+  --cream-2:{{ site.theme.colors.cream2 }};
+  --charcoal:{{ site.theme.colors.charcoal }};
+  --charcoal-2:{{ site.theme.colors.charcoal2 }};
+  --orange:{{ site.theme.colors.orange }};
+  --orange-dark:{{ site.theme.colors.orange_dark }};
+  --line:{{ site.theme.colors.line }};
+  --line-soft:{{ site.theme.colors.line_soft }};
+  --font-heading:{{ site.theme.fonts.heading | safe }};
+  --font-body:{{ site.theme.fonts.body | safe }};
+}
+</style>
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+
+{% include "components/nav.njk" %}
+
+<main>
+{{ content | safe }}
+</main>
+
+{% include "components/footer.njk" %}
+
+<script src="/assets/site.js"></script>
+</body>
+</html>

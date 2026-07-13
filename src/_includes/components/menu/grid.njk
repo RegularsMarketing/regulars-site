@@ -1,0 +1,20 @@
+{# MENU: categorized grid — cards grouped by category #}
+{% set groups = site.menu_items | groupBy("category") %}
+<div class="reveal">
+  {% for category, items in groups %}
+  <div class="menu-cat-group">
+    <div class="divider"><div class="ln"></div><div class="dot"></div><div class="ln"></div></div>
+    <h3 class="menu-cat">{{ category }}</h3>
+    <div class="menu-grid">
+      {% for item in items %}
+      <div class="menu-card">
+        <span class="service-num">{{ item.number }}</span>
+        <h4>{{ item.title }}</h4>
+        <p>{{ item.short }}</p>
+        <span class="tier-chip">{{ item.tier }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

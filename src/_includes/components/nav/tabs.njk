@@ -1,0 +1,15 @@
+{# NAV: tab-pill style (original) #}
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <img class="logo-mark" src="{{ site.images.logo_mark }}" alt="{{ site.business.name }}">
+      <div class="logo-word">{{ site.business.name }}</div>
+    </a>
+    <div class="tabs" id="tabs">
+      {% for link in site.nav.links %}
+      <a class="tab-btn{% if link.url == page.url %} active{% endif %}" href="{{ link.url }}">{{ link.label }}</a>
+      {% endfor %}
+    </div>
+    <a class="btn btn-primary btn-sm nav-cta" href="{{ site.nav.cta.url }}">{{ site.nav.cta.label }}</a>
+  </div>
+</nav>

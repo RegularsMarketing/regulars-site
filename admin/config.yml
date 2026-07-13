@@ -1,135 +1,485 @@
 # Decap CMS configuration.
+# Edits the single build config, content/site.yaml, which Eleventy renders at build time.
 # Docs: https://decapcms.org/docs/
 #
-# BACKEND — GitHub backend, authenticated through a self-hosted OAuth proxy Worker
-# (sveltia-cms-auth) on Cloudflare. This replaces Netlify's git-gateway, which does
-# not work off Netlify. Editors sign in with their own GitHub account; grant them
-# write access to THIS repo only (as a collaborator) — not your whole org.
-#
-# `base_url` must point at your deployed Worker. Decap calls <base_url>/auth to start
-# the OAuth flow; GitHub then redirects to <base_url>/callback.
-#
-# To edit locally with no auth instead, keep `local_backend: true` and run:
-#   npx decap-server   (then open http://localhost:8080/admin/ via your local server)
+# Auth is handled by the sveltia-cms-auth Worker (GitHub OAuth proxy), replacing
+# Netlify's git-gateway. Editors sign in with GitHub; grant write access to THIS repo only.
 backend:
   name: github
   repo: RegularsMarketing/regulars-site
   branch: main
   base_url: https://sveltia-cms-auth.vickery-6a4.workers.dev
 
+# Local editing without auth: keep this true and run `npx decap-server`, then open
+# http://localhost:8080/admin/ against a local server.
 local_backend: true
 
-media_folder: assets/uploads
-public_folder: /assets/uploads
+media_folder: src/assets
+public_folder: /assets
 
 collections:
-  # -------- Site-wide settings: contact details + hours --------
-  - name: settings
-    label: Site Settings
+  - name: site
+    label: Site
+    delete: false
     files:
-      - name: contact
-        label: Contact & Hours
-        file: content/settings.yml
+      - name: config
+        label: Site Configuration
+        file: content/site.yaml
+        description: "Everything about this site. Change component styles under 'Components' to restyle the whole site."
         fields:
-          - { label: Email, name: email, widget: string }
-          - { label: Instagram handle, name: instagram, widget: string }
-          - { label: Instagram URL, name: instagram_url, widget: string }
-          - { label: Response time, name: response_time, widget: string }
-          - { label: Works with, name: works_with, widget: string }
-          - label: Hours
-            name: hours
-            widget: list
+          # ---------------- BUSINESS ----------------
+          - label: Business
+            name: business
+            widget: object
+            collapsed: true
             fields:
-              - { label: Day(s), name: days, widget: string }
-              - { label: Hours, name: hours, widget: string }
+              - { label: Name, name: name, widget: string }
+              - { label: Tagline, name: tagline, widget: string }
+              - { label: Domain, name: domain, widget: string }
+              - { label: Site URL, name: url, widget: string }
 
-  # -------- The service "menu" --------
-  - name: menu
-    label: Services Menu
-    files:
-      - name: services
-        label: Services
-        file: content/menu.yml
-        fields:
-          - label: Services
-            name: services
+          # ---------------- THEME ----------------
+          - label: Theme
+            name: theme
+            widget: object
+            collapsed: true
+            fields:
+              - label: Colors
+                name: colors
+                widget: object
+                fields:
+                  - { label: Cream (background), name: cream, widget: string }
+                  - { label: Cream 2 (panels), name: cream2, widget: string }
+                  - { label: Charcoal (text), name: charcoal, widget: string }
+                  - { label: Charcoal 2 (muted text), name: charcoal2, widget: string }
+                  - { label: Orange (accent), name: orange, widget: string }
+                  - { label: Orange dark (hover), name: orange_dark, widget: string }
+                  - { label: Line, name: line, widget: string }
+                  - { label: Line soft, name: line_soft, widget: string }
+              - label: Fonts
+                name: fonts
+                widget: object
+                fields:
+                  - { label: Heading font-family, name: heading, widget: string }
+                  - { label: Body font-family, name: body, widget: string }
+                  - { label: Google Fonts <link> href, name: google_href, widget: string }
+
+          # ---------------- IMAGES ----------------
+          - label: Images
+            name: images
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Logo mark, name: logo_mark, widget: image }
+              - { label: Hero logo, name: hero_logo, widget: image }
+
+          # ---------------- COMPONENTS (the swappable library) ----------------
+          - label: Components (site-wide styles)
+            name: components
+            widget: object
+            fields:
+              - { label: Navigation, name: nav, widget: select, options: [tabs, topline] }
+              - { label: Hero, name: hero, widget: select, options: [textforward, fullbleed, split] }
+              - { label: Menu layout, name: menu, widget: select, options: [list, grid] }
+              - { label: Footer, name: footer, widget: select, options: [columns, minimal] }
+
+          # ---------------- NAV ----------------
+          - label: Navigation links
+            name: nav
+            widget: object
+            collapsed: true
+            fields:
+              - label: Links
+                name: links
+                widget: list
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: URL, name: url, widget: string }
+              - label: Call-to-action button
+                name: cta
+                widget: object
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: URL, name: url, widget: string }
+
+          # ---------------- FOOTER ----------------
+          - label: Footer
+            name: footer
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Description, name: description, widget: text }
+              - label: Columns
+                name: columns
+                widget: list
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - label: Links
+                    name: links
+                    widget: list
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+              - { label: Legal (left), name: legal_left, widget: string }
+              - { label: Legal (right), name: legal_right, widget: string }
+
+          # ---------------- CONTACT & HOURS ----------------
+          - label: Contact & Hours
+            name: contact
+            widget: object
+            collapsed: true
+            fields:
+              - { label: Email, name: email, widget: string }
+              - { label: Instagram handle, name: instagram, widget: string }
+              - { label: Instagram URL, name: instagram_url, widget: string }
+              - { label: Response time, name: response_time, widget: string }
+              - { label: Works with, name: works_with, widget: string }
+              - { label: Formspree contact form ID, name: formspree_contact_id, widget: string }
+              - { label: Formspree newsletter form ID, name: formspree_newsletter_id, widget: string }
+              - label: Hours
+                name: hours
+                widget: list
+                fields:
+                  - { label: Day(s), name: days, widget: string }
+                  - { label: Hours, name: hours, widget: string }
+
+          # ---------------- STAMP STRIP ----------------
+          - label: Stamp strip (home)
+            name: stamps
             widget: list
+            collapsed: true
+            field: { label: Stamp, name: stamp, widget: string }
+
+          # ---------------- THE MENU ----------------
+          - label: The Menu (services)
+            name: menu_items
+            widget: list
+            collapsed: true
             fields:
               - { label: Number, name: number, widget: string }
               - { label: Title, name: title, widget: string }
-              - { label: Description, name: description, widget: text }
-              - label: Tier
-                name: tier
-                widget: select
-                options: [Foundation, Growth, Full House]
+              - { label: Short line, name: short, widget: string }
+              - { label: Full description, name: description, widget: text }
+              - { label: Tier, name: tier, widget: select, options: [Foundation, Growth, Full House] }
+              - { label: Category (for grid layout), name: category, widget: string }
 
-  # -------- Per-page key text + SEO --------
-  - name: pages
-    label: Pages
-    files:
-      - name: home
-        label: Home
-        file: content/pages/home.yml
-        fields:
-          - { label: SEO title, name: seo_title, widget: string }
-          - { label: SEO description, name: seo_description, widget: text }
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: string }
-          - { label: Sub-headline, name: subhead, widget: text }
-          - { label: Primary button, name: primary_cta, widget: string }
-          - { label: Secondary button, name: secondary_cta, widget: string }
-      - name: our-story
-        label: Our Story
-        file: content/pages/our-story.yml
-        fields:
-          - { label: SEO title, name: seo_title, widget: string }
-          - { label: SEO description, name: seo_description, widget: text }
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: text }
-      - name: services
-        label: Services
-        file: content/pages/services.yml
-        fields:
-          - { label: SEO title, name: seo_title, widget: string }
-          - { label: SEO description, name: seo_description, widget: text }
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: string }
-          - { label: Sub-headline, name: subhead, widget: text }
-      - name: process
-        label: Process
-        file: content/pages/process.yml
-        fields:
-          - { label: SEO title, name: seo_title, widget: string }
-          - { label: SEO description, name: seo_description, widget: text }
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: string }
-          - { label: Sub-headline, name: subhead, widget: text }
-      - name: pricing
-        label: Pricing
-        file: content/pages/pricing.yml
-        fields:
-          - { label: SEO title, name: seo_title, widget: string }
-          - { label: SEO description, name: seo_description, widget: text }
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: string }
-          - { label: Sub-headline, name: subhead, widget: text }
-      - name: ledger
-        label: The Ledger
-        file: content/pages/ledger.yml
-        fields:
-          - { label: SEO title, name: seo_title, widget: string }
-          - { label: SEO description, name: seo_description, widget: text }
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: string }
-          - { label: Sub-headline, name: subhead, widget: text }
-          - { label: Signup heading, name: signup_heading, widget: string }
-          - { label: Signup subtext, name: signup_subtext, widget: string }
-      - name: book-a-call
-        label: Book a Call
-        file: content/pages/book-a-call.yml
-        fields:
-          - { label: SEO title, name: seo_title, widget: string }
-          - { label: SEO description, name: seo_description, widget: text }
-          - { label: Eyebrow, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: string }
-          - { label: Sub-headline, name: subhead, widget: text }
+          # ---------------- PAGES ----------------
+          - label: Pages
+            name: pages
+            widget: object
+            collapsed: true
+            fields:
+              # ---- HOME ----
+              - label: Home
+                name: home
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - label: Hero
+                    name: hero
+                    widget: object
+                    fields:
+                      - { label: Eyebrow, name: eyebrow, widget: string }
+                      - { label: Headline, name: headline, widget: string }
+                      - { label: Sub-headline, name: subhead, widget: text }
+                      - label: Primary button
+                        name: primary_cta
+                        widget: object
+                        fields:
+                          - { label: Label, name: label, widget: string }
+                          - { label: URL, name: url, widget: string }
+                      - label: Secondary button
+                        name: secondary_cta
+                        widget: object
+                        fields:
+                          - { label: Label, name: label, widget: string }
+                          - { label: URL, name: url, widget: string }
+                  - label: Thesis
+                    name: thesis
+                    widget: object
+                    fields:
+                      - { label: Eyebrow, name: eyebrow, widget: string }
+                      - { label: Heading, name: heading, widget: string }
+                      - label: Rows
+                        name: rows
+                        widget: list
+                        fields:
+                          - { label: Label, name: label, widget: string }
+                          - { label: Value, name: value, widget: string }
+                      - label: Link
+                        name: link
+                        widget: object
+                        fields:
+                          - { label: Label, name: label, widget: string }
+                          - { label: URL, name: url, widget: string }
+                  - label: Split section
+                    name: split
+                    widget: object
+                    fields:
+                      - label: Left
+                        name: left
+                        widget: object
+                        fields:
+                          - { label: Eyebrow, name: eyebrow, widget: string }
+                          - { label: Heading, name: heading, widget: string }
+                          - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: p, widget: text } }
+                      - label: Right
+                        name: right
+                        widget: object
+                        fields:
+                          - { label: Eyebrow, name: eyebrow, widget: string }
+                          - { label: Heading, name: heading, widget: string }
+                          - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: p, widget: text } }
+                          - label: Badges
+                            name: badges
+                            widget: list
+                            fields:
+                              - { label: Title, name: k, widget: string }
+                              - { label: Value, name: v, widget: string }
+                  - label: Services teaser
+                    name: services_teaser
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: string }
+                      - { label: Sub-headline, name: subhead, widget: text }
+                      - label: CTA
+                        name: cta
+                        widget: object
+                        fields:
+                          - { label: Label, name: label, widget: string }
+                          - { label: URL, name: url, widget: string }
+                  - label: Exclusions
+                    name: exclusions
+                    widget: object
+                    fields:
+                      - { label: Eyebrow, name: eyebrow, widget: string }
+                      - { label: Heading, name: heading, widget: string }
+                      - { label: Sub-headline, name: subhead, widget: text }
+                      - { label: Chips, name: chips, widget: list, field: { label: Chip, name: chip, widget: string } }
+                      - { label: Pull quote, name: quote, widget: text }
+                  - label: Closing CTA
+                    name: cta
+                    widget: object
+                    fields:
+                      - { label: Heading, name: heading, widget: string }
+                      - { label: Sub-headline, name: subhead, widget: text }
+                      - label: Button
+                        name: button
+                        widget: object
+                        fields:
+                          - { label: Label, name: label, widget: string }
+                          - { label: URL, name: url, widget: string }
+              # ---- STORY ----
+              - label: Our Story
+                name: story
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Hero quote, name: hero_quote, widget: text }
+                  - { label: Intro (supports **bold**), name: intro, widget: text }
+                  - label: Steps
+                    name: steps
+                    widget: list
+                    fields:
+                      - { label: Number, name: num, widget: string }
+                      - { label: Heading, name: heading, widget: string }
+                      - { label: Body, name: body, widget: text }
+                  - { label: Outro, name: outro, widget: text }
+                  - { label: Values heading, name: values_heading, widget: string }
+                  - label: Values
+                    name: values
+                    widget: list
+                    fields:
+                      - { label: Title, name: title, widget: string }
+                      - { label: Body, name: body, widget: text }
+              # ---- SERVICES ----
+              - label: Services
+                name: services
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Sub-headline, name: subhead, widget: text }
+                  - label: CTA
+                    name: cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+              # ---- PROCESS ----
+              - label: Process
+                name: process
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Sub-headline, name: subhead, widget: text }
+                  - label: Steps
+                    name: steps
+                    widget: list
+                    fields:
+                      - { label: Number, name: num, widget: string }
+                      - { label: Heading, name: heading, widget: string }
+                      - { label: Body, name: body, widget: text }
+                  - { label: Closing note, name: closing_note, widget: text }
+                  - label: CTA
+                    name: cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+              # ---- PRICING ----
+              - label: Pricing
+                name: pricing
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Sub-headline, name: subhead, widget: text }
+                  - label: Door One
+                    name: door_one
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: Title, name: title, widget: string }
+                      - { label: Body, name: body, widget: text }
+                      - label: Button
+                        name: button
+                        widget: object
+                        fields:
+                          - { label: Label, name: label, widget: string }
+                          - { label: URL, name: url, widget: string }
+                  - label: Door Two
+                    name: door_two
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: Title, name: title, widget: string }
+                      - { label: Sub-headline, name: subhead, widget: text }
+                      - label: Projects
+                        name: projects
+                        widget: list
+                        fields:
+                          - { label: Title, name: title, widget: string }
+                          - { label: Price, name: price, widget: string }
+                          - { label: Items, name: items, widget: list, field: { label: Item, name: item, widget: string } }
+                      - { label: Note (supports **bold**), name: note, widget: text }
+                  - label: Door Three
+                    name: door_three
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: Title, name: title, widget: string }
+                      - { label: Sub-headline, name: subhead, widget: text }
+                      - label: Tiers
+                        name: tiers
+                        widget: list
+                        fields:
+                          - { label: Name, name: name, widget: string }
+                          - { label: Amount, name: amount, widget: string }
+                          - { label: Per line, name: per, widget: string }
+                          - { label: Flagship?, name: flagship, widget: boolean, default: false }
+                          - { label: Summary bullets, name: summary, widget: list, field: { label: Bullet, name: bullet, widget: string } }
+                          - label: Detail groups
+                            name: details
+                            widget: list
+                            fields:
+                              - { label: Heading, name: heading, widget: string }
+                              - { label: Items, name: items, widget: list, field: { label: Item, name: item, widget: string } }
+                          - { label: Not included, name: not_included, widget: text }
+                          - label: Button
+                            name: button
+                            widget: object
+                            fields:
+                              - { label: Label, name: label, widget: string }
+                              - { label: URL, name: url, widget: string }
+                  - { label: Add-ons heading, name: addons_heading, widget: string }
+                  - { label: Add-ons sub-headline, name: addons_subhead, widget: text }
+                  - label: Add-ons
+                    name: addons
+                    widget: list
+                    fields:
+                      - { label: Name, name: name, widget: string }
+                      - { label: Price, name: price, widget: string }
+                  - { label: Guarantees heading, name: guarantees_heading, widget: string }
+                  - label: Guarantees
+                    name: guarantees
+                    widget: list
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: Value, name: value, widget: string }
+                  - { label: Guarantees quote, name: guarantees_quote, widget: text }
+                  - label: Final CTA
+                    name: final_cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+              # ---- LEDGER ----
+              - label: The Ledger
+                name: ledger
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Sub-headline, name: subhead, widget: text }
+                  - { label: Signup heading, name: signup_heading, widget: string }
+                  - { label: Signup sub-headline, name: signup_subhead, widget: string }
+                  - { label: Signup micro-text, name: signup_micro, widget: string }
+                  - { label: Research heading, name: research_heading, widget: string }
+                  - { label: Research sub-headline, name: research_subhead, widget: text }
+                  - label: Stats
+                    name: stats
+                    widget: list
+                    fields:
+                      - { label: Value, name: value, widget: string }
+                      - { label: Description, name: desc, widget: text }
+                      - { label: Source, name: source, widget: string }
+                  - label: Issue preview
+                    name: issue
+                    widget: object
+                    fields:
+                      - { label: Tag, name: tag, widget: string }
+                      - { label: Title, name: title, widget: string }
+                      - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: p, widget: text } }
+                      - { label: Signature, name: signature, widget: string }
+                  - { label: Footer prompt, name: footer_prompt, widget: string }
+                  - label: Footer CTA
+                    name: footer_cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+              # ---- CONTACT ----
+              - label: Book a Call
+                name: contact
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Sub-headline, name: subhead, widget: text }
+                  - { label: Form heading, name: form_heading, widget: string }
+                  - { label: Form sub-headline, name: form_subhead, widget: text }
+                  - { label: Form button, name: form_button, widget: string }
+                  - { label: Direct heading, name: direct_heading, widget: string }
+                  - { label: Direct sub-headline, name: direct_subhead, widget: text }

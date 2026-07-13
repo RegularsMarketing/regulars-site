@@ -1,0 +1,35 @@
+---
+layout: base.njk
+pageKey: story
+permalink: /our-story/
+---
+{% set s = site.pages.story %}
+<section style="padding-top:60px;">
+  <div class="wrap">
+    <div class="story-hero reveal">
+      <div class="eyebrow" style="color:var(--orange);">{{ s.eyebrow }}</div>
+      <h2>"{{ s.hero_quote }}"</h2>
+    </div>
+    <div class="story-body reveal">
+      <p>{{ s.intro | mdBold | safe }}</p>
+    </div>
+
+    <div class="step-list reveal">
+      {% for step in s.steps %}
+      <div class="step"><div class="snum">{{ step.num }}</div><div><h3>{{ step.heading }}</h3><p>{{ step.body }}</p></div></div>
+      {% endfor %}
+    </div>
+
+    <div class="story-body reveal" style="margin-top:8px;">
+      <p>{{ s.outro }}</p>
+    </div>
+
+    <div class="divider reveal" style="margin-top:16px;"><div class="ln"></div><div class="dot"></div><div class="ln"></div></div>
+    <div class="section-head reveal"><h2 style="font-size:25px;">{{ s.values_heading }}</h2></div>
+    <div class="values-grid reveal">
+      {% for v in s.values %}
+      <div class="value-card"><h3>{{ v.title }}</h3><p>{{ v.body }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
