@@ -45,6 +45,6 @@
 {% include "components/footer.njk" %}
 
 <script src="/assets/site.js"></script>
-{% if site.integrations and site.integrations.chat_widget %}{{ site.integrations.chat_widget | safe }}
+{% if site.integrations and site.integrations.chat_widget and not hide_chat_widget %}{{ site.integrations.chat_widget | safe }}
 {% endif %}</body>
 </html>

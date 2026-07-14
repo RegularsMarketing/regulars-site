@@ -34,6 +34,8 @@ ui:
   label_response: Response time
   label_works_with: We work with
   label_hours: Hours
+  label_phone: Phone
+  label_address: Address
 nav:
   links:
     - label: Home
@@ -74,6 +76,8 @@ footer:
           url: mailto:hello@regularsmarketing.com
         - label: '@regularsmarketing'
           url: https://instagram.com/regularsmarketing
+        - label: Terms of Service
+          url: /terms/
         - label: Privacy Policy
           url: /privacy/
         - label: SMS Terms
@@ -95,6 +99,8 @@ contact:
       hours: By appointment
     - days: Sunday
       hours: Closed
+  phone: (717) 525-1878
+  address: ''
 stamps:
   - Built by small business
   - Made for small business
@@ -598,5 +604,39 @@ pages:
       - heading: Privacy
         paragraphs:
           - Our Privacy Policy at regularsmarketing.com/privacy/ explains how we handle your information. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.
+  terms:
+    seo_title: Terms of Service | Regulars Marketing
+    seo_description: The terms that govern use of the Regulars Marketing website.
+    eyebrow: Legal
+    heading: Terms of Service
+    updated: 'Last updated: July 13, 2026'
+    sections:
+      - heading: Agreement
+        paragraphs:
+          - By using regularsmarketing.com (the "Site"), you agree to these Terms of Service. If you do not agree, please do not use the Site.
+      - heading: About the Site
+        paragraphs:
+          - The Site describes the marketing services Regulars Marketing offers to independent restaurants and cafés. Information on the Site is provided for general purposes; client engagements are governed by a separate written service agreement, which controls if it conflicts with anything here.
+      - heading: Messaging programs
+        paragraphs:
+          - Text and email programs offered through the Site are governed by our SMS Terms (regularsmarketing.com/sms-terms/) and Privacy Policy (regularsmarketing.com/privacy/).
+      - heading: Intellectual property
+        paragraphs:
+          - The Site and its content (text, graphics, logos) belong to Regulars Marketing or its licensors. You may not copy, reproduce, or use them commercially without permission.
+      - heading: Acceptable use
+        paragraphs:
+          - 'Do not misuse the Site: no attempts to disrupt it, probe it for vulnerabilities, scrape it at scale, or submit false or unlawful content through its forms and chat.'
+      - heading: Disclaimers
+        paragraphs:
+          - The Site is provided "as is" without warranties of any kind. We do not guarantee specific business results, search rankings, or uninterrupted availability of the Site.
+      - heading: Limitation of liability
+        paragraphs:
+          - To the fullest extent permitted by law, Regulars Marketing is not liable for indirect, incidental, or consequential damages arising from use of the Site.
+      - heading: Changes
+        paragraphs:
+          - We may update these terms; the date above reflects the latest version. Continued use of the Site after changes means you accept them.
+      - heading: Governing law and contact
+        paragraphs:
+          - 'These terms are governed by the laws of the Commonwealth of Pennsylvania. Questions: hello@regularsmarketing.com.'
 integrations:
   chat_widget: <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a557f062df990aa4e084fbe" data-source="WEB_USER"></script>

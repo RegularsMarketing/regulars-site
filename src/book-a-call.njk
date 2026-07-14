@@ -2,6 +2,9 @@
 layout: base.njk
 pageKey: contact
 permalink: /book-a-call/
+# Widget suppressed here: carrier rules forbid phone-collecting forms on pages
+# that carry the SMS opt-in chat widget.
+hide_chat_widget: true
 ---
 {% set c = site.pages.contact %}
 <section style="padding-top:60px;">
@@ -31,6 +34,8 @@ permalink: /book-a-call/
         <p>{{ c.direct_subhead }}</p>
         <ul class="contact-info">
           <li><span>{{ site.ui.label_email }}</span><span>{{ site.contact.email }}</span></li>
+          {% if site.contact.phone %}<li><span>{{ site.ui.label_phone }}</span><span><a href="tel:{{ site.contact.phone | replace('(','') | replace(')','') | replace(' ','') | replace('-','') }}">{{ site.contact.phone }}</a></span></li>{% endif %}
+          {% if site.contact.address %}<li><span>{{ site.ui.label_address }}</span><span>{{ site.contact.address }}</span></li>{% endif %}
           <li><span>{{ site.ui.label_instagram }}</span><span>{% if site.contact.instagram_url %}<a href="{{ site.contact.instagram_url }}">{{ site.contact.instagram }}</a>{% else %}{{ site.contact.instagram }}{% endif %}</span></li>
           <li><span>{{ site.ui.label_response }}</span><span>{{ site.contact.response_time }}</span></li>
           <li><span>{{ site.ui.label_works_with }}</span><span>{{ site.contact.works_with }}</span></li>

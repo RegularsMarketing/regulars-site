@@ -105,6 +105,8 @@ collections:
               - { label: Contact label — response time, name: label_response, widget: string }
               - { label: Contact label — works with, name: label_works_with, widget: string }
               - { label: Hours heading, name: label_hours, widget: string }
+              - { label: Contact label — phone, name: label_phone, widget: string }
+              - { label: Contact label — address, name: label_address, widget: string }
 
           # ---------------- NAV ----------------
           - label: Navigation links
@@ -153,6 +155,8 @@ collections:
             collapsed: true
             fields:
               - { label: Email, name: email, widget: string }
+              - { label: Phone (published business line), name: phone, widget: string, required: false }
+              - { label: "Street address (published; required for A2P brand match)", name: address, widget: string, required: false }
               - { label: Instagram handle, name: instagram, widget: string }
               - { label: Instagram URL, name: instagram_url, widget: string }
               - { label: Response time, name: response_time, widget: string }
@@ -520,6 +524,22 @@ collections:
                   - { label: Direct heading, name: direct_heading, widget: string }
                   - { label: Direct sub-headline, name: direct_subhead, widget: text }
               # ---- LEGAL PAGES ----
+              - label: Terms of Service
+                name: terms
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Last-updated line, name: updated, widget: string }
+                  - label: Sections
+                    name: sections
+                    widget: list
+                    fields:
+                      - { label: Heading, name: heading, widget: string }
+                      - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: p, widget: text } }
               - label: Privacy Policy
                 name: privacy
                 widget: object

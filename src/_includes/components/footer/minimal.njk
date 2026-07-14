@@ -19,6 +19,9 @@
       {% endfor %}
     </div>
     {% endif %}
+    {% if site.contact.phone or site.contact.address %}
+    <div class="fcontact fcontact--minimal">{% if site.contact.phone %}{{ site.contact.phone }}{% endif %}{% if site.contact.phone and site.contact.address %} · {% endif %}{% if site.contact.address %}{{ site.contact.address }}{% endif %}</div>
+    {% endif %}
     <div class="footer-bottom">
       <div class="fl">{{ site.footer.legal_left }}</div>
       <div class="fl">{{ site.footer.legal_right }}</div>
