@@ -20,3 +20,7 @@ _site/
 
 # Node
 node_modules/
+
+# Obsidian (user notes vault artifacts)
+.obsidian/
+*.canvas

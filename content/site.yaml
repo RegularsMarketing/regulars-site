@@ -19,13 +19,21 @@ theme:
     body: '''Inter'', sans-serif'
     google_href: https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap
 images:
-  logo_mark: /assets/logo-mark.png
-  hero_logo: /assets/hero-logo.png
+  logo_mark: /assets/25bd357d-b8dc-45fc-a952-8b7cfc9de403.png
+  hero_logo: /assets/c06ce0c9-85b5-4cc0-aaef-499a5cccfbd5.png
 components:
   nav: tabs
   hero: textforward
   menu: list
   footer: columns
+ui:
+  flagship_tag: Most Popular
+  accordion_toggle: See everything included
+  label_email: Email
+  label_instagram: Instagram
+  label_response: Response time
+  label_works_with: We work with
+  label_hours: Hours
 nav:
   links:
     - label: Home
@@ -433,12 +441,15 @@ pages:
   ledger:
     subhead: Numbers, not opinions. One stat, one idea, one thing to try — sent every week, written by an agency that only does restaurants.
     heading: A weekly note on what actually keeps restaurants full.
+    signup_subject: New Ledger subscriber
     footer_prompt: Want the full playbook, not just the newsletter?
     eyebrow: The Ledger
+    signup_placeholder: you@yourrestaurant.com
     footer_cta:
       label: Book a Call
       url: /book-a-call/
     seo_title: The Ledger | Weekly Restaurant Marketing Insights | Regulars
+    signup_button: Subscribe
     issue:
       tag: Preview — First Issue Coming Soon
       title: Issue 01 — Why "Get More Customers" Is the Wrong Goal
@@ -480,9 +491,6 @@ pages:
       - value: 90–98%
         desc: of text messages get read within 3 minutes of being sent.
         source: 'Source: Omnisend / Sakari'
-    signup_placeholder: you@yourrestaurant.com
-    signup_button: Subscribe
-    signup_subject: New Ledger subscriber
   contact:
     subhead: Free, no-pressure 20-minute visibility audit. Tell us about your restaurant and we'll tell you exactly where we'd start — no obligation.
     heading: Let's look at your restaurant.
@@ -492,8 +500,6 @@ pages:
     direct_subhead: Prefer to reach out directly? We're a real, small team — you'll hear back from us soon
     direct_heading: Direct contact
     form_button: Request My Free Audit
-    seo_title: Book a Free Visibility Audit | Contact Regulars Restaurant Marketing
-    seo_description: Book a free, no-pressure 20-minute visibility audit for your independent restaurant or café. See exactly where you're losing regulars — no obligation, response within 1 business day.
     form_subject: New free-audit request from regularsmarketing.com
     form_fields:
       - name: restaurant
@@ -516,6 +522,8 @@ pages:
         placeholder: City / neighborhood
         type: text
         required: false
+    seo_title: Book a Free Visibility Audit | Contact Regulars Restaurant Marketing
+    seo_description: Book a free, no-pressure 20-minute visibility audit for your independent restaurant or café. See exactly where you're losing regulars — no obligation, response within 1 business day.
   not_found:
     seo_title: Page not found | Regulars
     seo_description: That page moved or never existed.
@@ -528,13 +536,5 @@ pages:
     secondary_cta:
       label: See Pricing
       url: /pricing/
-ui:
-  flagship_tag: Most Popular
-  accordion_toggle: See everything included
-  label_email: Email
-  label_instagram: Instagram
-  label_response: Response time
-  label_works_with: We work with
-  label_hours: Hours
 integrations:
   chat_widget: <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a557f062df990aa4e084fbe" data-source="WEB_USER"></script>
