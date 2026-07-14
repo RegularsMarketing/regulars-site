@@ -84,6 +84,14 @@ collections:
               - { label: Menu layout, name: menu, widget: select, options: [list, grid] }
               - { label: Footer, name: footer, widget: select, options: [columns, minimal] }
 
+          # ---------------- INTEGRATIONS (third-party embeds) ----------------
+          - label: Integrations
+            name: integrations
+            widget: object
+            collapsed: true
+            fields:
+              - { label: "Chat widget embed code (e.g. GHL text-us widget; empty = no widget)", name: chat_widget, widget: text, required: false }
+
           # ---------------- UI STRINGS (small interface labels) ----------------
           - label: UI labels
             name: ui

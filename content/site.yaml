@@ -536,3 +536,5 @@ ui:
   label_response: Response time
   label_works_with: We work with
   label_hours: Hours
+integrations:
+  chat_widget: <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a557f062df990aa4e084fbe" data-source="WEB_USER"></script>

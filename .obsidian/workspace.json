@@ -4,24 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "487a9d70454e7090",
+        "id": "49785da920d2f7ce",
         "type": "tabs",
         "children": [
           {
-            "id": "6e0a2682af096ee9",
+            "id": "4e71c2407c0171c4",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": 0,
-                  "y": 0,
-                  "zoom": 0
-                }
+                "file": "README.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
+              "icon": "lucide-file",
+              "title": "README"
             }
           }
         ]
@@ -44,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -77,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -97,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Untitled.canvas",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -107,7 +105,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Untitled"
+              "title": "Backlinks for README"
             }
           },
           {
@@ -116,12 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Untitled.canvas",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Untitled"
+              "title": "Outgoing links from README"
             }
           },
           {
@@ -159,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Untitled.canvas",
+                "file": "README.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Untitled"
+              "title": "Outline of README"
             }
           }
         ]
@@ -186,10 +184,19 @@
       "bases:Create new base": false
     }
   },
-  "active": "6e0a2682af096ee9",
+  "active": "c49b5a1d766957f9",
   "lastOpenFiles": [
-    "Untitled.base",
+    "DESIGN-WORKFLOW.md",
+    "CLAUDE.md",
+    "2026-07-13.md",
+    "Untitled 1.canvas",
     "Untitled.canvas",
-    "2026-07-13.md"
+    "_site/assets/logo-mark.png",
+    "_site/assets/hero-logo.png",
+    "_site/assets/c06ce0c9-85b5-4cc0-aaef-499a5cccfbd5.png",
+    "_site/assets/25bd357d-b8dc-45fc-a952-8b7cfc9de403.png",
+    "Untitled.base",
+    "node_modules/ms/license.md",
+    "node_modules/commander/Readme.md"
   ]
 }
