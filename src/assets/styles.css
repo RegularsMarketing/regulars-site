@@ -296,6 +296,11 @@ a.logo{text-decoration:none;}
 .menu-card h4{font-size:17px;font-weight:600;margin:0 0 9px;}
 .menu-card p{font-size:13.5px;line-height:1.6;color:var(--charcoal-2);margin:0 0 12px;}
 
+/* ---------- LEGAL PAGES ---------- */
+.legal-body{margin-top:8px;}
+.legal-body h3{font-size:18px;font-weight:600;margin:32px 0 10px;}
+.legal-body p{font-size:15px;line-height:1.75;color:var(--charcoal-2);margin:0 0 12px;}
+
 /* ---------- FOOTER: hours block (both variants) ---------- */
 .fhours{margin-top:16px;font-size:12.5px;line-height:1.8;opacity:0.85;}
 .fhours .fh-row{display:flex;justify-content:space-between;gap:16px;max-width:260px;}

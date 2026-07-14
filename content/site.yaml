@@ -74,6 +74,10 @@ footer:
           url: mailto:hello@regularsmarketing.com
         - label: '@regularsmarketing'
           url: https://instagram.com/regularsmarketing
+        - label: Privacy Policy
+          url: /privacy/
+        - label: SMS Terms
+          url: /sms-terms/
   legal_left: © 2026 Regulars Marketing · regularsmarketing.com
   legal_right: 'Sources: National Restaurant Association · Bain & Co. · BrightLocal · Bloom Intelligence'
 contact:
@@ -536,5 +540,63 @@ pages:
     secondary_cta:
       label: See Pricing
       url: /pricing/
+  privacy:
+    seo_title: Privacy Policy | Regulars Marketing
+    seo_description: How Regulars Marketing collects, uses, and protects your information.
+    eyebrow: Legal
+    heading: Privacy Policy
+    updated: 'Last updated: July 13, 2026'
+    sections:
+      - heading: Who we are
+        paragraphs:
+          - Regulars Marketing ("we," "us") is a marketing agency for independent restaurants and cafés, operating at regularsmarketing.com. This policy explains what information we collect through this website and our messaging programs, and how we use it.
+      - heading: What we collect
+        paragraphs:
+          - 'Information you give us directly: your name, email address, phone number, business name, and anything you include when you fill out a form on this site, subscribe to our newsletter, or message us through the chat widget.'
+          - Basic technical information needed to serve the site (such as IP addresses processed by our hosting provider). We do not run advertising trackers.
+      - heading: How we use it
+        paragraphs:
+          - To respond to your inquiries, provide our services, send messages you have signed up for (such as our newsletter or text updates), and improve how we work. We only send marketing messages to people who have opted in, and every message includes a way to opt out.
+      - heading: Text messaging and consent
+        paragraphs:
+          - If you opt in to text messages, we send them via our messaging platform. Message frequency varies; message and data rates may apply. Reply STOP at any time to unsubscribe, or HELP for help.
+          - No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Opt-in data and consent records are never sold or transferred for marketing use.
+      - heading: Who we share information with
+        paragraphs:
+          - 'Only the service providers that make this site and our communications work: our website host (Cloudflare), our form processor (Formspree), and our customer-communication platform (LeadConnector / HighLevel). Each receives only what it needs to do its job. We never sell your information.'
+      - heading: Retention and your choices
+        paragraphs:
+          - We keep contact records and consent history for as long as needed to provide services and meet legal requirements. You can unsubscribe from emails via the link in any email, stop texts by replying STOP, or ask us to delete your information by emailing hello@regularsmarketing.com.
+      - heading: Children
+        paragraphs:
+          - This site and our messaging programs are intended for adults and business owners, not for children under 13, and we do not knowingly collect information from them.
+      - heading: Changes and contact
+        paragraphs:
+          - If we change this policy, we will update this page and the date above. Questions? Email hello@regularsmarketing.com.
+  sms_terms:
+    seo_title: SMS Terms & Conditions | Regulars Marketing
+    seo_description: 'Terms for the Regulars Marketing text-messaging program: frequency, rates, opt-out, and support.'
+    eyebrow: Legal
+    heading: SMS Terms & Conditions
+    updated: 'Last updated: July 13, 2026'
+    sections:
+      - heading: Program description
+        paragraphs:
+          - 'Regulars Marketing sends text messages to people who opt in: conversational replies when you contact us through our website chat widget, responses to inquiries and missed calls, and — for subscribers who join our list — occasional marketing messages such as offers and news.'
+      - heading: Message frequency
+        paragraphs:
+          - Message frequency varies. Conversational messages depend on your conversation with us. Marketing subscribers receive roughly 2–4 messages per month. Message and data rates may apply according to your mobile plan.
+      - heading: Opting in
+        paragraphs:
+          - You opt in by submitting your number through a form or chat widget on our website that includes consent language, or by texting us first. Marketing texts require a separate confirmed opt-in (we ask you to reply YES). Consent is not a condition of any purchase.
+      - heading: Opting out and help
+        paragraphs:
+          - Reply STOP to any message to unsubscribe at any time. After you opt out, you will receive one final message confirming the opt-out. Reply HELP for help, or contact us at hello@regularsmarketing.com.
+      - heading: Carriers
+        paragraphs:
+          - Carriers are not liable for delayed or undelivered messages.
+      - heading: Privacy
+        paragraphs:
+          - Our Privacy Policy at regularsmarketing.com/privacy/ explains how we handle your information. No mobile information will be shared with third parties or affiliates for marketing or promotional purposes.
 integrations:
   chat_widget: <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a557f062df990aa4e084fbe" data-source="WEB_USER"></script>

@@ -1,0 +1,16 @@
+{# Shared legal-page body. Expects `lp` (a pages.* object with eyebrow/heading/updated/sections). #}
+<section style="padding-top:60px;">
+  <div class="wrap" style="max-width:760px;">
+    <div class="eyebrow">{{ lp.eyebrow }}</div>
+    <div class="section-head">
+      <h2>{{ lp.heading }}</h2>
+      <p>{{ lp.updated }}</p>
+    </div>
+    <div class="legal-body">
+      {% for s in lp.sections %}
+      <h3>{{ s.heading }}</h3>
+      {% for p in s.paragraphs %}<p>{{ p }}</p>{% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
