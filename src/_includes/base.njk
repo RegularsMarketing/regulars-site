@@ -17,7 +17,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="{{ site.images.logo_mark }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="{{ site.theme.fonts.google_href }}" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="{{ site.theme.fonts.google_href }}">
+<link href="{{ site.theme.fonts.google_href }}" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="{{ site.theme.fonts.google_href }}" rel="stylesheet"></noscript>
 <style>
 :root{
   --cream:{{ site.theme.colors.cream }};

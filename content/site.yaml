@@ -19,8 +19,8 @@ theme:
     body: '''Inter'', sans-serif'
     google_href: https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap
 images:
-  logo_mark: /assets/25bd357d-b8dc-45fc-a952-8b7cfc9de403.png
-  hero_logo: /assets/c06ce0c9-85b5-4cc0-aaef-499a5cccfbd5.png
+  logo_mark: /assets/25bd357d-b8dc-45fc-a952-8b7cfc9de403.webp
+  hero_logo: /assets/c06ce0c9-85b5-4cc0-aaef-499a5cccfbd5.webp
 components:
   nav: tabs
   hero: textforward
