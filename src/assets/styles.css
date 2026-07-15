@@ -17,7 +17,12 @@
   *:focus-visible{outline:2px solid var(--orange);outline-offset:3px;}
 
   /* ---------- NAV ---------- */
-  .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--cream) 94%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--cream) 94%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);transition:box-shadow .25s ease, backdrop-filter .25s ease;}
+  /* Scrolled state — toggled by stickyNavShrink() in animations.js.
+     Transform/shadow/blur only: the nav's box never changes size (no CLS). */
+  .nav .logo{transform-origin:left center;transition:transform .25s cubic-bezier(0.25,0.46,0.45,0.94);}
+  .nav--scrolled{box-shadow:0 8px 24px -18px rgba(43,41,38,0.45);backdrop-filter:blur(14px);}
+  .nav--scrolled .logo{transform:scale(0.9);}
   .nav-inner{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;}
   .logo{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;order:1;}
   .logo-mark{width:32px;height:32px;border-radius:50%;flex-shrink:0;}
@@ -34,8 +39,9 @@
   }
 
   /* ---------- BUTTONS ---------- */
-  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:600;font-size:14.5px;padding:13px 24px;border-radius:30px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .12s ease, opacity .12s ease, background .15s ease;}
-  .btn:active{transform:scale(0.97);}
+  /* Hover lift + press scale come from hoverLift() in animations.js —
+     no CSS transforms here, Motion owns transform on these elements. */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-weight:600;font-size:14.5px;padding:13px 24px;border-radius:30px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:opacity .12s ease, background .15s ease;}
   .btn-sm{padding:10px 18px;font-size:13.5px;}
   .btn-primary{background:var(--orange);color:#fff;}
   .btn-primary:hover{background:var(--orange-dark);}
@@ -49,9 +55,12 @@
   .page{display:none;}
   .page.active{display:block;animation:pagefade .35s ease;}
   @keyframes pagefade{from{opacity:0;}to{opacity:1;}}
-  .reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease, transform .55s ease;}
-  .reveal.visible{opacity:1;transform:translateY(0);}
-  @media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important;}.hero-logo{animation:none!important;}}
+  /* .reveal elements are animated by scrollFadeIn() in animations.js.
+     They are hidden by JS (not CSS), so content stays visible without JS.
+     Reduced motion: animations.js skips everything; kill CSS transitions too. */
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
+  }
 
   section{padding:84px 0;}
   section.tight{padding:56px 0;}
@@ -71,8 +80,7 @@
 
   /* ---------- HERO ---------- */
   .hero{padding:80px 0 70px;text-align:center;}
-  .hero-logo{max-width:520px;width:88%;margin:0 auto 8px;animation:heroLogoIn 1s cubic-bezier(0.16,0.84,0.44,1) both;}
-  @keyframes heroLogoIn{from{opacity:0;transform:scale(0.94) translateY(14px);}to{opacity:1;transform:scale(1) translateY(0);}}
+  .hero-logo{max-width:520px;width:88%;margin:0 auto 8px;} /* entrance handled by heroLoadIn() in animations.js */
   .hero h1{font-size:clamp(30px,5vw,50px);font-weight:600;line-height:1.08;letter-spacing:-0.01em;margin:22px 0 20px;max-width:760px;margin-left:auto;margin-right:auto;}
   .hero p.sub{max-width:600px;margin:0 auto 32px;font-size:17px;line-height:1.7;color:var(--charcoal-2);}
   .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
@@ -110,8 +118,8 @@
 
   /* ---------- SERVICE CARDS ---------- */
   .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:36px;}
-  .service-card{background:var(--cream-2);border:1px solid var(--line);border-radius:16px;padding:24px 22px;transition:transform .15s ease, border-color .15s ease;}
-  .service-card:hover{transform:translateY(-3px);border-color:var(--orange);}
+  .service-card{background:var(--cream-2);border:1px solid var(--line);border-radius:16px;padding:24px 22px;transition:border-color .15s ease;} /* lift comes from hoverLift() in animations.js */
+  .service-card:hover{border-color:var(--orange);}
   .service-num{font-family:var(--font-heading);font-style:italic;color:var(--orange);font-size:14px;margin-bottom:12px;display:block;}
   .service-card h3{font-size:17px;font-weight:600;margin:0 0 9px;}
   .service-card p{font-size:13.5px;line-height:1.6;color:var(--charcoal-2);margin:0 0 12px;}

@@ -24,6 +24,10 @@ export default function (eleventyConfig) {
 
   // Static assets copied through untouched.
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  // Self-hosted Motion library (vanilla build) — used by src/assets/animations.js.
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/motion/dist/motion.js": "assets/vendor/motion.js",
+  });
   eleventyConfig.addPassthroughCopy({ admin: "admin" });
   eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
 
