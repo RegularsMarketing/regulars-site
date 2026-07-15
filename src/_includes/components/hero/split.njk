@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="hero-split-media reveal">
-      <img src="{{ hero.bg_image if hero.bg_image else site.images.hero_logo }}" alt="{{ site.business.name }}">
+      <img src="{{ hero.bg_image if hero.bg_image else site.images.hero_logo }}" alt="{{ site.business.name }}" fetchpriority="high">
     </div>
   </div>
 </section>
