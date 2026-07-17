@@ -3,6 +3,11 @@
 A config-driven static site template for independent restaurant/café client sites.
 Built with **Eleventy**, edited with **Decap CMS**, deployed on **Cloudflare Pages**.
 
+> **Note:** this repo wears two hats. It's the canonical template, and it's also the
+> live instance of Regulars' own marketing site (regularsmarketing.com) — the content
+> in `content/site.yaml` is Regulars' own. Client sites are **copies** of this repo
+> with their own `site.yaml` + images; nothing client-specific ever lands here.
+
 **A whole new client site = edit one file (`content/site.yaml`) + swap the images in
 `src/assets/`.** Nothing else changes.
 
@@ -21,7 +26,9 @@ src/
       hero/    textforward.njk · fullbleed.njk · split.njk
       menu/    list.njk · grid.njk
       footer/  columns.njk · minimal.njk
-  *.njk               ← the 7 pages (structure only; all text comes from the config)
+  *.njk               ← the pages (structure only; all text comes from the config).
+                         catering.njk is OPTIONAL — builds /catering/ only when
+                         pages.catering.enabled is true in the config.
   assets/             ← styles.css, site.js, images (swap the images per client)
 admin/                ← Decap CMS (edits content/site.yaml)
 eleventy.config.js    ← build config
@@ -70,7 +77,15 @@ npm run build       # production build into _site/
    empty for no chip, or use e.g. "New" / "Chef's Pick").
 6. Hours (`contact.hours`) render automatically on the contact page and in both footers;
    leave the list empty to hide them.
-7. `npm run build`, deploy.
+7. **Catering & events page (part of the standard offer — don't skip it):** set
+   `pages.catering.enabled: true`, edit the copy/packages/FAQs, and paste the client's
+   GHL catering-form embed into `pages.catering.form_embed` (submissions then fire the
+   Speed-to-Lead workflow — see `../Foundation/sammys-ghl-day-one-stack.md`). Until the
+   GHL form exists, leave `form_embed` empty and the page falls back to a styled
+   Formspree form using `pages.catering.form_fields`. Add a "Catering" link to
+   `nav.links` and the footer. The page auto-suppresses the chat widget (carrier rule:
+   no SMS-consent widget on phone-collecting form pages).
+8. `npm run build`, deploy.
 
 ## Deploy to Cloudflare Pages
 

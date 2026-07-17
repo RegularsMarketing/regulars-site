@@ -1,0 +1,151 @@
+---js
+{
+  layout: "base.njk",
+  pageKey: "catering",
+  // Phone-collecting form: carrier rules forbid pages that also carry the
+  // SMS opt-in chat widget (same rule as /book-a-call/).
+  hide_chat_widget: true,
+  eleventyComputed: {
+    // Optional page — only builds when pages.catering.enabled is true in
+    // content/site.yaml. Regulars' own site keeps it off; client sites flip it on.
+    permalink: (data) =>
+      data.site.pages.catering && data.site.pages.catering.enabled
+        ? "/catering/"
+        : false,
+  },
+}
+---
+{% set c = site.pages.catering %}
+<section style="padding-top:60px;">
+  <div class="wrap">
+    <div class="contact-hero reveal">
+      <div class="eyebrow center">{{ c.eyebrow }}</div>
+      <h2>{{ c.heading }}</h2>
+      <p>{{ c.subhead }}</p>
+    </div>
+    {% if c.points and c.points.length %}
+    <div class="stamp-row reveal" style="margin-top:18px;">
+      {% for point in c.points %}
+      <div class="stamp-item"><span class="ico"></span>{{ point }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div style="text-align:center;margin-top:32px;">
+      <a class="btn btn-primary" href="#catering-form">{{ c.hero_button }}</a>
+    </div>
+  </div>
+</section>
+
+{% if c.steps and c.steps.length %}
+<section class="tight">
+  <div class="wrap">
+    <div class="section-head center reveal"><h2>{{ c.steps_heading }}</h2></div>
+    <div class="step-list reveal">
+      {% for step in c.steps %}
+      <div class="step"><div class="snum">{{ step.num }}</div><div><h3>{{ step.heading }}</h3><p>{{ step.body }}</p></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if c.packages and c.packages.length %}
+<section class="tight">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <h2>{{ c.packages_heading }}</h2>
+      <p>{{ c.packages_subhead }}</p>
+    </div>
+    <div class="project-grid reveal">
+      {% for pkg in c.packages %}
+      <div class="project-card">
+        <h4>{{ pkg.title }}</h4>
+        <div class="price">{{ pkg.price }}</div>
+        <ul>{% for item in pkg.items %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+    {% if c.packages_note %}<p class="reveal" style="text-align:center;font-size:13px;color:var(--charcoal-2);margin-top:22px;">{{ c.packages_note | mdBold | safe }}</p>{% endif %}
+  </div>
+</section>
+{% endif %}
+
+<section class="tight" id="catering-form">
+  <div class="wrap">
+    <div class="contact-panel reveal">
+      <div>
+        <h3>{{ c.form_heading }}</h3>
+        <p>{{ c.form_subhead }}</p>
+        {% if c.form_embed %}
+        <!-- CRM form embed (e.g. the GHL catering form — submissions fire the
+             Speed-to-Lead workflow). Paste the embed code in content/site.yaml. -->
+        <div class="form-embed">{{ c.form_embed | safe }}</div>
+        {% else %}
+        <!-- Fallback: Formspree form (no CRM connected yet). -->
+        <form class="form-fields" action="https://formspree.io/f/{{ site.contact.formspree_contact_id }}" method="POST">
+          {% for f in c.form_fields %}
+          {% if f.type == 'select' %}
+          <select name="{{ f.name }}"{% if f.required %} required{% endif %} aria-label="{{ f.placeholder }}">
+            <option value="" disabled selected>{{ f.placeholder }}</option>
+            {% for opt in f.options %}<option value="{{ opt }}">{{ opt }}</option>{% endfor %}
+          </select>
+          {% else %}
+          <input type="{{ f.type }}" name="{{ f.name }}" placeholder="{{ f.placeholder }}"{% if f.type == 'date' %} aria-label="{{ f.placeholder }}" onfocus="this.showPicker && this.showPicker()"{% endif %}{% if f.required %} required{% endif %}>
+          {% endif %}
+          {% endfor %}
+          <input type="hidden" name="_subject" value="{{ c.form_subject }}">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top:6px;">{{ c.form_button }}</button>
+        </form>
+        {% endif %}
+      </div>
+      <div>
+        <h3>{{ c.direct_heading }}</h3>
+        <p>{{ c.direct_subhead }}</p>
+        <ul class="contact-info">
+          {% if site.contact.phone %}<li><span>{{ site.ui.label_phone }}</span><span><a href="tel:{{ site.contact.phone | replace('(','') | replace(')','') | replace(' ','') | replace('-','') }}">{{ site.contact.phone }}</a></span></li>{% endif %}
+          <li><span>{{ site.ui.label_email }}</span><span>{{ site.contact.email }}</span></li>
+          {% if site.contact.address %}<li><span>{{ site.ui.label_address }}</span><span>{{ site.contact.address }}</span></li>{% endif %}
+          <li><span>{{ site.ui.label_response }}</span><span>{{ c.response_promise }}</span></li>
+        </ul>
+        {% if site.contact.hours and site.contact.hours.length %}
+        <h3 style="margin-top:28px;">{{ site.ui.label_hours }}</h3>
+        <ul class="contact-info">
+          {% for h in site.contact.hours %}
+          <li><span>{{ h.days }}</span><span>{{ h.hours }}</span></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if c.faqs and c.faqs.length %}
+<section class="tight">
+  <div class="wrap">
+    <div class="section-head center reveal"><h2>{{ c.faq_heading }}</h2></div>
+    <div class="faq-list reveal">
+      {% for faq in c.faqs %}
+      <details class="faq-item">
+        <summary>{{ faq.q }}</summary>
+        <p>{{ faq.a }}</p>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% set cta = c.cta %}
+<section class="tight">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <div>
+        <h3>{{ cta.heading }}</h3>
+        <p>{{ cta.subhead }}</p>
+      </div>
+      <a class="btn btn-primary" href="{{ cta.button.url }}">{{ cta.button.label }}</a>
+    </div>
+  </div>
+</section>

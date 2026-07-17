@@ -137,10 +137,22 @@ menu_items:
     description: List building syncs monthly with your POS (Toast, Square, OpenTable, Resy). Full campaign sends — 2–4 a month with trackable redemption codes — are a Full House feature.
     category: Get Craved
     badge: Growth
+  - number: '06'
+    title: Missed-Call Text-Back
+    short: Slammed mid-rush? Every missed call gets an instant text.
+    description: The moment a call goes unanswered, the caller gets a friendly text within seconds — how can we help, plus a link to book. Restaurants miss the most calls at their busiest hours; this recovers them automatically, around the clock.
+    category: Get Booked
+    badge: Foundation
+  - number: '07'
+    title: AI Catering & Events Engine
+    short: Catering inquiries answered in 30 seconds — qualified, followed up, booked.
+    description: A dedicated catering page on your site feeds an AI events assistant that texts back instantly, gathers the date, headcount, and occasion, and books a call with you — then follows up automatically until they answer. Big events get flagged to the owner within the hour. High-ticket inquiries never sit overnight again.
+    category: Get Booked
+    badge: Full House
 pages:
   home:
     seo_title: Regulars | Flat-Rate Marketing for Independent Restaurants & Cafés
-    seo_description: Regulars is the flat-rate marketing partner for independent, single-location restaurants and cafés. Local SEO, reviews, social, and email that turn first-timers into loyal regulars — published prices, no lock-in.
+    seo_description: Regulars is the flat-rate marketing partner for independent, single-location restaurants and cafés. Local SEO, reviews, social, email, and AI-powered follow-up that turn first-timers into loyal regulars — published prices, no lock-in.
     hero:
       eyebrow: Marketing for Independent Restaurants & Cafés
       headline: Marketing built for one address — not eleven hundred.
@@ -183,15 +195,15 @@ pages:
           - k: Own your reputation
             v: Every review answered, every profile managed, every week.
     services_teaser:
-      heading: 'Five services. One goal: more regulars.'
-      subhead: Everything we do in year one is focused on turning up how often people come back.
+      heading: 'Seven services. One goal: more regulars.'
+      subhead: Everything we do in year one is focused on turning up how often people come back — and making sure no call, inquiry, or first-timer slips through the cracks.
       cta:
         label: Explore All Services
         url: /services/
     exclusions:
       eyebrow: Scope, On Purpose
       heading: What's not on the menu (yet).
-      subhead: Year one is intentionally narrow. Five things done properly beat fifteen things done halfway.
+      subhead: Year one is intentionally narrow. A handful of things done properly beats fifteen things done halfway.
       chips:
         - Paid ads
         - Funnels
@@ -237,11 +249,11 @@ pages:
     hero_quote: Every great restaurant is really just a room full of people who keep coming back.
     seo_description: Why we only market independent restaurants and cafés. Regulars brings the big-chain retention playbook to single-location restaurants — built from a family table, priced flat, never locked in.
   services:
-    seo_title: Services | Local SEO, Reviews, Social & Email for Restaurants | Regulars
-    seo_description: 'Five done-for-you marketing services for independent restaurants and cafés: Google Business & local SEO, review generation, social content, website builds, and email/SMS list building.'
+    seo_title: Services | Local SEO, Reviews, Social, Email & AI Follow-Up for Restaurants | Regulars
+    seo_description: 'Seven done-for-you marketing services for independent restaurants and cafés: Google Business & local SEO, review generation, social content, website builds, email/SMS list building, missed-call text-back, and an AI catering & events engine.'
     eyebrow: Services
-    heading: Five services, working together to build your regulars.
-    subhead: We keep our scope tight on purpose. No paid ads, no funnels, no influencer campaigns in year one — just the five things that reliably turn first-timers into regulars.
+    heading: Seven services, working together to build your regulars.
+    subhead: We keep our scope tight on purpose. No paid ads, no influencer campaigns, no bloat — just the things that reliably turn first-timers into regulars and make sure the guests already reaching out never slip away.
     cta:
       label: See Pricing
       url: /pricing/
@@ -309,6 +321,7 @@ pages:
             - Google Business Profile management
             - Citations & listings cleanup
             - Review generation & response system
+            - Missed-call text-back
             - Monthly one-page report
           details:
             - heading: Google Business Profile
@@ -329,11 +342,16 @@ pages:
                 - Every Google review answered within 48 hours, in your tone
                 - Same-day alert + drafted response for any 1–2 star review
                 - Never buy, gate, or incentivize reviews — ever
+            - heading: Missed-Call Text-Back
+              items:
+                - Every unanswered call gets an instant, friendly text within seconds — 24/7, including mid-rush and after hours
+                - Caller replies land in one inbox with a same-day human response
+                - Missed calls recovered are counted in your monthly report
             - heading: Reporting
               items:
                 - 'Monthly one-page report by the 5th business day: views, calls, directions, clicks vs. baseline'
                 - Direct line to your account owner, 1-business-day reply
-          not_included: 'Not included: social posting, website work, email/SMS campaigns, paid ads.'
+          not_included: 'Not included: social posting, website work, email/SMS campaigns, AI catering engine, paid ads.'
           button:
             label: Book a Call
             url: /book-a-call/
@@ -361,7 +379,7 @@ pages:
                 - Monthly sync with your POS/reservation system
                 - 'Full TCPA compliance: double opt-in, unsubscribe, documented consent'
                 - List growth tracked monthly — it's your asset, exportable anytime
-          not_included: 'Not included: campaign sends (+$300/mo add-on), website work, TikTok (+$200/mo add-on).'
+          not_included: 'Not included: campaign sends (+$300/mo add-on), website work, AI catering engine (Full House), TikTok (+$200/mo add-on).'
           button:
             label: Book a Call
             url: /book-a-call/
@@ -373,6 +391,7 @@ pages:
             - Everything in Growth
             - Website build, hosting & maintenance
             - Reservation/ordering integration
+            - AI catering & events engine
             - 2–4 email/SMS campaigns per month
           details:
             - heading: Website (Built, Hosted, Maintained)
@@ -383,6 +402,13 @@ pages:
                 - Up to 4 content updates/month, 2-business-day turnaround
                 - Local SEO fundamentals + restaurant schema markup on every page
                 - Live within 21 days of receiving your content
+            - heading: AI Catering & Events Engine
+              items:
+                - Dedicated catering page + inquiry form built into your site
+                - AI events assistant texts every inquiry back within seconds — gathers date, headcount, and occasion, and books a call with you
+                - Automated follow-up until they answer, so no inquiry sits overnight
+                - Big events (weddings, large headcounts, short notice) flagged to the owner within the hour
+                - Post-event review request and next-year rebooking nudge
             - heading: Email & SMS Campaigns
               items:
                 - 2–4 campaigns/month, planned quarterly with you
@@ -534,6 +560,113 @@ pages:
         required: false
     seo_title: Book a Free Visibility Audit | Contact Regulars Restaurant Marketing
     seo_description: Book a free, no-pressure 20-minute visibility audit for your independent restaurant or café. See exactly where you're losing regulars — no obligation, response within 1 business day.
+  catering:
+    # Optional page — OFF for the Regulars site. Client sites flip enabled: true,
+    # paste the CRM (GHL) form embed, and edit the copy. The copy below is the
+    # template default, written for a generic restaurant.
+    enabled: false
+    seo_title: Catering & Private Events | Check Your Date
+    seo_description: Catering and private events — tell us your date, headcount, and occasion, and hear back by text in minutes, not days. Check your date today.
+    eyebrow: Catering & Private Events
+    heading: Feed a crowd. Skip the phone tag.
+    subhead: Tell us about your event below and you'll hear back from us by text within minutes — any day, even mid-dinner-rush.
+    hero_button: Check My Date
+    points:
+      - A reply in minutes, not days
+      - Off-site catering & private dining
+      - No deposit to ask a question
+    steps_heading: How it works
+    steps:
+      - num: '01'
+        heading: Tell us about your event
+        body: Date, headcount, and the occasion — the form takes about a minute.
+      - num: '02'
+        heading: Get a text back in minutes
+        body: Our events assistant confirms the details and answers the quick questions right away, so nothing waits on a voicemail.
+      - num: '03'
+        heading: Lock it in with the owner
+        body: A quick 15-minute call to set the menu and exact pricing — then your date is held.
+    packages_heading: Ways to feed a crowd
+    packages_subhead: Exact pricing depends on your headcount and menu — these are the starting points.
+    packages:
+      - title: Delivered Trays
+        price: from $— /person
+        items:
+          - Family-style trays, delivered and ready to serve
+          - Plates, utensils & serving pieces included
+          - Delivery within our local radius
+      - title: Full-Service Catering
+        price: from $— /person
+        items:
+          - We set up, serve, and clean up at your location
+          - Custom menu built around your event
+          - Staffing available for larger events
+      - title: Private Dining Room
+        price: room minimum $—
+        items:
+          - Host your event here with a dedicated server
+          - Seated dinners & cocktail-style receptions
+          - Set menu or limited menu, your call
+    packages_note: Every package can flex for dietary needs — just tell us in the form.
+    form_heading: Tell us about your event
+    form_subhead: A minute now saves the phone tag later — you'll get a text back from us within minutes.
+    form_embed: ''
+    form_subject: New catering inquiry
+    form_button: Check My Date
+    form_fields:
+      - name: name
+        placeholder: Your name
+        type: text
+        required: true
+      - name: phone
+        placeholder: Mobile number (we'll text you back)
+        type: tel
+        required: true
+      - name: email
+        placeholder: Email address
+        type: email
+        required: true
+      - name: event_date
+        placeholder: Event date
+        type: date
+        required: false
+      - name: guest_count
+        placeholder: Roughly how many guests?
+        type: number
+        required: false
+      - name: occasion
+        placeholder: What's the occasion?
+        type: text
+        required: false
+      - name: budget
+        placeholder: Budget range (optional)
+        type: select
+        required: false
+        options:
+          - Under $500
+          - $500 – $1,000
+          - $1,000 – $2,500
+          - $2,500+
+          - Not sure yet
+    direct_heading: Rather talk to a person?
+    direct_subhead: Call or text us any time — and if we miss your call, we'll text you right back.
+    response_promise: By text, within minutes
+    faq_heading: Quick answers
+    faqs:
+      - q: How far ahead do I need to book?
+        a: The more notice the better — popular dates go fast — but ask about any date. Short-notice events get flagged straight to the owner.
+      - q: Can you handle dietary restrictions?
+        a: Yes — gluten-free, vegetarian, and most allergies are routine for us. Tell us what you need in the form and we'll build around it.
+      - q: Do you deliver, or do we pick up?
+        a: Both. Delivery is available within our local radius, and pickup is always an option.
+      - q: What does it cost to hold a date?
+        a: Asking is free. A date is held once you've talked with the owner and placed a deposit — we'll walk you through it on the call.
+    cta:
+      heading: Have a date in mind?
+      subhead: Popular dates book fast. Ask about yours today — it takes a minute.
+      button:
+        label: Check My Date
+        url: '#catering-form'
   not_found:
     seo_title: Page not found | Regulars
     seo_description: That page moved or never existed.

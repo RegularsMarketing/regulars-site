@@ -5,6 +5,28 @@ Stack: **Eleventy 3 + Nunjucks + CSS custom properties + Decap CMS +
 Cloudflare Pages.** Never React, Tailwind, Next.js, or framer-motion
 (vanilla `motion` is the animation library).
 
+## One repo, two hats (read before anything looks contradictory)
+
+This repo is **both** the canonical client-site template **and** the live
+instance of Regulars' own marketing site (regularsmarketing.com, deployed
+from this repo — `regulars-template` in the RegularsMktg org). That's not
+a conflict; it's the architecture:
+
+- Templates/CSS/JS hold **structure only**. All branded content — including
+  the Regulars services/pricing/ledger copy in `content/site.yaml` — is
+  config. Regulars' site is simply the **first instance** of the template,
+  eating its own dog food.
+- A client site = a **copy of this repo** with a different `site.yaml` +
+  images (CLIENT MODE). Client content never goes into THIS repo's
+  `site.yaml` — that file is Regulars' own content, on the LOCKED brand.
+- Code changes made here ship to Regulars' site AND every future client
+  copy — keep them generic and config-driven, never Regulars-specific.
+- Optional features (e.g. the `/catering` page via `pages.catering.enabled`)
+  default **OFF** in this repo and get switched on per client.
+
+So if the source pages "look like Regulars' branded content": correct and
+intended. The brand lives in the config, not the code.
+
 ## The rule that governs everything
 
 **For ANY design work, client site build, redesign, or "make this look

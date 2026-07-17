@@ -233,8 +233,23 @@
   .contact-info li{font-size:13.5px;padding:12px 0;border-top:1px solid color-mix(in srgb, var(--cream) 15%, transparent);display:flex;justify-content:space-between;gap:12px;}
   .contact-info li span:first-child{opacity:0.6;}
   .form-fields{display:flex;flex-direction:column;gap:11px;}
-  .form-fields input{background:color-mix(in srgb, var(--cream) 8%, transparent);border:1px solid color-mix(in srgb, var(--cream) 20%, transparent);border-radius:10px;padding:12px 14px;color:var(--cream);font-family:var(--font-body);font-size:13.5px;}
+  .form-fields input,.form-fields select{background:color-mix(in srgb, var(--cream) 8%, transparent);border:1px solid color-mix(in srgb, var(--cream) 20%, transparent);border-radius:10px;padding:12px 14px;color:var(--cream);font-family:var(--font-body);font-size:13.5px;}
   .form-fields input::placeholder{color:color-mix(in srgb, var(--cream) 45%, transparent);}
+  .form-fields select:invalid{color:color-mix(in srgb, var(--cream) 45%, transparent);}
+  .form-fields select option{color:var(--charcoal);background:var(--cream);}
+  .form-fields input[type=date]{color-scheme:dark;}
+
+  /* ---------- CATERING (optional page) ---------- */
+  .form-embed iframe{width:100%;min-height:560px;border:none;border-radius:12px;background:transparent;}
+  .faq-list{max-width:720px;margin:36px auto 0;}
+  .faq-item{border-top:1px solid var(--line);}
+  .faq-item:last-child{border-bottom:1px solid var(--line);}
+  .faq-item summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 2px;font-family:var(--font-heading);font-weight:600;font-size:16.5px;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+";font-family:var(--font-body);font-weight:500;font-size:20px;color:var(--orange);flex-shrink:0;transition:transform .2s ease;}
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  @media(prefers-reduced-motion:reduce){.faq-item summary::after{transition:none;}}
+  .faq-item p{font-size:14px;line-height:1.7;color:var(--charcoal-2);margin:0;padding:0 2px 18px;max-width:640px;}
 
   /* ---------- CTA PANEL (shared) ---------- */
   .cta-panel{background:var(--cream-2);border:1px solid var(--line);border-radius:22px;padding:36px 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;}
