@@ -94,6 +94,7 @@
           {% endif %}
           {% endfor %}
           <input type="hidden" name="_subject" value="{{ c.form_subject }}">
+          <input type="hidden" name="_next" value="{{ site.business.url }}/thanks/">
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="btn btn-primary btn-block" style="margin-top:6px;">{{ c.form_button }}</button>
         </form>

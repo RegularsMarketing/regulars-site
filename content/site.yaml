@@ -679,6 +679,24 @@ pages:
       button:
         label: Check My Date
         url: '#catering-form'
+  # Shown after a form submits (Formspree redirects here via the _next field).
+  # noindex — this page should never appear in search results.
+  thanks:
+    seo_title: Thanks — we've got it | Regulars
+    seo_description: Your request came through. We'll be in touch within one business day.
+    eyebrow: Request received
+    heading: We've got it.
+    subhead: Your request came through and it's sitting in front of a real person — not a queue.
+    steps:
+      - We'll reply within one business day, usually sooner.
+      - Before we talk, we look at your Google profile, reviews, socials and site.
+      - You'll get three specific things worth fixing, whether or not you work with us.
+    primary_cta:
+      label: See What Each Step Costs
+      url: /pricing/
+    secondary_cta:
+      label: Back to Home
+      url: /
   not_found:
     seo_title: Page not found | Regulars
     seo_description: That page moved or never existed.

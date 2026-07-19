@@ -1,0 +1,26 @@
+---
+layout: base.njk
+pageKey: thanks
+permalink: /thanks/
+noindex: true
+eleventyExcludeFromCollections: true
+---
+{% set t = site.pages.thanks %}
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow center">{{ t.eyebrow }}</div>
+    <h1>{{ t.heading }}</h1>
+    <p class="sub">{{ t.subhead }}</p>
+    {% if t.steps and t.steps.length %}
+    <ul class="thanks-steps">
+      {% for s in t.steps %}
+      <li>{{ s }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ t.primary_cta.url }}">{{ t.primary_cta.label }}</a>
+      <a class="btn btn-outline" href="{{ t.secondary_cta.url }}">{{ t.secondary_cta.label }}</a>
+    </div>
+  </div>
+</section>

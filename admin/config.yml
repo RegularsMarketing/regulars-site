@@ -650,6 +650,31 @@ collections:
                     fields:
                       - { label: Heading, name: heading, widget: string }
                       - { label: Paragraphs, name: paragraphs, widget: list, field: { label: Paragraph, name: p, widget: text } }
+              # ---- THANK YOU (post form submit) ----
+              - label: Thank you (after a form is submitted)
+                name: thanks
+                widget: object
+                collapsed: true
+                fields:
+                  - { label: SEO title, name: seo_title, widget: string }
+                  - { label: SEO description, name: seo_description, widget: text }
+                  - { label: Eyebrow, name: eyebrow, widget: string }
+                  - { label: Heading, name: heading, widget: string }
+                  - { label: Sub-headline, name: subhead, widget: text }
+                  - { label: "What happens next (one line per step)", name: steps, widget: list, field: { label: Step, name: step, widget: string }, required: false }
+                  - label: Primary button
+                    name: primary_cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+                  - label: Secondary button
+                    name: secondary_cta
+                    widget: object
+                    fields:
+                      - { label: Label, name: label, widget: string }
+                      - { label: URL, name: url, widget: string }
+
               # ---- 404 ----
               - label: Page not found (404)
                 name: not_found

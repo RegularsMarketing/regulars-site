@@ -18,6 +18,7 @@ permalink: /ledger/
       <form class="signup-form" action="https://formspree.io/f/{{ site.contact.formspree_newsletter_id }}" method="POST">
         <input type="email" name="email" placeholder="{{ l.signup_placeholder }}" required>
         <input type="hidden" name="_subject" value="{{ l.signup_subject }}">
+        <input type="hidden" name="_next" value="{{ site.business.url }}/thanks/">
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button type="submit" class="btn btn-primary">{{ l.signup_button }}</button>
       </form>
