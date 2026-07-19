@@ -36,7 +36,9 @@ hide_chat_widget: true
           <li><span>{{ site.ui.label_email }}</span><span>{{ site.contact.email }}</span></li>
           {% if site.contact.phone %}<li><span>{{ site.ui.label_phone }}</span><span><a href="tel:{{ site.contact.phone | replace('(','') | replace(')','') | replace(' ','') | replace('-','') }}">{{ site.contact.phone }}</a></span></li>{% endif %}
           {% if site.contact.address %}<li><span>{{ site.ui.label_address }}</span><span>{{ site.contact.address }}</span></li>{% endif %}
-          <li><span>{{ site.ui.label_instagram }}</span><span>{% if site.contact.instagram_url %}<a href="{{ site.contact.instagram_url }}">{{ site.contact.instagram }}</a>{% else %}{{ site.contact.instagram }}{% endif %}</span></li>
+          {% for s in site.contact.social %}
+          <li><span>{{ s.label }}</span><span>{% if s.url %}<a href="{{ s.url }}" rel="me">{{ s.handle or s.label }}</a>{% else %}{{ s.handle or s.label }}{% endif %}</span></li>
+          {% endfor %}
           <li><span>{{ site.ui.label_response }}</span><span>{{ site.contact.response_time }}</span></li>
           <li><span>{{ site.ui.label_works_with }}</span><span>{{ site.contact.works_with }}</span></li>
         </ul>

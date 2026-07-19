@@ -30,7 +30,6 @@ ui:
   flagship_tag: Most Popular
   accordion_toggle: See everything included
   label_email: Email
-  label_instagram: Instagram
   label_response: Response time
   label_works_with: We work with
   label_hours: Hours
@@ -74,8 +73,7 @@ footer:
           url: /book-a-call/
         - label: hello@regularsmarketing.com
           url: mailto:hello@regularsmarketing.com
-        - label: '@regularsmarketing'
-          url: https://instagram.com/regularsmarketing
+        # Social links are rendered from contact.social — don't duplicate them here.
         - label: Terms of Service
           url: /terms/
         - label: Privacy Policy
@@ -86,8 +84,22 @@ footer:
   legal_right: 'Sources: National Restaurant Association · Bain & Co. · BrightLocal · Bloom Intelligence'
 contact:
   email: hello@regularsmarketing.com
-  instagram: '@regularsmarketing'
-  instagram_url: https://instagram.com/regularsmarketing
+  # Social profiles. Add/remove freely per client — templates iterate this list,
+  # so a client with one platform or six needs no code change.
+  # `handle` is what shows on the contact page; `url` is where it links.
+  social:
+    - label: Instagram
+      handle: '@regularsmarketing'
+      url: https://instagram.com/regularsmarketing
+    - label: Facebook
+      handle: RegularsMarketing
+      url: https://www.facebook.com/profile.php?id=61592002194878
+    - label: TikTok
+      handle: '@regularsmarketing'
+      url: https://www.tiktok.com/@regularsmarketing
+    - label: X
+      handle: '@regularmktg'
+      url: https://x.com/regularmktg
   response_time: Within 1 day
   works_with: Independent restaurants & cafés and other small businesses ready to get regulars
   formspree_contact_id: xvzeoyng

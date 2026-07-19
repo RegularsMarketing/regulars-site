@@ -22,6 +22,11 @@
     {% if site.contact.phone or site.contact.address %}
     <div class="fcontact fcontact--minimal">{% if site.contact.phone %}{{ site.contact.phone }}{% endif %}{% if site.contact.phone and site.contact.address %} · {% endif %}{% if site.contact.address %}{{ site.contact.address }}{% endif %}</div>
     {% endif %}
+    {% if site.contact.social and site.contact.social.length %}
+    <div class="fsocial fsocial--minimal">
+      {% for s in site.contact.social %}<a href="{{ s.url }}" rel="me">{{ s.label }}</a>{% endfor %}
+    </div>
+    {% endif %}
     <div class="footer-bottom">
       <div class="fl">{{ site.footer.legal_left }}</div>
       <div class="fl">{{ site.footer.legal_right }}</div>

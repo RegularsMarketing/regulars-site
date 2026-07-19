@@ -101,7 +101,6 @@ collections:
               - { label: Flagship pricing tag, name: flagship_tag, widget: string }
               - { label: Pricing accordion toggle, name: accordion_toggle, widget: string }
               - { label: Contact label — email, name: label_email, widget: string }
-              - { label: Contact label — Instagram, name: label_instagram, widget: string }
               - { label: Contact label — response time, name: label_response, widget: string }
               - { label: Contact label — works with, name: label_works_with, widget: string }
               - { label: Hours heading, name: label_hours, widget: string }
@@ -157,8 +156,15 @@ collections:
               - { label: Email, name: email, widget: string }
               - { label: Phone (published business line), name: phone, widget: string, required: false }
               - { label: "Street address (published; required for A2P brand match)", name: address, widget: string, required: false }
-              - { label: Instagram handle, name: instagram, widget: string }
-              - { label: Instagram URL, name: instagram_url, widget: string }
+              - label: Social profiles
+                name: social
+                widget: list
+                required: false
+                summary: "{{fields.label}} — {{fields.handle}}"
+                fields:
+                  - { label: "Platform (e.g. Instagram)", name: label, widget: string }
+                  - { label: "Handle shown on the contact page", name: handle, widget: string, required: false }
+                  - { label: Profile URL, name: url, widget: string }
               - { label: Response time, name: response_time, widget: string }
               - { label: Works with, name: works_with, widget: string }
               - { label: Formspree contact form ID, name: formspree_contact_id, widget: string }

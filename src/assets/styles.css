@@ -332,6 +332,11 @@ a.logo{text-decoration:none;}
 .fcontact{margin-top:10px;font-size:12.5px;opacity:0.85;}
 .fcontact--minimal{margin:0 0 24px;}
 
+.fsocial{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px;font-size:12.5px;}
+.fsocial a{opacity:0.85;text-decoration:none;border-bottom:1px solid transparent;transition:opacity .18s ease,border-color .18s ease;}
+.fsocial a:hover{opacity:1;border-bottom-color:currentColor;}
+.fsocial--minimal{justify-content:center;margin:0 0 24px;}
+
 /* ---------- FOOTER: minimal ---------- */
 .footer--minimal{border-top:1px solid var(--line);padding:40px 0 28px;}
 .footer-min-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;margin-bottom:28px;}
