@@ -35,7 +35,7 @@
   --font-body:{{ site.theme.fonts.body | safe }};
 }
 </style>
-<link rel="stylesheet" href="/assets/styles.css">
+<link rel="stylesheet" href="{{ assets.styles }}">
 </head>
 <body>
 
@@ -47,9 +47,9 @@
 
 {% include "components/footer.njk" %}
 
-<script defer src="/assets/vendor/motion.js"></script>
-<script defer src="/assets/animations.js"></script>
-<script defer src="/assets/site.js"></script>
+<script defer src="{{ assets.motion }}"></script>
+<script defer src="{{ assets.animations }}"></script>
+<script defer src="{{ assets.site }}"></script>
 {% if site.integrations and site.integrations.chat_widget and not hide_chat_widget %}{{ site.integrations.chat_widget | safe }}
 {% endif %}</body>
 </html>

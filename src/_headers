@@ -1,2 +1,14 @@
+# Long-lived immutable caching for /assets/*.
+#
+# SAFE ONLY BECAUSE the code assets are requested with a content-hash query
+# string (see src/_data/assets.js) — e.g. /assets/site.js?v=a1b2c3d4e5.
+# Change the file, the hash changes, the URL changes, caches miss.
+#
+# If you ever reference /assets/styles.css, /assets/site.js or
+# /assets/animations.js WITHOUT the `assets.*` helper, returning visitors will
+# be stuck on the old copy for a YEAR — `immutable` means browsers never even
+# revalidate. That happened between 2026-07-13 and 2026-07-19; see decisions.md.
+#
+# Images here already have UUID filenames, so they are immutable by nature.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
