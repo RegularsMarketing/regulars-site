@@ -1,7 +1,36 @@
----
-layout: base.njk
-pageKey: privacy
-permalink: /privacy/
+---js
+{
+  layout: "base.njk",
+  pageKey: "privacy",
+  eleventyComputed: {
+    // GUARD: never publish Regulars' legal text on a client's domain.
+    //
+    // CLIENT MODE replaces content/site.yaml wholesale, so in the normal case
+    // these pages carry the client's own policy. The failure mode is narrower
+    // and quiet: an operator does the visible config pass (name, colours,
+    // menu, hero) and leaves pages.privacy alone, because writing a
+    // restaurant's privacy policy is legal drafting rather than a config swap.
+    // The site then publishes "Regulars Marketing ('we,' 'us') is a marketing
+    // agency" as that restaurant's policy, and points its guests at
+    // regularsmarketing.com to exercise their rights.
+    //
+    // So: build when the legal text belongs to whoever owns the domain.
+    // In the mismatch state, 404 rather than lie. A missing legal page is
+    // loud, because A2P registration requires a published privacy policy URL
+    // and the client's own lawyer will ask for it. A wrong one is silent.
+    //
+    // To clear this on a client build: replace pages.privacy.sections in
+    // content/site.yaml with that client's own policy text.
+    permalink: (data) => {
+      const lp = data.site.pages && data.site.pages.privacy;
+      if (!lp) return false;
+      const isRegularsOwnSite = (data.site.business.domain || "").includes("regularsmarketing.com");
+      const carriesRegularsIdentity = /regularsmarketing\.com|Regulars Marketing/i.test(JSON.stringify(lp));
+      if (carriesRegularsIdentity && !isRegularsOwnSite) return false;
+      return "/privacy/";
+    },
+  },
+}
 ---
 {% set lp = site.pages.privacy %}
 {% include "legal.njk" %}

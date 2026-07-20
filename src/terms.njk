@@ -1,7 +1,25 @@
----
-layout: base.njk
-pageKey: terms
-permalink: /terms/
+---js
+{
+  layout: "base.njk",
+  pageKey: "terms",
+  eleventyComputed: {
+    // GUARD: see the long note in src/privacy.njk. Same failure. An unreplaced
+    // copy binds a restaurant's visitors to Regulars Marketing's terms of
+    // service, which names the wrong contracting party on the client's own
+    // domain.
+    //
+    // To clear this on a client build: replace pages.terms.sections in
+    // content/site.yaml with that client's own terms.
+    permalink: (data) => {
+      const lp = data.site.pages && data.site.pages.terms;
+      if (!lp) return false;
+      const isRegularsOwnSite = (data.site.business.domain || "").includes("regularsmarketing.com");
+      const carriesRegularsIdentity = /regularsmarketing\.com|Regulars Marketing/i.test(JSON.stringify(lp));
+      if (carriesRegularsIdentity && !isRegularsOwnSite) return false;
+      return "/terms/";
+    },
+  },
+}
 ---
 {% set lp = site.pages.terms %}
 {% include "legal.njk" %}

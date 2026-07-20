@@ -6,12 +6,12 @@ business:
   lang: en
 theme:
   colors:
-    cream: '#FAF6EF'
-    cream2: '#F1E6D3'
+    cream: '#D5B38E'
+    cream2: '#E3CBAF'
     charcoal: '#2B2926'
     charcoal2: '#4A453E'
-    orange: '#C4551F'
-    orange_dark: '#9C4319'
+    orange: '#004437'
+    orange_dark: '#00332A'
     line: rgba(43,41,38,0.15)
     line_soft: rgba(43,41,38,0.09)
   fonts:
@@ -19,16 +19,32 @@ theme:
     body: '''Inter'', sans-serif'
     google_href: https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap
 images:
-  logo_mark: /assets/25bd357d-b8dc-45fc-a952-8b7cfc9de403.webp
-  hero_logo: /assets/c06ce0c9-85b5-4cc0-aaef-499a5cccfbd5.webp
+  logo_mark: /assets/logo-mark.webp
+  hero_logo: /assets/logo-wordmark.webp
 components:
-  nav: tabs
-  hero: textforward
-  menu: list
-  footer: columns
+  # nav: collapse. Six links wrapped to two rows of 32px pills on a phone and
+  #   ate 17.6% of a 375x812 viewport. Below 860px they fold into one control.
+  # hero: statement. The wordmark lockup rendered 520x347 and spent 39% of a
+  #   900px fold restating a brand the nav already carries 80px above it. The
+  #   proposition leads now; the mark closes.
+  # menu: tiered. Tier is the question the services page exists to answer, so
+  #   it gets its own column instead of a 10.5px chip inside the heading.
+  # footer: ledger. Hours and contact as dotted-leader rows on the accent,
+  #   which also gives every page a green close.
+  # proof: statement. Pre-launch, so the reason there are no case studies is
+  #   stated up front instead of living only on the fourth nav item.
+  nav: collapse
+  hero: statement
+  menu: tiered
+  footer: ledger
+  proof: statement
 ui:
   flagship_tag: Most Popular
   accordion_toggle: See everything included
+  # Label on the nav disclosure control (components.nav = collapse). If this is
+  # empty the collapse variant falls back to a plain link list, so an older
+  # config cannot end up with a trapped, unopenable nav.
+  nav_menu_label: Menu
   label_email: Email
   label_response: Response time
   label_works_with: We work with
@@ -73,7 +89,7 @@ footer:
           url: /book-a-call/
         - label: hello@regularsmarketing.com
           url: mailto:hello@regularsmarketing.com
-        # Social links are rendered from contact.social — don't duplicate them here.
+        # Social links are rendered from contact.social. Never duplicate them here.
         - label: Terms of Service
           url: /terms/
         - label: Privacy Policy
@@ -81,10 +97,10 @@ footer:
         - label: SMS Terms
           url: /sms-terms/
   legal_left: © 2026 Regulars Marketing · regularsmarketing.com
-  legal_right: 'Sources: National Restaurant Association · Bain & Co. · BrightLocal · Bloom Intelligence'
+  legal_right: 'Sources: National Restaurant Association · Bain & Co. · BrightLocal · Bloom Intelligence · Litmus/DMA · Omnisend/Sakari'
 contact:
   email: hello@regularsmarketing.com
-  # Social profiles. Add/remove freely per client — templates iterate this list,
+  # Social profiles. Add/remove freely per client. Templates iterate this list,
   # so a client with one platform or six needs no code change.
   # `handle` is what shows on the contact page; `url` is where it links.
   social:
@@ -100,7 +116,7 @@ contact:
     - label: X
       handle: '@regularmktg'
       url: https://x.com/regularmktg
-  response_time: Within 1 day
+  response_time: Within 1 business day
   works_with: Independent restaurants & cafés and other small businesses ready to get regulars
   formspree_contact_id: xvzeoyng
   formspree_newsletter_id: xrengdvp
@@ -117,57 +133,57 @@ stamps:
   - Built by small business
   - Made for small business
   - Independent restaurants only
-  - Prices published — no quote needed
+  - Prices published. No quote needed
 menu_items:
   - number: '01'
     title: Google Business Profile & Local SEO
     short: Own the map. Show up when hungry people search nearby.
-    description: Full onboarding optimization — verified name, correct categories, hours, keyword-informed description, HTML menu link — plus 15–20 photos at setup, 3–5 added monthly, and one Google Post every week.
+    description: Full onboarding optimization (verified name, correct categories, hours, keyword-informed description, HTML menu link), plus 15–20 photos at setup, 3–5 added monthly, and one Google Post every week.
     category: Get Found
     badge: Foundation
   - number: '02'
     title: Review Generation & Reputation Management
-    short: Turn happy guests into public proof — every review answered.
-    description: Automated review requests by text and email, QR review cards, and every Google review answered within 48 hours — positive or negative — using a tone guide written for your restaurant.
+    short: Turn happy guests into public proof, with every review answered.
+    description: Automated review requests by email from week one, and by text once your carrier registration clears. You also get QR review cards, and every Google review answered within 48 hours, positive or negative, using a tone guide written for your restaurant.
     category: Get Found
     badge: Foundation
   - number: '03'
     title: Social Media Content
     short: Consistent, on-brand posting that keeps you top of mind.
-    description: 12–16 posts a month across Instagram and Facebook, including one on-site content session monthly where we shoot your food and space — you never have to send us anything.
+    description: 12–16 posts a month across Instagram and Facebook, including one on-site content session monthly where we shoot your food and space, so the month's photos are ours to make and stay off your list.
     category: Get Craved
     badge: Growth
   - number: '04'
     title: Website Builds
-    short: Reservations and ordering built in — not bolted on.
-    description: A fast, mobile-first site with reservation and ordering integration built in from day one — live within 21 days of receiving your content, hosted and maintained by us.
+    short: Reservations and ordering built into the site itself.
+    description: A fast, mobile-first site with reservation and ordering integration built in from day one. Live within 21 days of receiving your content, hosted and maintained by us.
     category: The Whole Engine
     badge: Full House
   - number: '05'
     title: Email List Building & SMS/Email Campaigns
-    short: The list you own — the channel no algorithm can take away.
-    description: List building syncs monthly with your POS (Toast, Square, OpenTable, Resy). Full campaign sends — 2–4 a month with trackable redemption codes — are a Full House feature.
+    short: The list you own, on the one channel no algorithm can take away.
+    description: List building syncs monthly with your POS (Toast, Square, OpenTable, Resy). Full campaign sends (2–4 a month with trackable redemption codes) are a Full House feature.
     category: Get Craved
     badge: Growth
   - number: '06'
     title: Missed-Call Text-Back
     short: Slammed mid-rush? Every missed call gets an instant text.
-    description: The moment a call goes unanswered, the caller gets a friendly text within seconds — how can we help, plus a link to book. Restaurants miss the most calls at their busiest hours; this recovers them automatically, around the clock.
+    description: The moment a call goes unanswered, the caller gets a friendly text within seconds, asking how we can help and linking them to book. Calls go missed at the busiest hours; this recovers them automatically, around the clock, from the day your carrier texting registration clears.
     category: Get Booked
     badge: Foundation
   - number: '07'
     title: AI Catering & Events Engine
-    short: Catering inquiries answered in 30 seconds — qualified, followed up, booked.
-    description: A dedicated catering page on your site feeds an AI events assistant that texts back instantly, gathers the date, headcount, and occasion, and books a call with you — then follows up automatically until they answer. Big events get flagged to the owner within the hour. High-ticket inquiries never sit overnight again.
+    short: Catering inquiries answered in 30 seconds, then qualified, followed up, booked.
+    description: A dedicated catering page on your site feeds an AI events assistant that texts back instantly, gathers the date, headcount, and occasion, and books a call with you, then follows up automatically until they answer. Big events get flagged to the owner within the hour. Email follow-up runs from day one; the texting half switches on when your carrier registration clears.
     category: Get Booked
     badge: Full House
 pages:
   home:
     seo_title: Regulars | Flat-Rate Marketing for Independent Restaurants & Cafés
-    seo_description: Regulars is the flat-rate marketing partner for independent, single-location restaurants and cafés. Local SEO, reviews, social, email, and AI-powered follow-up that turn first-timers into loyal regulars — published prices, no lock-in.
+    seo_description: Regulars is the flat-rate marketing partner for independent, single-location restaurants and cafés. Local SEO, reviews, social, email, and AI-powered follow-up that turn first-timers into loyal regulars. Published prices, no lock-in.
     hero:
       eyebrow: Marketing for Independent Restaurants & Cafés
-      headline: Marketing built for one address — not eleven hundred.
+      headline: Your restaurant has one address. Most marketing is built for eleven hundred.
       subhead: Regulars is the flat-rate marketing partner for independent restaurants and cafés that are invisible online. We only do restaurants. We publish our prices. We never lock you in.
       primary_cta:
         label: Book a Free Visibility Audit
@@ -180,7 +196,7 @@ pages:
       eyebrow: The Thesis
       heading: Why retention is the whole business.
       rows:
-        - label: Revenue that comes from repeat guests, not new ones
+        - label: Revenue that comes from guests who have already eaten there
           value: 65–80%
         - label: First-time guests who never come back
           value: ~70%
@@ -194,13 +210,13 @@ pages:
         eyebrow: Who We Are
         heading: A marketing partner that's never run a franchise playbook.
         paragraphs:
-          - Regulars is a done-for-you marketing partner built exclusively for independent, single-location restaurants and cafés — never chains, never franchises. The industry's marketing playbook was written for companies with a hundred locations and a marketing department; independents were left to figure it out after a double shift.
-          - We're a small business too, so we build like one — hands-on, responsive, and focused on the handful of things that actually bring guests back.
+          - Regulars is a done-for-you marketing partner built exclusively for independent, single-location restaurants and cafés. Never chains, never franchises. The industry's marketing playbook was written for companies with a hundred locations and a marketing department; independents were left to figure it out after a double shift.
+          - We're a small business too, so we build like one. Hands-on, responsive, and focused on the handful of things that actually bring guests back.
       right:
         eyebrow: What We're Building
         heading: The big-chain playbook, minus the overhead.
         paragraphs:
-          - 'Every national chain already does this: own the guest list, own the reputation, make it easy to come back. Independents rarely have the systems to do the same — so we build them, sized and priced for one location.'
+          - 'Every national chain already does this: own the guest list, own the reputation, make it easy to come back. Independents rarely have the systems to do the same, so we build them, sized and priced for one location.'
         badges:
           - k: Own your list
             v: Email + SMS tied directly to your POS system.
@@ -208,7 +224,7 @@ pages:
             v: Every review answered, every profile managed, every week.
     services_teaser:
       heading: 'Seven services. One goal: more regulars.'
-      subhead: Everything we do in year one is focused on turning up how often people come back — and making sure no call, inquiry, or first-timer slips through the cracks.
+      subhead: Everything we do in year one is focused on turning up how often people come back, and on making sure no call, inquiry, or first-timer slips through the cracks.
       cta:
         label: Explore All Services
         url: /services/
@@ -223,23 +239,24 @@ pages:
         - National SEO
         - Cold outreach for clients
         - Custom apps
-      quote: That's outside your plan — I keep the menu tight so everything on it actually works.
+        - Video beyond short-form
+      quote: That's outside your plan. I keep the menu tight so everything on it actually works.
     cta:
       heading: Ready to fill more tables with regulars?
-      subhead: Book a free 20-minute discovery call — no pitch deck, no pressure, just a straight look at where you're losing regulars.
+      subhead: Book a free 15-minute discovery call. No pitch deck, no pressure, just a straight look at where you're losing regulars.
       button:
         label: Book a Free Audit
         url: /book-a-call/
   story:
     values:
       - title: Retention over acquisition
-        body: A repeat guest is worth more than ten one-timers. Everything we build points at the second visit, not just the first.
+        body: A repeat guest is worth more than ten one-timers. Everything we build points at the second visit and the tenth.
       - title: Own what you build
-        body: Your list, your reviews, your Google profile — assets that live with you, not rented from an algorithm.
-      - title: Built for one address
-        body: No multi-location complexity, no franchise red tape. Just what an independent owner actually needs.
+        body: Your list, your reviews, your Google profile. You own all of it outright, and it stays yours whatever the algorithms do next.
+      - title: Built for your address
+        body: No franchise red tape and no corporate marketing department in the way. Just what an independent owner actually needs, whether that is one room or three.
       - title: Process over promises
-        body: We're proving this model in real kitchens right now — with a process you can read in full before you ever sign anything.
+        body: We're pre-launch and we say so. What we have instead of case studies is the whole process, published in order, for you to read before you ever sign anything.
     values_heading: What we believe
     steps:
       - num: '01'
@@ -250,46 +267,46 @@ pages:
         body: The gap between those two numbers is where most independent restaurants lose money quietly, month after month.
       - num: '03'
         heading: Chains solved this decades ago.
-        body: Loyalty programs, CRM systems, marketing teams built entirely around getting people to come back — not just come once.
+        body: Loyalty programs, CRM systems, marketing teams built entirely around the second visit and every visit after it.
       - num: '04'
-        heading: Independents got left behind — doing it by instinct instead of systems.
+        heading: Independents got left behind, doing it by instinct instead of systems.
         body: Regulars brings the big-chain playbook to the one-location restaurant, at a flat rate.
     eyebrow: Our Story
     outro: 'So that''s what we build: the systems a chain would have, sized and priced for a restaurant with one location and an owner who''s already doing five jobs. We only do restaurants. We publish our prices. We never lock you in.'
-    intro: Regulars started at a family table, not a boardroom. It traces back to Sammy's — a family-owned restaurant where **we watched, up close, what actually keeps a small restaurant alive.** It was never really the first-time visitors who carried it through a slow winter or a rough month. It was the regulars — the ones who knew the servers by name, ordered "the usual," and kept showing up.
-    seo_title: Our Story | Regulars — Restaurant Marketing Built for One Address
+    intro: Regulars started at a family table. It traces back to Sammy's, a family-owned restaurant where **we watched, up close, what actually keeps a small restaurant alive.** It was never really the first-time visitors who carried it through a slow winter or a rough month. It was the regulars, the ones who knew the servers by name, ordered "the usual," and kept showing up.
+    seo_title: Our Story | Restaurant Marketing Built for One Address | Regulars
     hero_quote: Every great restaurant is really just a room full of people who keep coming back.
-    seo_description: Why we only market independent restaurants and cafés. Regulars brings the big-chain retention playbook to single-location restaurants — built from a family table, priced flat, never locked in.
+    seo_description: Why we only market independent restaurants and cafés. Regulars brings the big-chain retention playbook to single-location restaurants. Built from a family table, priced flat, never locked in.
   services:
     seo_title: Services | Local SEO, Reviews, Social, Email & AI Follow-Up for Restaurants | Regulars
     seo_description: 'Seven done-for-you marketing services for independent restaurants and cafés: Google Business & local SEO, review generation, social content, website builds, email/SMS list building, missed-call text-back, and an AI catering & events engine.'
     eyebrow: Services
     heading: Seven services, working together to build your regulars.
-    subhead: We keep our scope tight on purpose. No paid ads, no influencer campaigns, no bloat — just the things that reliably turn first-timers into regulars and make sure the guests already reaching out never slip away.
+    subhead: We keep our scope tight on purpose. No paid ads, no influencer campaigns, no bloat. Just the things that reliably turn first-timers into regulars and make sure the guests already reaching out never slip away.
     cta:
       label: See Pricing
       url: /pricing/
   process:
     seo_title: Our Process | How Restaurant Marketing Works at Regulars
-    seo_description: From free discovery call to monthly reporting — see exactly how Regulars audits, builds, launches, and grows local visibility and retention for independent restaurants and cafés.
+    seo_description: From free discovery call to monthly reporting, see exactly how Regulars audits, builds, launches, and grows local visibility and retention for independent restaurants and cafés.
     eyebrow: How We Work
-    heading: We're pre-launch — so we lead with the process, not manufactured proof.
+    heading: We're pre-launch, so the process is what we lead with.
     subhead: No fake testimonials, no borrowed case studies. Here's exactly what happens, in order, when you work with Regulars.
     steps:
       - num: '01'
         heading: Free Discovery Call
-        body: A 20-minute conversation about your restaurant, what’s already working, and where first-timers are slipping through the cracks. No pitch deck.
-      - body: We pull your starting numbers — Google views, calls, direction requests, review count and rating, social following, list size — before anything changes, so results are provable, not claimed.
+        body: A 15-minute conversation about your restaurant, what’s already working, and where first-timers are slipping through the cracks. No pitch deck.
+      - body: We pull your starting numbers (Google views, calls, direction requests, review count and rating, social following, list size) before anything changes, so every result later has a number to prove it.
         heading: Audit & Baseline
         num: '02'
       - num: '03'
         heading: Onboarding Build
-        body: 'We set up the systems: Google Business Profile, review flow, content calendar, and — for Full House — your website and POS-connected list. Full House builds go live within 21 days.'
+        body: 'We set up the systems: Google Business Profile, review flow, content calendar, and (for Full House) your website and POS-connected list. Your texting registration goes to the carriers on day one, because that''s the piece with a queue in front of it. Full House builds go live within 21 days of receiving your content.'
       - num: '04'
         heading: Launch
-        body: Everything goes live together, so your local visibility, reputation, and retention channels work from the same playbook from day one.
+        body: Your profile, reviews, email and site go live together and work from the same playbook from day one. Texting is the one piece we can't switch on ourselves. Carriers review every business that sends, and that takes anywhere from a few days to about three weeks. It joins the moment it clears, and you'll always know where it stands.
       - num: '05'
-        heading: Grow — the monthly cycle
+        heading: Grow, the monthly cycle
         body: Reviews answered within 48 hours. Reports by the 5th business day of every month, in plain English, measured against your baseline. One human owns your account.
     closing_note: That's the whole process. Nothing hidden behind a "schedule a call to learn more."
     cta:
@@ -301,7 +318,7 @@ pages:
     final_cta:
       label: Book Your Free Audit
       url: /book-a-call/
-    guarantees_quote: We never promise rankings — no honest agency can. We promise the work, the responsiveness, and the measurement.
+    guarantees_quote: We never promise rankings. No honest agency can. We promise the work, the responsiveness, and the measurement.
     eyebrow: Pricing
     guarantees:
       - label: Setup fee
@@ -313,13 +330,15 @@ pages:
       - label: After that
         value: Month-to-month
       - label: Cancellation notice
-        value: 15 days
+        value: 30 days
       - label: Billing
         value: Autopay, 1st
       - label: Annual rate adjustment
         value: 5–8%
       - label: Ownership
-        value: Always yours
+        value: Domain, list & content
+      - label: Texting goes live
+        value: After carrier approval
     door_three:
       label: Door Three
       title: The Retainer
@@ -339,10 +358,9 @@ pages:
             - heading: Google Business Profile
               items:
                 - 'Full onboarding optimization: name verification, primary + secondary categories, hours, attributes, keyword-informed description, HTML menu link, reservation/ordering links'
-                - 15–20 photos at onboarding; 3–5 fresh photos monthly
                 - 1 Google Post per week (4–5/month)
-                - Q&A monitoring within 2 business days; 5–8 seeded FAQs at onboarding
-                - Ongoing protection against spam edits; monthly keyword review
+                - Holiday and special hours pushed to your profile before every holiday
+                - Ongoing protection against spam edits; Google-added junk services removed monthly; monthly keyword review
             - heading: Citations & Listings
               items:
                 - NAP correction across Yelp, TripAdvisor, Apple Maps, Bing Places, Facebook + 5 food-specific directories
@@ -350,14 +368,15 @@ pages:
             - heading: Review System
               items:
                 - Print-ready QR review cards + table tents (printing at cost, ~$40)
-                - Automated review requests by text + email
+                - Automated review requests by email from week one, by text once your carrier registration clears
                 - Every Google review answered within 48 hours, in your tone
                 - Same-day alert + drafted response for any 1–2 star review
-                - Never buy, gate, or incentivize reviews — ever
+                - Never buy, gate, or incentivize reviews, ever
             - heading: Missed-Call Text-Back
               items:
-                - Every unanswered call gets an instant, friendly text within seconds — 24/7, including mid-rush and after hours
-                - Caller replies land in one inbox with a same-day human response
+                - Every unanswered call gets an instant, friendly text within seconds, 24/7, including mid-rush and after hours, from the day your carrier registration clears
+                - Goes live when your carrier texting registration clears, and we file it on day one
+                - Caller replies land in one inbox, answered by a human within 1 business day
                 - Missed calls recovered are counted in your monthly report
             - heading: Reporting
               items:
@@ -373,30 +392,28 @@ pages:
           flagship: true
           summary:
             - Everything in Foundation
-            - Social content, 12–16 posts/mo
-            - Monthly on-site content session
+            - Comments & DMs answered within 1 business day
             - Email & text list building
+            - Monthly opt-in sync with your POS
           details:
-            - heading: Social Media (IG + FB)
+            - heading: Community Management
               items:
-                - '12–16 posts/month: photos, carousels, 2–4 Reels'
-                - One 60–90 min on-site content session/month — we shoot it
-                - Captions written in your restaurant's voice; local hashtag + geotag strategy
-                - Monthly content calendar for approval, one revision round included
-                - Comments/DMs answered within 1 business day
+                - Comments and DMs on your Instagram and Facebook answered within 1 business day
+                - Checked every weekday, so nothing sits over a weekend
+                - Questions we cannot answer are passed to you with the context attached
             - heading: Email & Text List Building
               items:
                 - Branded signup page, QR code, print-ready table tents
-                - Welcome automation on every signup
+                - Welcome automation that fires once a signup confirms their opt-in
                 - Monthly sync with your POS/reservation system
                 - 'Full TCPA compliance: double opt-in, unsubscribe, documented consent'
-                - List growth tracked monthly — it's your asset, exportable anytime
-          not_included: 'Not included: campaign sends (+$300/mo add-on), website work, AI catering engine (Full House), TikTok (+$200/mo add-on).'
+                - List growth tracked monthly. The list is contractually yours, and it leaves with you
+          not_included: 'Not included: social posting (+$450/mo add-on), campaign sends (+$700/mo add-on), website work, AI catering engine (+$300/mo add-on).'
           button:
             label: Book a Call
             url: /book-a-call/
         - name: Full House
-          amount: $1,497
+          amount: $1,997
           per: per month · "The whole engine"
           flagship: false
           summary:
@@ -409,7 +426,7 @@ pages:
             - heading: Website (Built, Hosted, Maintained)
               items:
                 - 'Mobile-first site: Home, HTML menu, About, Reservations/Ordering, Contact + map'
-                - Reservation/ordering integration — your platform or new OpenTable/Resy/Square Online setup — plus Reserve with Google where supported
+                - Reservation/ordering integration on OpenTable, Resy, Square Online or Toast (yours or a new setup), plus Reserve with Google where supported. Anything else, we scope it before we promise it
                 - Hosting, SSL, and maintenance included
                 - Up to 4 content updates/month, 2-business-day turnaround
                 - Local SEO fundamentals + restaurant schema markup on every page
@@ -417,14 +434,14 @@ pages:
             - heading: AI Catering & Events Engine
               items:
                 - Dedicated catering page + inquiry form built into your site
-                - AI events assistant texts every inquiry back within seconds — gathers date, headcount, and occasion, and books a call with you
+                - AI events assistant texts every inquiry back within seconds, gathering date, headcount, and occasion, then books a call with you
                 - Automated follow-up until they answer, so no inquiry sits overnight
                 - Big events (weddings, large headcounts, short notice) flagged to the owner within the hour
                 - Post-event review request and next-year rebooking nudge
             - heading: Email & SMS Campaigns
               items:
-                - 2–4 campaigns/month, planned quarterly with you
-                - We write, design, and send — one clear offer + trackable redemption code per campaign
+                - 2–4 campaigns/month, planned quarterly with you. Never more than 4 marketing texts to a guest in a month, which is what their opt-in promised them
+                - We write and design; you approve every send before it goes out, with one clear offer + trackable redemption code per campaign
                 - Redemptions tracked in your monthly report
           not_included: 'Not included: e-commerce builds, custom code, loyalty apps, paid advertising.'
           button:
@@ -432,23 +449,29 @@ pages:
             url: /book-a-call/
     guarantees_heading: Every Tier, Always
     addons:
-      - name: Campaigns (Foundation/Growth)
+      - name: Community management
+        price: +$400/mo
+      - name: Social content, from your photos
+        price: +$450/mo
+      - name: Email & text list building
+        price: +$100/mo
+      - name: Email & SMS campaigns
+        price: +$700/mo
+      - name: Website updates, 4/month
         price: +$300/mo
-      - name: Additional platform (TikTok)
-        price: +$200/mo
-      - name: Additional location
-        price: +40% of tier
-      - name: WiFi guest capture
-        price: +$150/mo
-      - name: Extra content-capture visit
-        price: $150/visit
-      - name: Holiday/event campaign
-        price: $250
-    addons_subhead: Layer these onto any retainer.
+      - name: AI catering & events engine
+        price: +$300/mo
+      - name: Additional location, Foundation
+        price: +$397/mo
+      - name: Additional location, Growth
+        price: +$547/mo
+      - name: Additional location, Full House
+        price: +$647/mo
+    addons_subhead: Add any of these to any tier. Foundation clients can buy anything on this list.
     door_one:
       label: Door One
       title: The Free Visibility Audit
-      body: A 10-minute look at your Google profile, reviews, socials, and site — what's working, what's not, and three fixes you could make this week. Zero cost, zero commitment.
+      body: A 15-minute look at your Google profile, reviews, socials, and site. What's working, what's not, and three fixes you could make this week. Zero cost, zero commitment.
       button:
         label: Book Your Free Audit
         url: /book-a-call/
@@ -458,7 +481,7 @@ pages:
     door_two:
       label: Door Two
       title: Launch Projects
-      subhead: For restaurants that want one thing fixed now, not a monthly relationship yet.
+      subhead: For restaurants that want one thing fixed now, before any monthly relationship.
       projects:
         - title: Website Launch
           price: $1,800
@@ -468,7 +491,7 @@ pages:
             - GBP basic cleanup
             - 30 days of post-launch fixes
         - title: Google Rescue
-          price: $497
+          price: $797
           items:
             - Full GBP optimization
             - Citation cleanup
@@ -485,12 +508,12 @@ pages:
             - Request automation
             - QR review cards
             - Response tone guide
-      note: Every Launch Project includes a **$300 credit** toward your first retainer month, if you start within 60 days. Website-only? Our **$99/mo Care Plan** covers hosting, updates, and menu changes.
+      note: Every Launch Project includes a **$300 credit** toward your first retainer month, if you start within 60 days. Website-only? Our **$99/mo Care Plan** covers hosting plus one content update a month, with extra updates at $75 each.
   ledger:
-    subhead: Numbers, not opinions. One stat, one idea, one thing to try — sent every week, written by an agency that only does restaurants.
+    subhead: Numbers you can act on. One stat, one idea, one thing to try, sent every week, written by an agency that only does restaurants.
     heading: A weekly note on what actually keeps restaurants full.
     signup_subject: New Ledger subscriber
-    footer_prompt: Want the full playbook, not just the newsletter?
+    footer_prompt: Ready for the full playbook?
     eyebrow: The Ledger
     signup_placeholder: you@yourrestaurant.com
     footer_cta:
@@ -499,21 +522,21 @@ pages:
     seo_title: The Ledger | Weekly Restaurant Marketing Insights | Regulars
     signup_button: Subscribe
     issue:
-      tag: Preview — First Issue Coming Soon
-      title: Issue 01 — Why "Get More Customers" Is the Wrong Goal
+      tag: Preview, First Issue Coming Soon
+      title: Issue 01. Why "Get More Customers" Is the Wrong Goal
       paragraphs:
-        - Most restaurant marketing chases strangers. But 65–80% of your revenue is already coming from people who've eaten with you before — and roughly 7 in 10 first-timers never make it back to be part of that number.
+        - Most restaurant marketing chases strangers. But 65–80% of your revenue is already coming from people who've eaten with you before, and roughly 7 in 10 first-timers never make it back to be part of that number.
         - 'This week: one low-cost way to turn tonight''s first-timers into next month''s regulars, before you spend a dollar chasing anyone new.'
-      signature: — The Ledger, from Regulars
+      signature: The Ledger, from Regulars
     signup_subhead: One email a week. No fifteen-tab listicles.
-    seo_description: A weekly note on what actually keeps independent restaurants full — one stat, one idea, one thing to try. Plus the research behind Regulars, written by a restaurant-only marketing agency.
+    seo_description: A weekly note on what actually keeps independent restaurants full. One stat, one idea, one thing to try. Plus the research behind Regulars, written by a restaurant-only marketing agency.
     signup_heading: Get The Ledger in your inbox
     research_subhead: Every stat we build the business on, in one place. Borrow them for your own specials board if you want.
-    signup_micro: Unsubscribe anytime — we're basically an anti-spam company.
+    signup_micro: Unsubscribe anytime. We're basically an anti-spam company.
     research_heading: The research behind Regulars
     stats:
       - value: 65–80%
-        desc: of restaurant revenue comes from repeat customers, not new ones.
+        desc: of restaurant revenue comes from customers who have already eaten there.
         source: 'Source: National Restaurant Association'
       - value: ~70%
         desc: of first-time restaurant guests never come back for a second visit.
@@ -531,21 +554,21 @@ pages:
         desc: of independent restaurants even have a complete Google Business Profile.
         source: 'Source: Industry audit data'
       - value: 89%
-        desc: of people read how a business responds to its reviews, not just the star rating.
+        desc: of people read how a business responds to its reviews.
         source: 'Source: BrightLocal'
       - value: $36
-        desc: returned for every $1 spent on email — restaurant open rates run 40–44%.
+        desc: returned for every $1 spent on email, with restaurant open rates running 40–44%.
         source: 'Source: Litmus / DMA'
       - value: 90–98%
         desc: of text messages get read within 3 minutes of being sent.
         source: 'Source: Omnisend / Sakari'
   contact:
-    subhead: Free, no-pressure 20-minute visibility audit. Tell us about your restaurant and we'll tell you exactly where we'd start — no obligation.
+    subhead: Free, no-pressure 15-minute visibility audit. Tell us about your restaurant and we'll tell you exactly where we'd start, no obligation.
     heading: Let's look at your restaurant.
     form_subhead: Fill this out and we'll follow up to find a time that works.
     form_heading: Tell us about your restaurant
     eyebrow: Book a Call
-    direct_subhead: Prefer to reach out directly? We're a real, small team — you'll hear back from us soon
+    direct_subhead: Prefer to reach out directly? We're a real, small team, and you'll hear back within one business day.
     direct_heading: Direct contact
     form_button: Request My Free Audit
     form_subject: New free-audit request from regularsmarketing.com
@@ -571,35 +594,35 @@ pages:
         type: text
         required: false
     seo_title: Book a Free Visibility Audit | Contact Regulars Restaurant Marketing
-    seo_description: Book a free, no-pressure 20-minute visibility audit for your independent restaurant or café. See exactly where you're losing regulars — no obligation, response within 1 business day.
+    seo_description: Book a free, no-pressure 15-minute visibility audit for your independent restaurant or café. See exactly where you're losing regulars, no obligation, response within 1 business day.
   catering:
-    # Optional page — OFF for the Regulars site. Client sites flip enabled: true,
+    # Optional page, OFF for the Regulars site. Client sites flip enabled: true,
     # paste the CRM (GHL) form embed, and edit the copy. The copy below is the
     # template default, written for a generic restaurant.
     enabled: false
     seo_title: Catering & Private Events | Check Your Date
-    seo_description: Catering and private events — tell us your date, headcount, and occasion, and hear back by text in minutes, not days. Check your date today.
+    seo_description: Catering and private events. Tell us your date, headcount, and occasion, and hear back fast. Check your date today.
     eyebrow: Catering & Private Events
     heading: Feed a crowd. Skip the phone tag.
-    subhead: Tell us about your event below and you'll hear back from us by text within minutes — any day, even mid-dinner-rush.
+    subhead: Tell us about your event below and you'll hear back from us fast, any day, even mid-dinner-rush.
     hero_button: Check My Date
     points:
-      - A reply in minutes, not days
+      - A fast reply, without days of waiting
       - Off-site catering & private dining
       - No deposit to ask a question
     steps_heading: How it works
     steps:
       - num: '01'
         heading: Tell us about your event
-        body: Date, headcount, and the occasion — the form takes about a minute.
+        body: Date, headcount, and the occasion. The form takes about a minute.
       - num: '02'
-        heading: Get a text back in minutes
+        heading: Get a fast reply
         body: Our events assistant confirms the details and answers the quick questions right away, so nothing waits on a voicemail.
       - num: '03'
         heading: Lock it in with the owner
-        body: A quick 15-minute call to set the menu and exact pricing — then your date is held.
+        body: A quick 15-minute call to set the menu and exact pricing, and then your date is held.
     packages_heading: Ways to feed a crowd
-    packages_subhead: Exact pricing depends on your headcount and menu — these are the starting points.
+    packages_subhead: Exact pricing depends on your headcount and menu. These are the starting points.
     packages:
       - title: Delivered Trays
         price: from $— /person
@@ -619,9 +642,9 @@ pages:
           - Host your event here with a dedicated server
           - Seated dinners & cocktail-style receptions
           - Set menu or limited menu, your call
-    packages_note: Every package can flex for dietary needs — just tell us in the form.
+    packages_note: Every package can flex for dietary needs. Just tell us in the form.
     form_heading: Tell us about your event
-    form_subhead: A minute now saves the phone tag later — you'll get a text back from us within minutes.
+    form_subhead: A minute now saves the phone tag later, and you'll hear back from us fast.
     form_embed: ''
     form_subject: New catering inquiry
     form_button: Check My Date
@@ -661,32 +684,32 @@ pages:
           - $2,500+
           - Not sure yet
     direct_heading: Rather talk to a person?
-    direct_subhead: Call or text us any time — and if we miss your call, we'll text you right back.
-    response_promise: By text, within minutes
+    direct_subhead: Call or text us any time, and if we miss your call, we'll text you right back.
+    response_promise: Fast, usually the same day
     faq_heading: Quick answers
     faqs:
       - q: How far ahead do I need to book?
-        a: The more notice the better — popular dates go fast — but ask about any date. Short-notice events get flagged straight to the owner.
+        a: The more notice the better, because popular dates go fast, but ask about any date. Short-notice events get flagged straight to the owner.
       - q: Can you handle dietary restrictions?
-        a: Yes — gluten-free, vegetarian, and most allergies are routine for us. Tell us what you need in the form and we'll build around it.
+        a: Yes. Gluten-free, vegetarian, and most allergies are routine for us. Tell us what you need in the form and we'll build around it.
       - q: Do you deliver, or do we pick up?
         a: Both. Delivery is available within our local radius, and pickup is always an option.
       - q: What does it cost to hold a date?
-        a: Asking is free. A date is held once you've talked with the owner and placed a deposit — we'll walk you through it on the call.
+        a: Asking is free. A date is held once you've talked with the owner and placed a deposit, and we'll walk you through it on the call.
     cta:
       heading: Have a date in mind?
-      subhead: Popular dates book fast. Ask about yours today — it takes a minute.
+      subhead: Popular dates book fast. Asking about yours takes a minute.
       button:
         label: Check My Date
         url: '#catering-form'
   # Shown after a form submits (Formspree redirects here via the _next field).
-  # noindex — this page should never appear in search results.
+  # noindex. This page should never appear in search results.
   thanks:
-    seo_title: Thanks — we've got it | Regulars
+    seo_title: Thanks, we've got it | Regulars
     seo_description: Your request came through. We'll be in touch within one business day.
     eyebrow: Request received
     heading: We've got it.
-    subhead: Your request came through and it's sitting in front of a real person — not a queue.
+    subhead: Your request came through and it's sitting in front of a real person.
     steps:
       - We'll reply within one business day, usually sooner.
       - Before we talk, we look at your Google profile, reviews, socials and site.
@@ -751,7 +774,7 @@ pages:
     sections:
       - heading: Program description
         paragraphs:
-          - 'Regulars Marketing sends text messages to people who opt in: conversational replies when you contact us through our website chat widget, responses to inquiries and missed calls, and — for subscribers who join our list — occasional marketing messages such as offers and news.'
+          - 'Regulars Marketing sends text messages to people who opt in: conversational replies when you contact us through our website chat widget, responses to inquiries and missed calls, and (for subscribers who join our list) occasional marketing messages such as offers and news.'
       - heading: Message frequency
         paragraphs:
           - Message frequency varies. Conversational messages depend on your conversation with us. Marketing subscribers receive roughly 2–4 messages per month. Message and data rates may apply according to your mobile plan.

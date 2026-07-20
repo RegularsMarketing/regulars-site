@@ -1,7 +1,27 @@
----
-layout: base.njk
-pageKey: sms_terms
-permalink: /sms-terms/
+---js
+{
+  layout: "base.njk",
+  pageKey: "sms_terms",
+  eleventyComputed: {
+    // GUARD: see the long note in src/privacy.njk. Same failure, and this page
+    // is the worst of the three to get wrong: the SMS Terms name the opt-out
+    // contact, so an unreplaced copy tells a restaurant's guests to email
+    // hello@regularsmarketing.com to stop receiving that restaurant's texts.
+    // That is a carrier-facing compliance statement, and it is the page A2P
+    // reviewers actually read.
+    //
+    // To clear this on a client build: replace pages.sms_terms.sections in
+    // content/site.yaml with that client's own SMS terms.
+    permalink: (data) => {
+      const lp = data.site.pages && data.site.pages.sms_terms;
+      if (!lp) return false;
+      const isRegularsOwnSite = (data.site.business.domain || "").includes("regularsmarketing.com");
+      const carriesRegularsIdentity = /regularsmarketing\.com|Regulars Marketing/i.test(JSON.stringify(lp));
+      if (carriesRegularsIdentity && !isRegularsOwnSite) return false;
+      return "/sms-terms/";
+    },
+  },
+}
 ---
 {% set lp = site.pages.sms_terms %}
 {% include "legal.njk" %}
