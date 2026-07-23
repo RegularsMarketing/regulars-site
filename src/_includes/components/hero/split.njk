@@ -11,7 +11,13 @@
       </div>
     </div>
     <div class="hero-split-media reveal">
-      <img src="{{ hero.bg_image if hero.bg_image else site.images.hero_logo }}" alt="{{ site.business.name }}" fetchpriority="high">
+      {# width/height are the wordmark's intrinsic 900x600. Without them this
+         image — the largest above the fold and the LCP candidate — reserved no
+         space and was the only real CLS source on the page. Every other <img>
+         in the repo already carries them.
+         fetchpriority stays and loading="lazy" stays OFF: this is above the
+         fold, so lazy-loading it would delay the LCP it is meant to win. #}
+      <img src="{{ hero.bg_image if hero.bg_image else site.images.hero_logo }}" alt="{{ site.business.name }}" width="900" height="600" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>

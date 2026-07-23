@@ -1,0 +1,189 @@
+{#- ===========================================================================
+  JSON-LD structured data (schema.org), emitted into <head> by base.njk.
+
+  CONFIG-DRIVEN. Every value comes from content/site.yaml. A site.yaml that
+  has none of the optional `seo:` keys still emits a valid graph built from
+  business / contact / nav / pages, so no client copy needs a code change.
+  Optional keys are documented in admin/config.yml under "SEO / structured
+  data" and in Knowledge/Regulars/build/07-schema-markup.md.
+
+  ONE ENTITY, ONE NODE. Restaurant is a subclass of LocalBusiness, which is a
+  subclass of Organization. Emitting a Restaurant node AND a separate
+  LocalBusiness node for the same business describes two businesses at the
+  same address. So there is a single business node whose @type is
+  seo.schema.type (default LocalBusiness), and everything else @id-references
+  it.
+
+  DELIBERATELY ABSENT. Do not add:
+  - aggregateRating / review. Google does not accept self-serving review
+    markup on a LocalBusiness (ratings the business collects about itself).
+    We run review generation for clients, so the temptation is real; adding
+    it risks a manual action against the client's site.
+  - WebSite.potentialAction SearchAction. These sites have no search
+    endpoint, so it would describe a feature that does not exist.
+
+  ESCAPING. The graph is built as one object, pruned, then serialised by
+  Nunjucks' `dump` filter (JSON.stringify). `</` is escaped to `<\/` (a legal
+  JSON escape) so no config string can close the script element early.
+  Never hand-build this JSON by interpolating values one at a time: a stray
+  apostrophe in client copy is auto-escaped to &#39; and corrupts the value,
+  and a stray double quote breaks the whole document.
+=========================================================================== -#}
+
+{#- ---- source objects, each defaulted so a missing key never throws ---- -#}
+{%- set biz     = site.business -%}
+{%- set con     = site.contact if site.contact else {} -%}
+{%- set seoCfg  = site.seo if site.seo else {} -%}
+{%- set sd      = seoCfg.schema if seoCfg.schema else {} -%}
+{%- set ap      = con.address_parts if con.address_parts else {} -%}
+{%- set geo     = con.geo if con.geo else {} -%}
+{%- set pg      = site.pages[pageKey] if pageKey and site.pages[pageKey] else null -%}
+
+{%- set pageUrl  = biz.url + page.url -%}
+{%- set bizId    = biz.url + "/#business" -%}
+{%- set siteId   = biz.url + "/#website" -%}
+{%- set pageId   = pageUrl + "#webpage" -%}
+{%- set menuId   = biz.url + "/#menu" -%}
+
+{#- ---- business type. Restaurant-only properties are gated on this so a
+     non-food business (Regulars' own site) never emits servesCuisine. ---- -#}
+{%- set bizType = sd.type if sd.type else "LocalBusiness" -%}
+{%- set foodTypes = ["FoodEstablishment", "Restaurant", "CafeOrCoffeeShop", "BarOrPub", "FastFoodRestaurant", "Bakery", "IceCreamShop", "Brewery", "Winery", "Distillery"] -%}
+{%- set isFood = bizType in foodTypes -%}
+
+{#- ---- opening hours. Built ONLY from contact.hours_machine. The prose in
+     contact.hours ("Monday – Friday", "By appointment") is for humans and is
+     never parsed: guessing at it would publish opening times the owner never
+     confirmed. No hours_machine, no openingHoursSpecification. ---- -#}
+{%- set hoursSpec = [] -%}
+{%- for h in con.hours_machine -%}
+  {%- set hoursSpec = hoursSpec.concat([{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": h.days,
+    "opens": "00:00" if h.closed else h.opens,
+    "closes": "00:00" if h.closed else h.closes,
+    "validFrom": h.valid_from,
+    "validThrough": h.valid_through
+  }]) -%}
+{%- endfor -%}
+
+{#- ---- menu. Only for food businesses, and only when menu_items is really
+     the food menu. On Regulars' own site menu_items is the services list,
+     which is why this is gated instead of always on. ---- -#}
+{%- set emitMenu = sd.emit_menu if sd.emit_menu is defined else isFood -%}
+{%- set menuSections = [] -%}
+{%- if emitMenu -%}
+  {%- set groups = site.menu_items | groupBy("category") -%}
+  {%- for category, items in groups -%}
+    {%- set menuItems = [] -%}
+    {%- for item in items -%}
+      {%- set menuItems = menuItems.concat([{
+        "@type": "MenuItem",
+        "name": item.title,
+        "description": item.description if item.description else item.short,
+        "offers": {
+          "@type": "Offer",
+          "price": item.price_value,
+          "priceCurrency": sd.currency if sd.currency else "USD"
+        } if item.price_value is defined else null
+      }]) -%}
+    {%- endfor -%}
+    {%- set menuSections = menuSections.concat([{
+      "@type": "MenuSection",
+      "name": category if category and category != "undefined" else null,
+      "hasMenuItem": menuItems
+    }]) -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{#- ---- breadcrumb. Home > current page. The label prefers an explicit
+     pages.<key>.breadcrumb, then the nav label for this URL, then the SEO
+     title. Skipped on the home page (a one-item trail is noise). ---- -#}
+{%- set navMatch = site.nav.links | findBy("url", page.url) -%}
+{%- set crumbName = pg.breadcrumb if pg and pg.breadcrumb else (navMatch.label if navMatch else (pg.seo_title if pg else title)) -%}
+
+{#- ---- the graph.
+
+     NOTE: the `set` below is ONE Nunjucks tag spanning many lines. Never put a
+     Nunjucks comment inside it. Nunjucks comments also do not nest, so a
+     comment marker written inside another comment ends it early. Either
+     mistake throws "unexpected end of comment", and Eleventy swallows that:
+     the include renders as an empty string, the build still exits 0, and the
+     page ships with no structured data at all. A green build does not prove
+     the schema shipped. Verify with the check in the build spec.
+
+     The business `description` comes from seo.schema.description (or the
+     tagline) and never from the page's seo_description: one @id is one
+     entity, so its description must be identical on every page. ---- -#}
+{%- set graph = [
+  {
+    "@type": bizType,
+    "@id": bizId,
+    "name": biz.name,
+    "url": biz.url,
+    "description": sd.description if sd.description else biz.tagline,
+    "slogan": biz.tagline,
+    "telephone": con.phone_e164 if con.phone_e164 else con.phone,
+    "email": con.email,
+    "image": (sd.images if sd.images else [site.images.hero_logo]) | absUrl(biz.url),
+    "logo": site.images.logo_mark | absUrl(biz.url),
+    "sameAs": con.social | pluck("url"),
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": ap.street,
+      "addressLocality": ap.locality,
+      "addressRegion": ap.region,
+      "postalCode": ap.postal_code,
+      "addressCountry": ap.country
+    } if ap.street else con.address,
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": geo.lat,
+      "longitude": geo.lng
+    } if (geo.lat is defined and geo.lng is defined) else null,
+    "openingHoursSpecification": hoursSpec,
+    "priceRange": sd.price_range,
+    "currenciesAccepted": sd.currency,
+    "areaServed": sd.area_served,
+    "servesCuisine": sd.serves_cuisine if isFood else null,
+    "acceptsReservations": sd.accepts_reservations if isFood else null,
+    "hasMenu": (menuId if emitMenu and menuSections else (sd.menu_url | absUrl(biz.url))) if isFood else null
+  },
+  {
+    "@type": "WebSite",
+    "@id": siteId,
+    "url": biz.url,
+    "name": biz.name,
+    "description": biz.tagline,
+    "inLanguage": biz.lang,
+    "publisher": { "@id": bizId }
+  },
+  {
+    "@type": "WebPage",
+    "@id": pageId,
+    "url": pageUrl,
+    "name": pg.seo_title if pg else title,
+    "description": pg.seo_description if pg else description,
+    "isPartOf": { "@id": siteId },
+    "about": { "@id": bizId },
+    "inLanguage": biz.lang,
+    "breadcrumb": { "@id": pageUrl + "#breadcrumb" } if page.url != "/" else null
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": pageUrl + "#breadcrumb",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": biz.url + "/" },
+      { "@type": "ListItem", "position": 2, "name": crumbName, "item": pageUrl }
+    ]
+  } if page.url != "/" else null,
+  {
+    "@type": "Menu",
+    "@id": menuId,
+    "name": sd.menu_name if sd.menu_name else "Menu",
+    "url": sd.menu_url | absUrl(biz.url),
+    "hasMenuSection": menuSections
+  } if emitMenu and menuSections else null
+] -%}
+
+<script type="application/ld+json">{{ { "@context": "https://schema.org", "@graph": graph } | prune | dump | replace("</", "<\\/") | safe }}</script>

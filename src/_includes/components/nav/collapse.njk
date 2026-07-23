@@ -1,0 +1,55 @@
+{# NAV: collapse — the link set folds into one disclosure control below 860px
+   instead of wrapping to two rows of pills, and every target clears 44px.
+
+   Progressive enhancement, matching the contract the reveals already use:
+   the panel is VISIBLE in the markup and is collapsed by the script below.
+   No JS, or no `ui.nav_menu_label` in the config, means the nav renders as a
+   plain link list — the same thing the tabs variant does. Nothing is ever
+   trapped behind a control that did not initialise. #}
+<nav class="nav nav--collapse">
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <img class="logo-mark" src="{{ site.images.logo_mark }}" alt="{{ site.business.name }}" width="32" height="32">
+      <div class="logo-word">{{ site.business.name }}</div>
+    </a>
+    {% if site.ui.nav_menu_label %}
+    <button class="navc-toggle" type="button" aria-expanded="true" aria-controls="navc-panel" data-navc-toggle>
+      <span class="navc-bars" aria-hidden="true"></span>
+      <span>{{ site.ui.nav_menu_label }}</span>
+    </button>
+    {% endif %}
+    <div class="navc-panel" id="navc-panel" data-navc-panel>
+      {% for link in site.nav.links %}
+      <a class="navc-link{% if link.url == page.url %} active{% endif %}" href="{{ link.url }}">{{ link.label }}</a>
+      {% endfor %}
+    </div>
+    <a class="btn btn-primary btn-sm nav-cta" href="{{ site.nav.cta.url }}">{{ site.nav.cta.label }}</a>
+  </div>
+</nav>
+<script>
+/* Scoped to this variant so it ships with the file rather than adding a
+   template-wide dependency. Collapses only below the breakpoint; above it the
+   CSS lays the panel out as a row and the toggle is display:none. */
+(function () {
+  var toggle = document.querySelector('[data-navc-toggle]');
+  var panel = document.querySelector('[data-navc-panel]');
+  if (!toggle || !panel) return;
+  var narrow = window.matchMedia('(max-width: 859px)');
+
+  function setOpen(open) {
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden', ''); }
+  }
+  function sync() { setOpen(!narrow.matches); }
+
+  toggle.addEventListener('click', function () {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  /* Escape closes, and focus goes back to the control that opened it. */
+  panel.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && narrow.matches) { setOpen(false); toggle.focus(); }
+  });
+  narrow.addEventListener ? narrow.addEventListener('change', sync) : narrow.addListener(sync);
+  sync();
+})();
+</script>

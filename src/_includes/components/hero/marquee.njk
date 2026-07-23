@@ -1,0 +1,36 @@
+{# HERO: marquee — the name as an awning or a hand-painted window.
+
+   A bounded ink band carries the business name at genuine display scale
+   between thin double rules; the headline, subhead and CTAs sit on the sand
+   BELOW the band. The type is the image. The band is bounded rather than
+   running behind the content, and the supporting copy leaves it entirely —
+   which is what separates this from the category reflex (a photo behind a
+   scrim with a centred white serif on top).
+
+   Serves an established neighbourhood restaurant whose sign IS its brand and
+   whose name is worth setting large.
+
+   Optional config, all with fallbacks to fields every site already has:
+     hero.marquee_word  → falls back to business.name
+     hero.marquee_sub   → falls back to business.tagline
+   An existing client's config switches to this variant without edits. #}
+<section class="hero-marquee">
+  <div class="wrap">
+    <div class="marquee-band">
+      <div class="marquee-rules">
+        <span class="marquee-word">{{ hero.marquee_word if hero.marquee_word else site.business.name }}</span>
+      </div>
+      {% set msub = hero.marquee_sub if hero.marquee_sub else site.business.tagline %}
+      {% if msub %}<div class="marquee-sub">{{ msub }}</div>{% endif %}
+    </div>
+    <div class="marquee-below">
+      <div class="eyebrow center">{{ hero.eyebrow }}</div>
+      <h1>{{ hero.headline }}</h1>
+      <p class="sub">{{ hero.subhead }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ hero.primary_cta.url }}">{{ hero.primary_cta.label }}</a>
+        <a class="btn btn-outline" href="{{ hero.secondary_cta.url }}">{{ hero.secondary_cta.label }}</a>
+      </div>
+    </div>
+  </div>
+</section>

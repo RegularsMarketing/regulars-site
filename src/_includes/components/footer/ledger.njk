@@ -1,0 +1,87 @@
+{# FOOTER: ledger — the footer as a closing-out sheet on the accent.
+
+   Hours as dotted-leader rows, contact as further rows, and a single signed
+   line in Fraunces italic at the foot. The reflex footer is three columns of
+   links plus social icons; this one treats the footer as the last piece of
+   INFORMATION rather than as a sitemap, which is what the place people
+   actually go hunting for hours should be.
+
+   It reuses the brand's own ledger metaphor at the exact spot users go
+   looking for facts, and it gives every page a green close — the other half
+   of the sand-to-ink alternation the accent was never carrying.
+
+   Serves cafés, bakeries and bars with awkward or split hours, where the
+   kitchen closes before the bar and hours are the single most-looked-at fact
+   on the site.
+
+   Every block is guarded: a site with no hours, no phone, no address and no
+   social still renders a correct footer. No new config fields. #}
+<footer class="footer--ledger">
+  <div class="wrap">
+    <div class="fledger-grid">
+      <div>
+        <a class="footer-brand" href="/">
+          <img class="logo-mark" src="{{ site.images.logo_mark }}" alt="{{ site.business.name }}" width="28" height="28" loading="lazy">
+          <div class="logo-word">{{ site.business.name }}</div>
+        </a>
+        <p class="fdesc">{{ site.footer.description }}</p>
+        {% if site.business.tagline %}<p class="fsign">{{ site.business.tagline }}</p>{% endif %}
+        {% if site.contact.social and site.contact.social.length %}
+        <div class="fsocial">
+          {% for s in site.contact.social %}<a href="{{ s.url }}" rel="me">{{ s.label }}</a>{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+
+      <div>
+        {% if site.contact.hours and site.contact.hours.length %}
+        <h4>{{ site.ui.label_hours }}</h4>
+        <ul class="fledger-rows">
+          {% for h in site.contact.hours %}
+          <li class="fledger-row">
+            <span class="fl-key">{{ h.days }}</span>
+            <span class="fl-dots"></span>
+            <span class="fl-val">{{ h.hours }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        <ul class="fledger-rows">
+          {% if site.contact.phone %}
+          <li class="fledger-row">
+            <span class="fl-key">{{ site.ui.label_phone }}</span>
+            <span class="fl-dots"></span>
+            <span class="fl-val"><a href="tel:{{ site.contact.phone | replace('(','') | replace(')','') | replace(' ','') | replace('-','') }}">{{ site.contact.phone }}</a></span>
+          </li>
+          {% endif %}
+          {% if site.contact.email %}
+          <li class="fledger-row">
+            <span class="fl-key">{{ site.ui.label_email }}</span>
+            <span class="fl-dots"></span>
+            <span class="fl-val"><a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a></span>
+          </li>
+          {% endif %}
+          {% if site.contact.address %}
+          <li class="fledger-row">
+            <span class="fl-key">{{ site.ui.label_address }}</span>
+            <span class="fl-dots"></span>
+            <span class="fl-val">{{ site.contact.address }}</span>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="fledger-links">
+      {% for col in site.footer.columns %}{% for link in col.links %}
+      <a href="{{ link.url }}">{{ link.label }}</a>
+      {% endfor %}{% endfor %}
+    </div>
+
+    <div class="footer-bottom">
+      <div class="fl">{{ site.footer.legal_left }}</div>
+      <div class="fl">{{ site.footer.legal_right }}</div>
+    </div>
+  </div>
+</footer>

@@ -45,18 +45,59 @@ collections:
             widget: object
             collapsed: true
             fields:
+              # The field NAMES below (cream, cream2, orange, orange_dark) are
+              # historical and stay exactly as they are — renaming them would
+              # break every template reference, every client clone's own
+              # site.yaml, and this file, for a cosmetic gain. The LABELS say
+              # what each colour actually does.
+              #
+              # The two hints marked PRECONDITION are not style advice. The
+              # stylesheet's surface model depends on them, and a palette that
+              # breaks either one produces a site that is quietly wrong rather
+              # than obviously broken. Full reasoning: design-system/MASTER.md
+              # §1.2 and the header of src/assets/styles.css.
               - label: Colors
                 name: colors
                 widget: object
                 fields:
-                  - { label: Cream (background), name: cream, widget: string }
-                  - { label: Cream 2 (panels), name: cream2, widget: string }
-                  - { label: Charcoal (text), name: charcoal, widget: string }
-                  - { label: Charcoal 2 (muted text), name: charcoal2, widget: string }
-                  - { label: Orange (accent), name: orange, widget: string }
-                  - { label: Orange dark (hover), name: orange_dark, widget: string }
-                  - { label: Line, name: line, widget: string }
-                  - { label: Line soft, name: line_soft, widget: string }
+                  - label: "Page field — the main background (currently a warm sand)"
+                    name: cream
+                    widget: string
+                    pattern: ['^#[0-9a-fA-F]{6}$', 'Use a 6-digit hex value, e.g. #D5B38E']
+                    hint: "The colour of the whole page. Everything else is measured against this one, so change it first and re-check the two below."
+                  - label: "Raised surfaces — cards and panels (MUST be lighter than the page field)"
+                    name: cream2
+                    widget: string
+                    pattern: ['^#[0-9a-fA-F]{6}$', 'Use a 6-digit hex value, e.g. #E3CBAF']
+                    hint: "PRECONDITION: this must be a LIGHTER tint of the page field above. Cards, panels and chips are lifted off the page by being lighter, plus a thin bright edge along their top. Pick something darker and the model inverts: every card reads as a hole punched in the page instead of a card resting on it."
+                  - label: "Body text"
+                    name: charcoal
+                    widget: string
+                    pattern: ['^#[0-9a-fA-F]{6}$', 'Use a 6-digit hex value, e.g. #2B2926']
+                    hint: "Also the ground for the active nav pill. Needs to be dark enough to read comfortably on the page field — aim for 7:1 or better."
+                  - label: "Muted text — secondary copy"
+                    name: charcoal2
+                    widget: string
+                    pattern: ['^#[0-9a-fA-F]{6}$', 'Use a 6-digit hex value, e.g. #4A453E']
+                    hint: "Most of the running text on the site uses this. It is the tightest contrast pair in the whole palette, so do not lighten it, and do not darken the page field without re-checking it. Minimum 4.5:1 against the page field."
+                  - label: "Accent — MUST be dark (currently a deep green)"
+                    name: orange
+                    widget: string
+                    pattern: ['^#[0-9a-fA-F]{6}$', 'Use a 6-digit hex value, e.g. #004437']
+                    hint: "PRECONDITION: the accent is not just trim — it is the BACKGROUND of eight components (the CTA panel, the contact panel, the flagship pricing card, the story banner, the newsletter panel, the ink section band, the ledger footer, the full-bleed hero) and text sits on top of it. It must reach 4.5:1 against BOTH white AND your page field colour. Checking white alone is not enough: this site's previous accent reached 4.5:1 on white but only 2.3:1 on the page field, which would have made the copy on every one of those panels unreadable. A mid-tone amber or olive fails both. When in doubt, go darker."
+                  - label: "Accent, darker — hover and pressed states"
+                    name: orange_dark
+                    widget: string
+                    pattern: ['^#[0-9a-fA-F]{6}$', 'Use a 6-digit hex value, e.g. #00332A']
+                    hint: "A darker version of the accent above. Used when someone hovers or presses a primary button."
+                  - label: "Hairlines — borders and dividers"
+                    name: line
+                    widget: string
+                    hint: "An rgba() value, tinted from your body text colour so rules sit in the page rather than on it. Keep the rgba() form."
+                  - label: "Hairlines, softer — separators inside lists"
+                    name: line_soft
+                    widget: string
+                    hint: "As above, fainter. Keep the rgba() form."
               - label: Fonts
                 name: fonts
                 widget: object
@@ -79,10 +120,32 @@ collections:
             name: components
             widget: object
             fields:
-              - { label: Navigation, name: nav, widget: select, options: [tabs, topline] }
-              - { label: Hero, name: hero, widget: select, options: [textforward, fullbleed, split] }
-              - { label: Menu layout, name: menu, widget: select, options: [list, grid] }
-              - { label: Footer, name: footer, widget: select, options: [columns, minimal] }
+              - label: Navigation
+                name: nav
+                widget: select
+                options: [tabs, topline, collapse]
+                hint: "tabs = pill row · topline = plain underlined links · collapse = links fold into one menu control below 860px. Pick collapse if you have five or more links; the other two wrap to a second row on a phone."
+              - label: Hero
+                name: hero
+                widget: select
+                options: [textforward, fullbleed, split, statement, marquee, ticket]
+                hint: "textforward = centred logo + copy · fullbleed = photo/colour band · split = copy beside an image · statement = text-first, no logo in the fold (best when the headline is the argument) · marquee = your NAME set large on an accent band (best when the sign is the brand) · ticket = a perforated paper dupe, hard left (counter-service, delis, coffee bars)."
+              - label: Menu layout
+                name: menu
+                widget: select
+                options: [list, grid, tiered, board]
+                hint: "list = numbered rows (use only when order means something) · grid = cards by category · tiered = ruled rows with the badge in its own column (best for a services catalogue) · board = two-column letter board with dotted leaders and prices (best for a long food menu of 20+ items)."
+              - label: Footer
+                name: footer
+                widget: select
+                options: [columns, minimal, ledger]
+                hint: "columns = three link columns · minimal = brand + one link row · ledger = hours and contact as dotted-leader rows on the accent (best when hours are the most-looked-at fact on the site)."
+              - label: Pre-launch proof statement
+                name: proof
+                widget: select
+                options: [off, statement]
+                required: false
+                hint: "statement = say plainly why there are no testimonials yet, using the wording from your Process page. Switch to off once you have real client results to show."
 
           # ---------------- INTEGRATIONS (third-party embeds) ----------------
           - label: Integrations
@@ -100,6 +163,11 @@ collections:
             fields:
               - { label: Flagship pricing tag, name: flagship_tag, widget: string }
               - { label: Pricing accordion toggle, name: accordion_toggle, widget: string }
+              - label: Nav menu button label
+                name: nav_menu_label
+                widget: string
+                required: false
+                hint: "Only used when Navigation is set to 'collapse'. Leave it empty and the nav simply shows all links instead of folding them behind a button — it never leaves you with a menu that will not open."
               - { label: Contact label — email, name: label_email, widget: string }
               - { label: Contact label — response time, name: label_response, widget: string }
               - { label: Contact label — works with, name: label_works_with, widget: string }
@@ -195,6 +263,11 @@ collections:
               - { label: Full description, name: description, widget: text }
               - { label: "Badge (optional — e.g. Foundation / New / Chef's Pick)", name: badge, widget: string, required: false }
               - { label: Category (for grid layout), name: category, widget: string }
+              - label: "Price (optional)"
+                name: price
+                widget: string
+                required: false
+                hint: "Only shown by the 'board' menu layout. Leave empty and the row renders as name + description with no dotted leader, so a services list without prices still looks right."
 
           # ---------------- PAGES ----------------
           - label: Pages

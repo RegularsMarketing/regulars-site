@@ -1,7 +1,12 @@
 {# HERO: text-forward with background texture (original) — centered logo + copy on the dotted cream ground #}
 <section class="hero">
   <div class="wrap">
-    <img class="hero-logo" src="{{ site.images.hero_logo }}" alt="{{ site.business.name }} — {{ site.business.tagline }}" fetchpriority="high">
+    {# width/height are the wordmark's intrinsic 900x600 — this is the LCP
+       element and it previously reserved no space, the page's only real CLS
+       source. The alt is the business name alone: the nav announces the brand
+       twice already (logo alt + wordmark text), and repeating the tagline here
+       made a screen-reader user hear it a third time before the headline. #}
+    <img class="hero-logo" src="{{ site.images.hero_logo }}" alt="{{ site.business.name }}" width="900" height="600" fetchpriority="high" decoding="async">
     <div class="reveal">
       <div class="eyebrow center">{{ hero.eyebrow }}</div>
       <h1>{{ hero.headline }}</h1>

@@ -7,6 +7,8 @@
   "scripts": {
     "dev": "eleventy --serve",
     "build": "eleventy",
+    "check:schema": "node tools/check-schema.mjs",
+    "check:schema:fixture": "node tools/schema-fixture-test.mjs",
     "clean": "rm -rf _site"
   },
   "devDependencies": {

@@ -1,0 +1,3 @@
+{# Dispatcher: renders the proof treatment named in content/site.yaml (components.proof).
+   Defaults to `off` so an existing client config without the key still builds. #}
+{% include "components/proof/" + (site.components.proof if site.components.proof else "off") + ".njk" %}

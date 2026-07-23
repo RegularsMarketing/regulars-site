@@ -1,0 +1,45 @@
+{# HERO: ticket — the hero as a kitchen dupe.
+
+   A hard-left paper column with perforated top and bottom edges (a CSS mask,
+   no image), the headline set as the order, tracked micro-labels, and the two
+   CTAs as the actions at the foot. The rest of the viewport stays empty sand
+   with a small corner mark.
+
+   Serves counter-service, delis, sandwich shops, coffee bars — anywhere the
+   ticket is the actual artefact of the transaction. It also inverts this
+   template's own centring reflex, which is the specific thing the fold audit
+   flagged.
+
+   The headline uses .ticket-head rather than h1 styling alone so the ticket
+   can hold a long order line without blowing the column; heroLoadIn() targets
+   `h1` by tag, so the entrance still wires automatically.
+
+   Meta row reuses `stamps`, which every site in this template already has, so
+   no new config field is required. It is skipped entirely when absent. #}
+<section class="hero-ticket">
+  <div class="wrap hero-ticket-grid">
+    <div class="ticket">
+      <div class="eyebrow">{{ hero.eyebrow }}</div>
+      <h1 class="ticket-head">{{ hero.headline }}</h1>
+      <hr class="ticket-rule">
+      <p class="sub">{{ hero.subhead }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ hero.primary_cta.url }}">{{ hero.primary_cta.label }}</a>
+        <a class="btn btn-outline" href="{{ hero.secondary_cta.url }}">{{ hero.secondary_cta.label }}</a>
+      </div>
+      {% if site.stamps and site.stamps.length %}
+      <hr class="ticket-rule">
+      <div class="ticket-meta">
+        <span>{{ site.stamps[0] }}</span>
+        {% if site.stamps.length > 1 %}<span>{{ site.stamps[1] }}</span>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+    <div class="hero-ticket-aside">
+      <div class="hero-ticket-mark">
+        <img src="{{ site.images.logo_mark }}" alt="" width="256" height="256" loading="lazy" decoding="async">
+        <span class="htm-word">{{ site.business.name }}</span>
+      </div>
+    </div>
+  </div>
+</section>

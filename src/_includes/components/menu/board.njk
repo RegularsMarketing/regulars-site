@@ -1,0 +1,40 @@
+{# MENU: board — the menu as a letter board.
+
+   Two typographic columns on a ruled ground, grouped under category rules,
+   reusing the label / dotted-leader / value mechanics of .ledger-row at menu
+   scale. Item names in Fraunces, prices in Inter with tabular figures.
+
+   Serves any client with a long real menu (20+ items that change) — a bistro,
+   wine bar, bakery — where the card grid degenerates into a wall of identical
+   boxes. The correct affordance for a long list is a typographic list with no
+   imagery, which is also why this is not predictable from "restaurant
+   website": the reflex there is a card grid with a photo per dish.
+
+   `price` on a menu item is OPTIONAL. Without it the leader and the price are
+   dropped and the row is just name + note, so an existing config with no
+   prices switches to this variant without breaking.
+
+   MOTION NOTE: the container carries `.menu-grid`, which is already in the
+   staggerReveal() selector list in animations.js, and this variant does not
+   wrap itself in `.reveal` — so unlike menu/grid, the items here can actually
+   deal out instead of being skipped by the closest('.reveal') guard. #}
+{% set groups = site.menu_items | groupBy("category") %}
+<div class="board">
+  {% for category, items in groups %}
+  <div class="board-group">
+    {% if category %}<div class="board-cat">{{ category }}</div>{% endif %}
+    <div class="menu-grid menu-grid--board">
+      {% for item in items %}
+      <div class="board-item">
+        <div class="board-line">
+          <span class="bname">{{ item.title }}</span>
+          {% if item.price %}<span class="bdots"></span><span class="bprice">{{ item.price }}</span>{% endif %}
+        </div>
+        {% if item.short %}<p class="bnote">{{ item.short }}</p>{% endif %}
+        {% if item.badge %}<span class="tier-chip">{{ item.badge }}</span>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,35 @@
+{# MENU: tiered — the catalogue with plan membership in its own column.
+
+   Two defects this replaces. The tier chip used to sit INSIDE the h3 at
+   10.5px, which is where a reader never looks for it; and at 1440 the
+   right-hand third of every row was empty sand carrying nothing — no price,
+   no tier, no "included in", no mark. Tier is the question the services page
+   exists to answer, so it gets the column.
+
+   No numerals. Seven services are an inventory, not a sequence. Numbering
+   them taught the reader that the italic numerals mean nothing here, which
+   then cost /process/, the one page where order genuinely is the content.
+
+   `badge` and `category` are both optional — a config with neither still
+   renders as a clean ruled catalogue.
+
+   MOTION NOTE: this variant deliberately does NOT wrap itself in `.reveal`.
+   Both existing menu variants do, which is what made a client's menu — the
+   densest, most-scanned component in the product — fade in as one blurred
+   block that staggerReveal could never reach. Rows here paint immediately.
+   To give them a staggered entrance instead, add `.tier-list` to the
+   staggerReveal() call in animations.js init(). #}
+<div class="tier-list">
+  {% for item in site.menu_items %}
+  <div class="tier-row">
+    <div>
+      <h3 class="tname">{{ item.title }}</h3>
+      <p class="tdesc">{{ item.description }}</p>
+    </div>
+    <div class="tmeta">
+      {% if item.badge %}<span class="tier-chip">{{ item.badge }}</span>{% endif %}
+      {% if item.category %}<span class="tcat">{{ item.category }}</span>{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

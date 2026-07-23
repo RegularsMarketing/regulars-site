@@ -1,0 +1,38 @@
+{# HERO: statement — text-first, hard-left, no logo above the argument.
+
+   The wordmark does not lead here. The nav carries it ~80px above, and as a
+   hero lockup it rendered 520x347: 39% of a 900px fold, pushing the primary
+   CTA to within 11px of the fold on desktop and cutting it in half on a
+   375x812 phone. The brand was stated twice before the proposition was
+   stated once.
+
+   Standard classes throughout (.eyebrow / h1 / .sub / .hero-actions) so
+   heroLoadIn() wires this variant with no change to animations.js.
+
+   The mark below is optional in effect: it only renders when the config has a
+   hero logo, so a client without one gets the pure statement. #}
+<section class="hero-statement">
+  <div class="wrap hero-statement-grid">
+    <div class="hero-statement-main">
+      <div class="eyebrow">{{ hero.eyebrow }}</div>
+      <h1>{{ hero.headline }}</h1>
+      <p class="sub">{{ hero.subhead }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ hero.primary_cta.url }}">{{ hero.primary_cta.label }}</a>
+        <a class="btn btn-outline" href="{{ hero.secondary_cta.url }}">{{ hero.secondary_cta.label }}</a>
+      </div>
+    </div>
+    {% if site.images.hero_logo %}
+    <div class="hero-statement-side">
+      <div class="hero-statement-mark">
+        {# alt="" on purpose: this is a closing mark, and the nav already
+           names the business in both its logo alt and its wordmark text. A
+           third announcement of the brand before the headline is noise for a
+           screen-reader user, not information. #}
+        <img src="{{ site.images.hero_logo }}" alt="" width="900" height="600" loading="lazy" decoding="async">
+        {% if site.business.tagline %}<span class="hsm-note">{{ site.business.tagline }}</span>{% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>

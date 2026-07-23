@@ -1,6 +1,9 @@
-{# HERO: full-bleed photo — dark full-width band. Set `hero.bg_image` in the config to
-   drop in an actual photo; without one it falls back to a solid charcoal band. #}
-<section class="hero-fullbleed"{% if hero.bg_image %} style="background-image:linear-gradient(color-mix(in srgb, var(--charcoal) 60%, transparent),color-mix(in srgb, var(--charcoal) 60%, transparent)),url('{{ hero.bg_image }}');background-size:cover;background-position:center;"{% endif %}>
+{# HERO: full-bleed photo — inverted full-width band. Set `hero.bg_image` in the config to
+   drop in an actual photo; without one it falls back to the solid accent band (--ink).
+   The scrim is the accent, not neutral black, so a photo sits inside the palette instead
+   of under a grey wash — and it deepens toward the base so the CTAs stay legible on a
+   bright photo. --ink resolves in styles.css from the injected theme vars. #}
+<section class="hero-fullbleed"{% if hero.bg_image %} style="background-image:linear-gradient(to bottom, color-mix(in srgb, var(--ink) 58%, transparent), color-mix(in srgb, var(--ink) 74%, transparent)),url('{{ hero.bg_image }}');background-size:cover;background-position:center;"{% endif %}>
   <div class="wrap hero-fullbleed-inner reveal">
     <div class="eyebrow center">{{ hero.eyebrow }}</div>
     <h1>{{ hero.headline }}</h1>

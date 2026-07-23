@@ -1,0 +1,30 @@
+{# PROOF: statement — the "we have no testimonials yet, and here is why" block.
+
+   A pre-launch business has no case studies, and every visitor forms that
+   objection inside the first ten seconds. On this site the answer to it —
+   "we're pre-launch, so we lead with the process" plus "no fake testimonials,
+   no borrowed case studies" — existed only as an h2 on the FOURTH nav item.
+   Every other page left the reader silently wondering. This is the most
+   trust-building claim the business owns and it belongs before the services
+   grid.
+
+   Every clone needs this in month one, which is exactly the case the variant
+   library exists for.
+
+   NO NEW CONFIG FIELDS, on purpose. It reads the process page's own heading
+   and subhead, so the claim has ONE canonical home and cannot drift out of
+   sync with the page it summarises. A client who wants different words edits
+   the process copy, and both places follow.
+
+   Rendered as a ruled statement on the page field rather than as a card, so
+   it never reads as a badge or a testimonial widget. #}
+{% set pp = site.pages.process %}
+{% if pp and pp.heading %}
+<div class="proof-none">
+  <h3>{{ pp.heading }}</h3>
+  <div>
+    {% if pp.subhead %}<p>{{ pp.subhead }}</p>{% endif %}
+    {% if pp.closing_note %}<p>{{ pp.closing_note }}</p>{% endif %}
+  </div>
+</div>
+{% endif %}

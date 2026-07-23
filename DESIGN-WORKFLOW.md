@@ -90,9 +90,24 @@ Hard constraints:
 - prefers-reduced-motion respected on every animation.
 - CLIENT sites: no Inter, Roboto, or Arial — fonts with character, set
   per client in site.yaml. EXCEPTION — regularsmarketing.com itself uses
-  the LOCKED Regulars brand (Mastermind §2): cream #FAF6EF, charcoal
-  #2B2926, burnt orange #C4551F, Fraunces display serif + Inter body.
+  the LOCKED Regulars brand (Mastermind §2): cream #D5B38E (warm sand,
+  the page ground), cream2 #E3CBAF, charcoal #2B2926, charcoal2 #4A453E,
+  orange #004437 (evergreen), orange_dark #00332A, and Helvetica for both
+  headings and body ('Helvetica Neue', Helvetica, Arial; system stack,
+  google_href deliberately empty so no webfont loads).
   The brand kit outranks this workflow; no skill may restyle it.
+  WHAT "LOCKED" MEANS — the lock binds skills and sessions, not the owner.
+  No skill, audit, or "make it pop" pass may restyle Regulars' brand on its
+  own initiative; a deliberate owner-directed change is a different act and
+  is allowed. The values above ARE such changes (sand/green July 2026
+  replacing cream #FAF6EF and burnt orange #C4551F; Helvetica replacing
+  Fraunces+Inter 2026-07-23 with the tagline "Made by Small Business,
+  Built for Small Business"). Do not "correct" them back — treat them as
+  the locked brand now, and re-lock any future owner-directed change the
+  same way.
+  NAMING TRAP — the config keys are still `cream` and `orange` while holding
+  sand and green. Deliberate: renaming would break every template reference,
+  admin/config.yml, and every future client clone. Leave the keys alone.
 - Mobile-first, tested at 375 / 768 / 1024 / 1440.
 ```
 
@@ -100,25 +115,52 @@ Hard constraints:
 
 ## CLIENT MODE — spinning up a new client site (NO CODE)
 
-Per README: a new client site = one file + images. No skills required.
+A new client site is still **config + images, never code**. But the skills
+are used here — in **selecting** and **auditing** roles, never in creating
+ones. That distinction is what keeps the half-day bar intact:
 
-1. Copy this repo.
-2. Optional: `python3 ~/.claude/skills/ui-ux-pro-max/scripts/search.py
-   "[client cuisine/vibe keywords]"` to pick colors, fonts, and component
-   combos with intent.
-3. Edit `content/site.yaml` only: business info, copy, menu_items, theme
+- **Selecting and auditing** is bounded and fast (seconds to minutes) and
+  produces no new files. It raises quality on every client.
+- **Creating** (`craft`, `shape`, `polish`, `--design-system`) is
+  open-ended and emits new styling. Run per client, it forks the template
+  into N one-offs — Failure Modes #7 and #12. That work belongs in
+  TEMPLATE MODE, where one pass benefits every client forever.
+
+1. Copy this repo. **Repoint `admin/config.yml` `repo:` to the client's own
+   repository** — the one code edit a clean clone requires. Left unchanged,
+   the client's CMS commits their content into the Regulars template repo.
+2. **Design direction — required, not optional:**
+   `python3 ~/.claude/skills/ui-ux-pro-max/scripts/search.py
+   "[client cuisine/vibe keywords]"` → pick palette, font pairing, and the
+   component combo with intent. This is the single highest-leverage design
+   decision per client; skipping it is why client sites drift toward
+   sameness. Cross-check the pick against `design-system/MASTER.md`.
+3. **`frontend-design` — advisory pass on that pick.** One question: does
+   this combination read as intentional for *this* restaurant, or as a
+   template with the colors swapped? Adjust the picks, not the code.
+4. Edit `content/site.yaml` only: business info, copy, menu_items, theme
    colors/fonts, `components:` picks.
-4. Swap images in `src/assets/`. Set Formspree IDs under `contact:`.
-5. `npm run build` → push to a Cloudflare **preview URL** → run the 7.1 QA
-   gate (mobile view, real form test, no broken links, Lighthouse) → approve
-   → production on the client's domain.
+5. Swap images in `src/assets/`. Set Formspree IDs under `contact:`.
+   If the client's build introduces a new card class, register it in the
+   `hoverLift()` call in `src/assets/animations.js` — otherwise it silently
+   gets no hover motion. (Every other animation is automatic.)
+6. `npm run build` → push to a Cloudflare **preview URL**.
+7. **Audit the preview — bounded, both are checks and neither rewrites
+   design:** `/impeccable audit` (accessibility, performance, responsive)
+   then `design-motion-principles` (motion quality). Fix what they find in
+   config where possible.
+8. Run the 7.1 QA gate (mobile view, real form test, no broken links,
+   Lighthouse) → approve → production on the client's domain.
 
-Checkpoint (Mastermind 5.3): the whole thing fits in half a day. If it
-doesn't, the leak is in the template/config separation — fix the template,
-not your speed.
+Checkpoint (Mastermind 5.3): the whole thing still fits in half a day. The
+audits cost minutes, not hours. **If a client build ever runs long, the leak
+is the template/config separation or an audit finding that should have been
+a variant — never your speed.**
 
 If a client needs a look no variant offers → switch to TEMPLATE MODE and
-build it as a new variant first, then come back and select it in config.
+build it as a **new variant**, then come back and select it in config. That
+is the only sanctioned path from "this client needs something different" to
+shipped, and it is what makes the next client's site better too.
 
 ---
 

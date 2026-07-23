@@ -15,12 +15,20 @@
 <meta property="og:url" content="{{ site.business.url }}{{ page.url }}">
 <meta property="og:image" content="{{ site.business.url }}{{ site.images.hero_logo }}">
 <meta name="twitter:card" content="summary_large_image">
+{# Mobile browser chrome matches the page field instead of defaulting to white,
+   which on a mid-tone field is a visible seam above the fold. Reuses the
+   existing theme colour — no new config field. #}
+<meta name="theme-color" content="{{ site.theme.colors.cream }}">
 <link rel="icon" type="image/png" href="{{ site.images.logo_mark }}">
+{# Webfonts load only when the config names them. An empty google_href means
+   system fonts: no preconnect, no request, nothing to fall back from. #}
+{% if site.theme.fonts.google_href %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="{{ site.theme.fonts.google_href }}">
 <link href="{{ site.theme.fonts.google_href }}" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="{{ site.theme.fonts.google_href }}" rel="stylesheet"></noscript>
+{% endif %}
 <style>
 :root{
   --cream:{{ site.theme.colors.cream }};
@@ -36,6 +44,9 @@
 }
 </style>
 <link rel="stylesheet" href="{{ assets.styles }}">
+{# JSON-LD structured data. Config-driven; skipped on noindex pages, which
+   have nothing to describe to a search engine. #}
+{% if not noindex %}{% include "components/schema.njk" %}{% endif %}
 </head>
 <body>
 
